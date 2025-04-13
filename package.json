@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "opn": "^5.5.0",
+    "pkg": "^5.8.1",
     "puppeteer": "^21.0.0"
   },
   "devDependencies": {

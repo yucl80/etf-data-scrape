@@ -148,8 +148,8 @@ async function saveToFile(stock,data) {
         }
         
         // Keep only the 20 most recent entries
-        if (existingData.length > 20) {
-            existingData = existingData.slice(0, 20);
+        if (existingData.length > 90) {
+            existingData = existingData.slice(0, 90);
         }
         
         // Write the updated data back to the file

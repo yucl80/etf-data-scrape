@@ -4,7 +4,7 @@ const opn = require('opn');
 
 function readConfig() {
     try {
-        const configPath = path.join(__dirname, 'config.json');
+        const configPath = path.join(process.cwd(), 'config.json');
         const configData = fs.readFileSync(configPath, 'utf8');
         return JSON.parse(configData);
     } catch (error) {
@@ -164,7 +164,7 @@ function writeHTML() {
     htmlContent = htmlContent.replace('<span id="updateTime"></span>', updateTime);
     
     // Write the updated HTML to a new file
-    const outputPath = path.join(__dirname, 'output.html');
+    const outputPath = path.join(process.cwd(), 'output.html');
     fs.writeFileSync(outputPath, htmlContent);
     
     console.log('HTML file has been generated successfully!');

@@ -3,27 +3,25 @@
   "version": "1.0.0",
   "description": "ETF Size Monitor",
   "main": "main.js",
+  "bin": "scraper.js",
   "scripts": {
-    "start": "electron .",
-    "build": "electron-builder"
-  },
-  "build": {
-    "appId": "com.etf.size",
-    "win": {
-      "target": "nsis"
-    },
-    "files": [
-      "**/*",
-      "!node_modules/*"
-    ]
+    "start": "node scraper.js",
+    "build": "pkg . --targets node18-win-x64 --output etf-scraper.exe"
   },
   "dependencies": {
     "opn": "^5.5.0",
-    "pkg": "^5.8.1",
     "puppeteer": "^21.0.0"
   },
   "devDependencies": {
-    "electron": "^35.1.5",
-    "electron-builder": "^24.9.1"
+    "pkg": "^5.8.1"
+  },
+  "pkg": {
+    "assets": [
+      "data/**/*",     
+      "display.js"
+    ],
+    "scripts": [
+      "display.js"
+    ]
   }
 }

@@ -1,0 +1,43 @@
+{
+  "etfIndexMapping": {    
+    "159545": {
+      "indexCode": "02033.00",
+      "indexName": "恒生港股通高股息低波动指数",
+      "description": "hshylv"
+    },
+    "513950": {
+      "indexCode": "02033.00",
+      "indexName": "恒生港股通高股息低波动指数",
+      "description": "hshylv"
+    },
+    "513920": {
+      "indexCode": "02200.00",
+      "indexName": "恒生港股通中国央企红利指数",
+      "description": "hsscsoy"
+    },
+    "513690": {
+      "indexCode": "02055.00",
+      "indexName": "恒生港股通高股息率指数",
+      "description": "hsschky"
+    },
+    "159920": {
+      "indexCode": "00001.00",
+      "indexName": "恒生指数",
+      "description": "hsi"
+    },
+    "513890": {
+      "indexCode": "02083.00",
+      "indexName": "恒生科技指数",
+      "description": "hstech"
+    }
+ 
+ 
+  },
+  "settings": {
+    "dataDirectory": "./fundamentals-data",
+    "logDirectory": "./logs",
+    "maxRetries": 3,
+    "retryDelay": 5000,
+    "cacheExpiryHours": 24
+  }
+} 

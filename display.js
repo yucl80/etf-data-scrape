@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const opn = require('opn');
+const ETFPEDPFetcher = require('./etf-pe-dp-fetcher.js');
+const ETFFundamentalsBatchProcessor = require('./etf-fundamentals-batch.js');
 
 function readConfig() {
     try {
@@ -59,6 +61,14 @@ function calculateSizeChanges(stock) {
             };
         }
 
+        let FityDayChange = null;
+        if (data.length >= 22) {
+            FityDayChange = {
+                date: sortedData[0].date,
+                change: parseFloat(sortedData[0].size) - parseFloat(sortedData[21].size)
+            };
+        }
+
         let ThirtyDayChange = null;
         if (data.length >= 31) {
             ThirtyDayChange = {
@@ -93,14 +103,44 @@ function getChangeClass(change) {
     return change > 0 ? 'negative' : 'positive';
 }
 
-function generateHTML() {
+async function generateHTML() {
     const config = readConfig();
     const results = [];
+    const fetcher = new ETFPEDPFetcher();
+    
+    // 首先执行etf-fundamentals-batch
+    console.log('🚀 开始执行ETF基本面数据批量处理...');
+    const batchProcessor = new ETFFundamentalsBatchProcessor();
+    let batchResults = [];
+    
+    try {
+        batchResults = await batchProcessor.processAllETFs();
+        console.log(`✅ ETF基本面数据批量处理完成，共获取 ${batchResults.length} 个ETF的数据`);
+    } catch (error) {
+        console.error('❌ ETF基本面数据批量处理失败:', error);
+        console.log('⚠️ 将使用原有的单个ETF获取逻辑');
+    }
+    
+    // 将批量结果转换为Map以便快速查找
+    const batchResultsMap = new Map();
+    batchResults.forEach(result => {
+        if (result.etfCode && !result.error) {
+            batchResultsMap.set(result.etfCode, {
+                indexName: result.indexName,
+                peValue: result.peRatio,
+                dpValue: result.dividendYield
+            });
+        }
+    });
 
     for (const stock of config.stocks) {
         const fileName = 'data/'+stock+'_data.json';
         let name = 'N/A';
         let latestSize = 'N/A';
+        let indexName = '-';
+        let peValue = '-';
+        let dpValue = '-';
+        
         try {
             if (fs.existsSync(fileName)) {
                 const fileContent = fs.readFileSync(fileName, 'utf8');
@@ -114,11 +154,36 @@ function generateHTML() {
             console.error(`Error reading data for stock ${stock}:`, error);
         }
 
+        // 获取ETF的市盈率和股息率数据
+        // 首先检查是否在批量处理结果中
+        if (batchResultsMap.has(stock)) {
+            const batchData = batchResultsMap.get(stock);
+            indexName = batchData.indexName || '-';
+            peValue = batchData.peValue !== null && batchData.peValue !== undefined ? batchData.peValue : '-';
+            dpValue = batchData.dpValue !== null && batchData.dpValue !== undefined ? batchData.dpValue : '-';
+            console.log(`📊 从批量数据中获取 ${stock} 的数据: PE=${peValue}, DP=${dpValue}`);
+        } else {
+            // 如果不在批量结果中，使用原有的逻辑
+            try {
+                const peDpResult = await fetcher.getETFPEAndDP(stock);
+                if (peDpResult.success) {
+                    indexName = peDpResult.indexName || '-';
+                    peValue = peDpResult.peValue !== null && peDpResult.peValue !== undefined ? peDpResult.peValue : '-';
+                    dpValue = peDpResult.dpValue !== null && peDpResult.dpValue !== undefined ? peDpResult.dpValue : '-';
+                }
+            } catch (error) {
+                console.error(`Error getting PE/DP data for stock ${stock}:`, error);
+            }
+        }
+
         const changes = calculateSizeChanges(stock);
         results.push({
             stock,
             name,
             latestSize: latestSize === 'N/A' ? 'N/A' : parseFloat(latestSize),
+            indexName,
+            peValue,
+            dpValue,
             oneDayChange: changes?.oneDayChange?.change ?? 'N/A',
             threeDayChange: changes?.threeDayChange?.change ?? 'N/A',
             fiveDayChange: changes?.FiveDayChange?.change ?? 'N/A',
@@ -139,6 +204,9 @@ function generateHTML() {
                 <td class="${getChangeClass(result.fiveDayChange)}">${formatNumber(result.fiveDayChange)}</td>
                 <td class="${getChangeClass(result.tenDayChange)}">${formatNumber(result.tenDayChange)}</td>
                 <td class="${getChangeClass(result.thirtyDayChange)}">${formatNumber(result.thirtyDayChange)}</td>
+                <td>${result.indexName}</td>
+                <td>${result.peValue}</td>
+                <td>${result.dpValue}</td>
             </tr>
         `;
     });
@@ -152,8 +220,8 @@ function generateHTML() {
 }
 
 // Write the HTML content to a file
-function writeHTML() {
-    const { tableHtml, updateTime } = generateHTML();
+async function writeHTML() {
+    const { tableHtml, updateTime } = await generateHTML();
     
     // Read the template HTML
     const templatePath = path.join(__dirname, 'index.html');
@@ -175,3 +243,18 @@ function writeHTML() {
 
 // Export the functions
 module.exports = { writeHTML, calculateSizeChanges }; 
+
+// Main function to run the program
+async function main() {
+    try {
+        await writeHTML();
+    } catch (error) {
+        console.error('Error generating HTML:', error);
+        process.exit(1);
+    }
+}
+
+// Run the main function if this file is executed directly
+if (require.main === module) {
+    main();
+} 

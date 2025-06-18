@@ -1,0 +1,68 @@
+{
+  "timestamp": "2025-06-18T08:02:42.682Z",
+  "totalETFs": 6,
+  "processedIndices": [
+    "02033.00",
+    "00001.00",
+    "02055.00",
+    "02083.00",
+    "02200.00"
+  ],
+  "results": [
+    {
+      "etfCode": "159545",
+      "indexCode": "02033.00",
+      "indexName": "恒生港股通高股息低波动指数",
+      "dividendYield": 6.5,
+      "peRatio": 7.55,
+      "timestamp": "2025-06-18T08:02:03.464Z",
+      "source": "HSI Fundamentals"
+    },
+    {
+      "etfCode": "159920",
+      "indexCode": "00001.00",
+      "indexName": "恒生指数",
+      "dividendYield": 3.37,
+      "peRatio": 12.09,
+      "timestamp": "2025-06-18T08:02:12.296Z",
+      "source": "HSI Fundamentals"
+    },
+    {
+      "etfCode": "513690",
+      "indexCode": "02055.00",
+      "indexName": "恒生港股通高股息率指数",
+      "dividendYield": 6.45,
+      "peRatio": 8.2,
+      "timestamp": "2025-06-18T08:02:21.038Z",
+      "source": "HSI Fundamentals"
+    },
+    {
+      "etfCode": "513890",
+      "indexCode": "02083.00",
+      "indexName": "恒生科技指数",
+      "dividendYield": 0.98,
+      "peRatio": 22.77,
+      "timestamp": "2025-06-18T08:02:29.793Z",
+      "source": "HSI Fundamentals"
+    },
+    {
+      "etfCode": "513920",
+      "indexCode": "02200.00",
+      "indexName": "恒生港股通中国央企红利指数",
+      "dividendYield": 6.46,
+      "peRatio": 6.27,
+      "timestamp": "2025-06-18T08:02:38.598Z",
+      "source": "HSI Fundamentals"
+    },
+    {
+      "etfCode": "513950",
+      "indexCode": "02033.00",
+      "indexName": "恒生港股通高股息低波动指数",
+      "dividendYield": 6.5,
+      "peRatio": 7.55,
+      "timestamp": "2025-06-18T08:02:03.464Z",
+      "source": "HSI Fundamentals",
+      "fromCache": true
+    }
+  ]
+}

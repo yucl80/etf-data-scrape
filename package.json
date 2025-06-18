@@ -6,11 +6,15 @@
   "bin": "scraper.js",
   "scripts": {
     "start": "node scraper.js",
-    "build": "pkg . --targets node18-win-x64 --output etf-scraper.exe"
+    "build": "pkg . --targets node18-win-x64 --output etf-scraper.exe",
+    "etf-pe-dp": "node etf-pe-dp-cli.js",
+    "test-etf": "node test-etf-pe-dp.js"
   },
   "dependencies": {
+    "node-fetch": "^2.6.7",
     "opn": "^5.5.0",
-    "puppeteer": "^21.0.0"
+    "puppeteer": "^21.0.0",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "pkg": "^5.8.1"

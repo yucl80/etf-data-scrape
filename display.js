@@ -3,6 +3,7 @@ const path = require('path');
 const opn = require('opn');
 const ETFPEDPFetcher = require('./etf-pe-dp-fetcher.js');
 const ETFFundamentalsBatchProcessor = require('./etf-fundamentals-batch.js');
+const { processAllETFs, getETFResultByStock } = require('./sp-pdf-metrics.js');
 
 function readConfig() {
     try {
@@ -108,6 +109,22 @@ async function generateHTML() {
     const results = [];
     const fetcher = new ETFPEDPFetcher();
     
+    // 先获取S&P PDF指标数据
+    let spPdfResults = [];
+    try {
+        spPdfResults = await processAllETFs();
+        console.log(`✅ S&P PDF指标数据获取完成，共获取 ${spPdfResults.length} 个ETF的数据`);
+    } catch (error) {
+        console.error('❌ S&P PDF指标数据获取失败:', error);
+    }
+    // 构建Map便于查找
+    const spPdfMap = new Map();
+    spPdfResults.forEach(item => {
+        if (item.stock && !item.error) {
+            spPdfMap.set(item.stock, item);
+        }
+    });
+
     // 首先执行etf-fundamentals-batch
     console.log('🚀 开始执行ETF基本面数据批量处理...');
     const batchProcessor = new ETFFundamentalsBatchProcessor();
@@ -154,16 +171,22 @@ async function generateHTML() {
             console.error(`Error reading data for stock ${stock}:`, error);
         }
 
-        // 获取ETF的市盈率和股息率数据
-        // 首先检查是否在批量处理结果中
-        if (batchResultsMap.has(stock)) {
+        // 优先使用S&P PDF指标数据
+        if (spPdfMap.has(stock)) {
+            const spData = spPdfMap.get(stock);
+            indexName = spData.indexName || '-';
+            peValue = spData["预期市盈率"] !== null && spData["预期市盈率"] !== undefined ? spData["预期市盈率"] : '-';
+            dpValue = spData["股息率"] !== null && spData["股息率"] !== undefined ? spData["股息率"] : '-';
+            console.log(`📊 从S&P PDF数据中获取 ${stock} 的数据: PE=${peValue}, DP=${dpValue}`);
+        } else if (batchResultsMap.has(stock)) {
+            // 其次使用批量处理结果
             const batchData = batchResultsMap.get(stock);
             indexName = batchData.indexName || '-';
             peValue = batchData.peValue !== null && batchData.peValue !== undefined ? batchData.peValue : '-';
             dpValue = batchData.dpValue !== null && batchData.dpValue !== undefined ? batchData.dpValue : '-';
             console.log(`📊 从批量数据中获取 ${stock} 的数据: PE=${peValue}, DP=${dpValue}`);
         } else {
-            // 如果不在批量结果中，使用原有的逻辑
+            // 如果都没有，使用原有的逻辑
             try {
                 const peDpResult = await fetcher.getETFPEAndDP(stock);
                 if (peDpResult.success) {

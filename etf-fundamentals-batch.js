@@ -14,7 +14,7 @@ class ETFFundamentalsBatchProcessor {
 
     loadConfig() {
         try {
-            const configPath = path.join(__dirname, 'etf-index-mapping.json');
+            const configPath = path.join(__dirname, 'config.json');
             this.config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
             console.log('✅ 配置文件加载成功');
             
@@ -93,18 +93,14 @@ class ETFFundamentalsBatchProcessor {
 
     async login() {
         try {
-            // 从配置文件读取登录凭据
-            const hsiConfig = JSON.parse(fs.readFileSync('hsi-config.json', 'utf8'));
-            const username = hsiConfig.hsi.credentials.username;
-            const password = hsiConfig.hsi.credentials.password;
-
+            const hsiConfig = this.config.hsi;
+            const username = hsiConfig.credentials.username;
+            const password = hsiConfig.credentials.password;
             if (!username || !password) {
                 throw new Error('登录凭据未配置');
             }
-
             console.log(`🔐 开始登录，用户名: ${username}`);
             const loginSuccess = await this.scraper.login(username, password);
-            
             if (loginSuccess) {
                 console.log('✅ 登录成功');
                 return true;

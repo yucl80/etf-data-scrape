@@ -23,7 +23,7 @@ class HSIFundamentalsScraper {
     async initialize() {
         try {
             this.browser = await puppeteer.launch({
-                headless: true, // 设置为false以便观察登录过程
+                // headless: true, // 设置为false以便观察登录过程
                 defaultViewport: { width: 1280, height: 800 },
                 args: [
                     '--no-sandbox',
@@ -857,13 +857,12 @@ async function main() {
         // 从配置文件读取登录凭据
         let username, password;
         try {
-            const config = JSON.parse(fs.readFileSync('hsi-config.json', 'utf8'));
+            const config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
             username = config.hsi.credentials.username;
             password = config.hsi.credentials.password;
             console.log('✅ 从配置文件读取登录凭据');
         } catch (configError) {
             console.error('❌ 读取配置文件失败:', configError.message);
-            // 回退到命令行参数和环境变量
             username = process.argv[2] || process.env.HSI_USERNAME;
             password = process.argv[3] || process.env.HSI_PASSWORD;
         }
@@ -872,7 +871,7 @@ async function main() {
             console.error('❌ 请提供用户名和密码');
             console.log('用法: node hsi-fundamentals-scraper.js <username> <password>');
             console.log('或设置环境变量 HSI_USERNAME 和 HSI_PASSWORD');
-            console.log('或在 hsi-config.json 文件中配置凭据');
+            console.log('或在 config.json 文件中配置凭据');
             return;
         }
 

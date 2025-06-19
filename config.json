@@ -54,5 +54,75 @@
         "589800",                 
         "159903",
         "159597"
-    ]
+    ],
+    "etfIndexMapping": {
+        "159545": {
+            "indexCode": "02033.00",
+            "indexName": "恒生港股通高股息低波动指数",
+            "description": "hshylv"
+        },
+        "513950": {
+            "indexCode": "02033.00",
+            "indexName": "恒生港股通高股息低波动指数",
+            "description": "hshylv"
+        },
+        "513920": {
+            "indexCode": "02200.00",
+            "indexName": "恒生港股通中国央企红利指数",
+            "description": "hsscsoy"
+        },
+        "513690": {
+            "indexCode": "02055.00",
+            "indexName": "恒生港股通高股息率指数",
+            "description": "hsschky"
+        },
+        "159920": {
+            "indexCode": "00001.00",
+            "indexName": "恒生指数",
+            "description": "hsi"
+        },
+        "513890": {
+            "indexCode": "02083.00",
+            "indexName": "恒生科技指数",
+            "description": "hstech"
+        }
+    },
+    "spEtfIndexMap": [
+        { "stock": "515450", "indexCode": "92372168", "indexName": "标普中国A股大盘红利低波50指数" },
+        { "stock": "513630", "indexCode": "92321370", "indexName": "标普港股通低波红利指数" }
+    ],
+    "settings": {
+        "dataDirectory": "./fundamentals-data",
+        "logDirectory": "./logs",
+        "maxRetries": 3,
+        "retryDelay": 5000,
+        "cacheExpiryHours": 24
+    },
+    "hsi": {
+        "baseUrl": "https://www.hsi.com.hk/eng/index360/login",
+        "credentials": {
+            "username": "devmail@163.com",
+            "password": "Yucl@2021"
+        },
+        "scraping": {
+            "headless": false,
+            "timeout": 30000,
+            "waitTime": 3000,
+            "screenshotOnError": true,
+            "savePageContent": false
+        },
+        "dataExtraction": {
+            "extractTables": true,
+            "extractLinks": true,
+            "extractText": true,
+            "maxTextLength": 500,
+            "minTextLength": 10
+        },
+        "output": {
+            "saveScreenshots": true,
+            "saveHTML": true,
+            "saveJSON": true,
+            "outputDirectory": "./hsi-data"
+        }
+    }
 } 

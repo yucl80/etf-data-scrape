@@ -120,9 +120,9 @@ class ETFPEDPFetcher {
             for (let i = 0; i < firstRow.length; i++) {
                 const cellValue = firstRow[i];
                 if (cellValue && typeof cellValue === 'string') {
-                    if (cellValue.includes('市盈率') && cellValue.includes('P/E1')) {
+                    if (cellValue.includes('市盈率') && cellValue.includes('P/E2')) {
                         peIndex = i;
-                    } else if (cellValue.includes('股息率') && cellValue.includes('D/P1')) {
+                    } else if (cellValue.includes('股息率') && cellValue.includes('D/P2')) {
                         dpIndex = i;
                     }
                 }

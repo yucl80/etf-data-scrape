@@ -244,23 +244,38 @@ async function generateHTML() {
 
 // Write the HTML content to a file
 async function writeHTML() {
+    // Get today's date string in YYYY-MM-DD format
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    const dateStr = `${yyyy}-${mm}-${dd}`;
+
+    // Ensure html-data directory exists
+    const htmlDataDir = path.join(process.cwd(), 'html-data');
+    if (!fs.existsSync(htmlDataDir)) {
+        fs.mkdirSync(htmlDataDir);
+    }
+
+    // Set output file path
+    const outputFileName = `output-${dateStr}.html`;
+    const outputPath = path.join(htmlDataDir, outputFileName);
+
+    // If today's file exists, open it and return
+    if (fs.existsSync(outputPath)) {
+        console.log(`Today's HTML file already exists: ${outputPath}`);
+        opn(outputPath);
+        return;
+    }
+
+    // Otherwise, generate new HTML
     const { tableHtml, updateTime } = await generateHTML();
-    
-    // Read the template HTML
     const templatePath = path.join(__dirname, 'index.html');
     let htmlContent = fs.readFileSync(templatePath, 'utf8');
-    
-    // Replace the placeholder with actual data
     htmlContent = htmlContent.replace('<!-- Data will be inserted here by JavaScript -->', tableHtml);
     htmlContent = htmlContent.replace('<span id="updateTime"></span>', updateTime);
-    
-    // Write the updated HTML to a new file
-    const outputPath = path.join(process.cwd(), 'output.html');
     fs.writeFileSync(outputPath, htmlContent);
-    
     console.log('HTML file has been generated successfully!');
-    
-    // Open the file in the default browser
     opn(outputPath);
 }
 

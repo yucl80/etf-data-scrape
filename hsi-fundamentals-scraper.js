@@ -9,7 +9,7 @@ class HSIFundamentalsScraper {
         this.browser = null;
         this.page = null;
         this.loginUrl = 'https://www.hsi.com.hk/eng/index360/login';
-        this.fundamentalsUrl = 'https://www.hsi.com.hk/index360/schi/indexes?id=01067.00';
+        this.fundamentalsUrl = 'https://www.hsi.com.hk/index360/schi/indexes?id=02055.00';
         this.outputDir = './hsi-fundamentals-data';
         this.ensureOutputDirectory();
     }

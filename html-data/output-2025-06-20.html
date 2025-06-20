@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETF Size Changes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .positive {
+            color: #28a745;
+        }
+        .negative {
+            color: #dc3545;
+        }
+        .last-updated {
+            text-align: right;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 20px;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">       
+        <table id="stockTable">
+            <thead>
+                <tr>
+                    <th>Stock</th>
+                    <th>Name</th>
+                    <th>Size</th>
+                    <th>1-Day</th>
+                    <th>3-Day</th>
+                    <th>5-Day</th>
+                    <th>10-Day</th>
+                    <th>30-Day</th>
+                    <th>Index</th>
+                    <th>PE</th>
+                    <th>DP</th>
+                </tr>
+            </thead>
+            <tbody id="stockData">
+                
+            <tr>
+                <td>515450</td>
+                <td>红利低波50ETF</td>
+                <td>66.96</td>
+                <td class="negative">0.40</td>
+                <td class="negative">1.32</td>
+                <td class="negative">3.17</td>
+                <td class="negative">4.09</td>
+                <td class="negative">8.52</td>
+                <td>标普中国A股大盘红利低波50指数</td>
+                <td>9.17</td>
+                <td>4.67</td>
+            </tr>
+        
+            <tr>
+                <td>512890</td>
+                <td>红利低波ETF</td>
+                <td>153.83</td>
+                <td class="negative">0.45</td>
+                <td class="negative">2.83</td>
+                <td class="negative">1.21</td>
+                <td class="negative">1.70</td>
+                <td class="negative">10.40</td>
+                <td>红利低波</td>
+                <td>7.44</td>
+                <td>6.13</td>
+            </tr>
+        
+            <tr>
+                <td>563020</td>
+                <td>红利低波动ETF</td>
+                <td>16.06</td>
+                <td class="negative">0.11</td>
+                <td class="negative">0.30</td>
+                <td class="negative">0.73</td>
+                <td class="negative">1.92</td>
+                <td class="negative">2.86</td>
+                <td>红利低波</td>
+                <td>7.44</td>
+                <td>6.13</td>
+            </tr>
+        
+            <tr>
+                <td>515100</td>
+                <td>红利低波100ETF</td>
+                <td>40.46</td>
+                <td class="positive">0.00</td>
+                <td class="positive">-0.01</td>
+                <td class="negative">0.16</td>
+                <td class="positive">-0.67</td>
+                <td class="">N/A</td>
+                <td>红利低波100</td>
+                <td>7.86</td>
+                <td>6</td>
+            </tr>
+        
+            <tr>
+                <td>159549</td>
+                <td>红利低波ETF天弘</td>
+                <td>33.79</td>
+                <td class="negative">0.09</td>
+                <td class="negative">0.45</td>
+                <td class="negative">0.57</td>
+                <td class="negative">0.65</td>
+                <td class="">N/A</td>
+                <td>红利低波100</td>
+                <td>7.86</td>
+                <td>6</td>
+            </tr>
+        
+            <tr>
+                <td>159545</td>
+                <td>恒生红利低波ETF</td>
+                <td>15.00</td>
+                <td class="positive">0.00</td>
+                <td class="negative">0.50</td>
+                <td class="negative">1.51</td>
+                <td class="negative">2.68</td>
+                <td class="">N/A</td>
+                <td>恒生港股通高股息低波动指数</td>
+                <td>7.42</td>
+                <td>6.61</td>
+            </tr>
+        
+            <tr>
+                <td>513950</td>
+                <td>恒生红利ETF</td>
+                <td>12.70</td>
+                <td class="negative">0.42</td>
+                <td class="negative">1.18</td>
+                <td class="negative">1.67</td>
+                <td class="negative">2.51</td>
+                <td class="negative">2.54</td>
+                <td>恒生港股通高股息低波动指数</td>
+                <td>7.42</td>
+                <td>6.61</td>
+            </tr>
+        
+            <tr>
+                <td>513630</td>
+                <td>港股红利指数ETF</td>
+                <td>78.16</td>
+                <td class="positive">-0.02</td>
+                <td class="negative">0.54</td>
+                <td class="negative">0.84</td>
+                <td class="negative">2.54</td>
+                <td class="negative">2.66</td>
+                <td>标普港股通低波红利指数</td>
+                <td>8.17</td>
+                <td>6.02</td>
+            </tr>
+        
+            <tr>
+                <td>513530</td>
+                <td>港股通红利ETF</td>
+                <td>15.68</td>
+                <td class="negative">0.53</td>
+                <td class="negative">1.46</td>
+                <td class="">N/A</td>
+                <td class="">N/A</td>
+                <td class="">N/A</td>
+                <td>港股通高股息</td>
+                <td>9.25</td>
+                <td>8.01</td>
+            </tr>
+        
+            <tr>
+                <td>513910</td>
+                <td>港股央企红利ETF</td>
+                <td>19.43</td>
+                <td class="negative">0.01</td>
+                <td class="negative">0.49</td>
+                <td class="negative">0.59</td>
+                <td class="negative">1.32</td>
+                <td class="">N/A</td>
+                <td>港股通央企红利</td>
+                <td>7.57</td>
+                <td>7.96</td>
+            </tr>
+        
+            <tr>
+                <td>513920</td>
+                <td>港股通央企红利ETF</td>
+                <td>21.46</td>
+                <td class="positive">-0.14</td>
+                <td class="positive">-0.31</td>
+                <td class="positive">-0.16</td>
+                <td class="positive">-0.51</td>
+                <td class="">N/A</td>
+                <td>恒生港股通中国央企红利指数</td>
+                <td>6.12</td>
+                <td>6.6</td>
+            </tr>
+        
+            <tr>
+                <td>513690</td>
+                <td>港股红利ETF博时</td>
+                <td>42.01</td>
+                <td class="positive">-0.06</td>
+                <td class="negative">0.32</td>
+                <td class="negative">0.83</td>
+                <td class="negative">0.98</td>
+                <td class="">N/A</td>
+                <td>恒生港股通高股息率指数</td>
+                <td>8</td>
+                <td>6.61</td>
+            </tr>
+        
+            <tr>
+                <td>520990</td>
+                <td>港股央企红利50ETF</td>
+                <td>48.89</td>
+                <td class="positive">-0.02</td>
+                <td class="positive">-0.07</td>
+                <td class="positive">-0.08</td>
+                <td class="positive">-0.14</td>
+                <td class="positive">-3.95</td>
+                <td>国新港股通央企红利</td>
+                <td>9.74</td>
+                <td>6.25</td>
+            </tr>
+        
+            <tr>
+                <td>159569</td>
+                <td>港股红利低波ETF</td>
+                <td>1.08</td>
+                <td class="positive">0.00</td>
+                <td class="positive">0.00</td>
+                <td class="">N/A</td>
+                <td class="">N/A</td>
+                <td class="">N/A</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+        
+            <tr>
+                <td>513190</td>
+                <td>港股通金融ETF</td>
+                <td>7.90</td>
+                <td class="">N/A</td>
+                <td class="">N/A</td>
+                <td class="">N/A</td>
+                <td class="">N/A</td>
+                <td class="">N/A</td>
+                <td>港股通内地金融</td>
+                <td>6.58</td>
+                <td>8.54</td>
+            </tr>
+        
+            <tr>
+                <td>513750</td>
+                <td>港股非银ETF</td>
+                <td>19.95</td>
+                <td class="">N/A</td>
+                <td class="">N/A</td>
+                <td class="">N/A</td>
+                <td class="">N/A</td>
+                <td class="">N/A</td>
+                <td>港股通非银</td>
+                <td>19.8</td>
+                <td>3.32</td>
+            </tr>
+        
+            <tr>
+                <td>512800</td>
+                <td>银行ETF</td>
+                <td>55.67</td>
+                <td class="negative">1.10</td>
+                <td class="negative">2.72</td>
+                <td class="negative">1.19</td>
+                <td class="negative">4.13</td>
+                <td class="negative">5.90</td>
+                <td>中证银行</td>
+                <td>6.78</td>
+                <td>6.21</td>
+            </tr>
+        
+            <tr>
+                <td>501025</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td class="">N/A</td>
+                <td class="">N/A</td>
+                <td class="">N/A</td>
+                <td class="">N/A</td>
+                <td class="">N/A</td>
+                <td>HK银行</td>
+                <td>8.87</td>
+                <td>8.26</td>
+            </tr>
+        
+            <tr>
+                <td>159691</td>
+                <td>港股红利ETF</td>
+                <td>52.70</td>
+                <td class="positive">-0.05</td>
+                <td class="negative">0.43</td>
+                <td class="">N/A</td>
+                <td class="">N/A</td>
+                <td class="">N/A</td>
+                <td>港股通高息精选</td>
+                <td>10.93</td>
+                <td>5.99</td>
+            </tr>
+        
+            <tr>
+                <td>515180</td>
+                <td>红利ETF易方达</td>
+                <td>62.74</td>
+                <td class="negative">0.26</td>
+                <td class="positive">-0.06</td>
+                <td class="positive">-0.20</td>
+                <td class="positive">-1.26</td>
+                <td class="positive">-5.93</td>
+                <td>中证红利</td>
+                <td>7.9</td>
+                <td>6.16</td>
+            </tr>
+        
+            <tr>
+                <td>515300</td>
+                <td>300红利低波ETF</td>
+                <td>39.79</td>
+                <td class="negative">0.08</td>
+                <td class="positive">-0.34</td>
+                <td class="positive">-2.93</td>
+                <td class="positive">-3.35</td>
+                <td class="negative">0.02</td>
+                <td>300红利低波</td>
+                <td>8.87</td>
+                <td>5.3</td>
+            </tr>
+        
+            <tr>
+                <td>159930</td>
+                <td>能源ETF</td>
+                <td>2.18</td>
+                <td class="negative">0.14</td>
+                <td class="negative">0.17</td>
+                <td class="negative">0.17</td>
+                <td class="negative">0.17</td>
+                <td class="negative">0.09</td>
+                <td>800能源</td>
+                <td>11.18</td>
+                <td>5.57</td>
+            </tr>
+        
+            <tr>
+                <td>159399</td>
+                <td>现金流ETF</td>
+                <td>34.59</td>
+                <td class="negative">0.41</td>
+                <td class="negative">0.25</td>
+                <td class="negative">0.78</td>
+                <td class="positive">-1.85</td>
+                <td class="positive">-0.81</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+        
+            <tr>
+                <td>159201</td>
+                <td>自由现金流ETF</td>
+                <td>37.56</td>
+                <td class="negative">0.43</td>
+                <td class="negative">0.43</td>
+                <td class="negative">0.24</td>
+                <td class="positive">-0.67</td>
+                <td class="negative">3.23</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+        
+            <tr>
+                <td>159222</td>
+                <td>自由现金流ETF易方达</td>
+                <td>4.54</td>
+                <td class="positive">0.00</td>
+                <td class="positive">-0.04</td>
+                <td class="negative">0.08</td>
+                <td class="positive">-0.50</td>
+                <td class="positive">-1.35</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+        
+            <tr>
+                <td>562080</td>
+                <td>300现金流ETF</td>
+                <td>1.46</td>
+                <td class="positive">0.00</td>
+                <td class="positive">-0.01</td>
+                <td class="positive">-0.09</td>
+                <td class="positive">-0.20</td>
+                <td class="negative">0.08</td>
+                <td>300现金流</td>
+                <td>13.67</td>
+                <td>3.75</td>
+            </tr>
+        
+            <tr>
+                <td>563990</td>
+                <td>800现金流ETF</td>
+                <td>0.96</td>
+                <td class="positive">0.00</td>
+                <td class="positive">-0.03</td>
+                <td class="positive">-0.07</td>
+                <td class="positive">-0.19</td>
+                <td class="positive">-4.81</td>
+                <td>800现金流</td>
+                <td>11.61</td>
+                <td>4.14</td>
+            </tr>
+        
+            <tr>
+                <td>159232</td>
+                <td>现金流ETF南方</td>
+                <td>5.67</td>
+                <td class="negative">0.04</td>
+                <td class="negative">0.02</td>
+                <td class="negative">0.02</td>
+                <td class="positive">-0.16</td>
+                <td class="positive">-8.44</td>
+                <td>中证现金流</td>
+                <td>11.39</td>
+                <td>4.12</td>
+            </tr>
+        
+            <tr>
+                <td>562500</td>
+                <td>机器人ETF</td>
+                <td>160.27</td>
+                <td class="negative">1.20</td>
+                <td class="negative">1.58</td>
+                <td class="negative">1.38</td>
+                <td class="negative">3.74</td>
+                <td class="positive">-4.64</td>
+                <td>机器人</td>
+                <td>42.08</td>
+                <td>0.6</td>
+            </tr>
+        
+            <tr>
+                <td>159770</td>
+                <td>机器人ETF</td>
+                <td>63.71</td>
+                <td class="negative">0.16</td>
+                <td class="negative">0.02</td>
+                <td class="positive">-0.02</td>
+                <td class="negative">0.79</td>
+                <td class="positive">-0.42</td>
+                <td>机器人</td>
+                <td>42.08</td>
+                <td>0.6</td>
+            </tr>
+        
+            <tr>
+                <td>588000</td>
+                <td>科创50ETF</td>
+                <td>804.76</td>
+                <td class="positive">-0.77</td>
+                <td class="negative">15.08</td>
+                <td class="negative">21.02</td>
+                <td class="negative">37.67</td>
+                <td class="negative">74.16</td>
+                <td>科创50</td>
+                <td>46.43</td>
+                <td>0.68</td>
+            </tr>
+        
+            <tr>
+                <td>588080</td>
+                <td>科创板50ETF</td>
+                <td>612.47</td>
+                <td class="negative">0.15</td>
+                <td class="negative">4.23</td>
+                <td class="negative">7.47</td>
+                <td class="negative">11.31</td>
+                <td class="negative">23.16</td>
+                <td>科创50</td>
+                <td>46.43</td>
+                <td>0.68</td>
+            </tr>
+        
+            <tr>
+                <td>588790</td>
+                <td>科创AIETF</td>
+                <td>60.52</td>
+                <td class="positive">-0.45</td>
+                <td class="positive">-1.23</td>
+                <td class="positive">-1.80</td>
+                <td class="negative">1.83</td>
+                <td class="negative">12.30</td>
+                <td>科创AI</td>
+                <td>50.4</td>
+                <td>0.37</td>
+            </tr>
+        
+            <tr>
+                <td>588200</td>
+                <td>科创芯片ETF</td>
+                <td>174.58</td>
+                <td class="negative">1.17</td>
+                <td class="negative">2.46</td>
+                <td class="negative">1.65</td>
+                <td class="negative">2.25</td>
+                <td class="negative">13.53</td>
+                <td>科创芯片</td>
+                <td>82.4</td>
+                <td>0.2</td>
+            </tr>
+        
+            <tr>
+                <td>588110</td>
+                <td>科创成长ETF</td>
+                <td>1.70</td>
+                <td class="positive">-0.09</td>
+                <td class="positive">-0.03</td>
+                <td class="positive">-0.03</td>
+                <td class="positive">-0.09</td>
+                <td class="positive">-0.03</td>
+                <td>科创成长</td>
+                <td>71.43</td>
+                <td>0.24</td>
+            </tr>
+        
+            <tr>
+                <td>159516</td>
+                <td>半导体设备ETF</td>
+                <td>22.69</td>
+                <td class="positive">-0.17</td>
+                <td class="positive">-0.43</td>
+                <td class="positive">-0.67</td>
+                <td class="negative">0.55</td>
+                <td class="negative">0.53</td>
+                <td>半导体材料设备</td>
+                <td>51.94</td>
+                <td>0.35</td>
+            </tr>
+        
+            <tr>
+                <td>561980</td>
+                <td>半导体设备ETF</td>
+                <td>7.08</td>
+                <td class="positive">-0.09</td>
+                <td class="positive">-0.09</td>
+                <td class="positive">-0.05</td>
+                <td class="negative">0.52</td>
+                <td class="negative">1.21</td>
+                <td>中证半导</td>
+                <td>69.14</td>
+                <td>0.21</td>
+            </tr>
+        
+            <tr>
+                <td>560850</td>
+                <td>信创50ETF</td>
+                <td>3.77</td>
+                <td class="positive">-0.04</td>
+                <td class="positive">-0.20</td>
+                <td class="positive">-0.58</td>
+                <td class="positive">-0.60</td>
+                <td class="negative">1.54</td>
+                <td>中证信创</td>
+                <td>74.32</td>
+                <td>0.59</td>
+            </tr>
+        
+            <tr>
+                <td>512070</td>
+                <td>证券保险ETF</td>
+                <td>90.16</td>
+                <td class="negative">1.16</td>
+                <td class="negative">0.90</td>
+                <td class="negative">1.36</td>
+                <td class="positive">-0.43</td>
+                <td class="negative">2.91</td>
+                <td>300非银</td>
+                <td>12.24</td>
+                <td>2.21</td>
+            </tr>
+        
+            <tr>
+                <td>512880</td>
+                <td>证券ETF</td>
+                <td>279.00</td>
+                <td class="negative">3.24</td>
+                <td class="negative">3.61</td>
+                <td class="negative">6.97</td>
+                <td class="negative">8.39</td>
+                <td class="negative">8.22</td>
+                <td>证券公司</td>
+                <td>20.45</td>
+                <td>1.59</td>
+            </tr>
+        
+            <tr>
+                <td>515000</td>
+                <td>科技ETF</td>
+                <td>23.58</td>
+                <td class="positive">-0.07</td>
+                <td class="positive">-0.17</td>
+                <td class="positive">-0.42</td>
+                <td class="positive">-1.00</td>
+                <td class="positive">-0.86</td>
+                <td>科技龙头</td>
+                <td>36.85</td>
+                <td>1.17</td>
+            </tr>
+        
+            <tr>
+                <td>560080</td>
+                <td>中药ETF</td>
+                <td>16.94</td>
+                <td class="negative">0.06</td>
+                <td class="negative">0.09</td>
+                <td class="negative">0.03</td>
+                <td class="positive">-0.25</td>
+                <td class="positive">-2.65</td>
+                <td>中证中药</td>
+                <td>20.77</td>
+                <td>3.15</td>
+            </tr>
+        
+            <tr>
+                <td>159992</td>
+                <td>创新药ETF</td>
+                <td>114.62</td>
+                <td class="negative">0.21</td>
+                <td class="negative">0.73</td>
+                <td class="positive">-1.16</td>
+                <td class="positive">-7.84</td>
+                <td class="positive">-41.58</td>
+                <td>CS创新药</td>
+                <td>30.62</td>
+                <td>1.31</td>
+            </tr>
+        
+            <tr>
+                <td>512170</td>
+                <td>医疗ETF</td>
+                <td>798.77</td>
+                <td class="negative">6.85</td>
+                <td class="negative">15.08</td>
+                <td class="negative">21.01</td>
+                <td class="negative">15.24</td>
+                <td class="positive">-10.56</td>
+                <td>中证医疗</td>
+                <td>27.54</td>
+                <td>2.09</td>
+            </tr>
+        
+            <tr>
+                <td>512690</td>
+                <td>酒ETF</td>
+                <td>222.02</td>
+                <td class="positive">-0.37</td>
+                <td class="negative">0.95</td>
+                <td class="negative">11.90</td>
+                <td class="negative">30.97</td>
+                <td class="negative">31.60</td>
+                <td>中证酒</td>
+                <td>18.38</td>
+                <td>4.32</td>
+            </tr>
+        
+            <tr>
+                <td>510050</td>
+                <td>上证50ETF</td>
+                <td>597.89</td>
+                <td class="negative">1.58</td>
+                <td class="negative">2.52</td>
+                <td class="negative">3.37</td>
+                <td class="negative">2.95</td>
+                <td class="negative">0.14</td>
+                <td>上证50</td>
+                <td>10.63</td>
+                <td>4.35</td>
+            </tr>
+        
+            <tr>
+                <td>563220</td>
+                <td>中证A500ETF富国</td>
+                <td>153.62</td>
+                <td class="positive">-2.22</td>
+                <td class="positive">-2.58</td>
+                <td class="positive">-3.30</td>
+                <td class="positive">-7.95</td>
+                <td class="positive">-16.95</td>
+                <td>中证A500</td>
+                <td>13.75</td>
+                <td>3.14</td>
+            </tr>
+        
+            <tr>
+                <td>159920</td>
+                <td>恒生ETF</td>
+                <td>108.68</td>
+                <td class="positive">0.00</td>
+                <td class="positive">0.00</td>
+                <td class="positive">0.00</td>
+                <td class="positive">-0.66</td>
+                <td class="positive">-3.78</td>
+                <td>恒生指数</td>
+                <td>11.71</td>
+                <td>3.47</td>
+            </tr>
+        
+            <tr>
+                <td>589000</td>
+                <td>科创综指ETF华夏</td>
+                <td>24.04</td>
+                <td class="positive">-0.12</td>
+                <td class="positive">-0.16</td>
+                <td class="positive">-0.32</td>
+                <td class="positive">-4.44</td>
+                <td class="positive">-12.52</td>
+                <td>科创价格</td>
+                <td>46.3</td>
+                <td>0.66</td>
+            </tr>
+        
+            <tr>
+                <td>589800</td>
+                <td>科创综指ETF易方达</td>
+                <td>27.48</td>
+                <td class="negative">0.04</td>
+                <td class="positive">-0.12</td>
+                <td class="positive">-0.36</td>
+                <td class="positive">-2.68</td>
+                <td class="positive">-8.20</td>
+                <td>科创价格</td>
+                <td>46.3</td>
+                <td>0.66</td>
+            </tr>
+        
+            <tr>
+                <td>159995</td>
+                <td>芯片ETF</td>
+                <td>204.13</td>
+                <td class="positive">-0.36</td>
+                <td class="positive">-0.18</td>
+                <td class="negative">1.15</td>
+                <td class="negative">4.45</td>
+                <td class="">N/A</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+        
+            <tr>
+                <td>512480</td>
+                <td>半导体ETF</td>
+                <td>228.77</td>
+                <td class="positive">-1.72</td>
+                <td class="negative">0.24</td>
+                <td class="negative">1.08</td>
+                <td class="negative">8.60</td>
+                <td class="">N/A</td>
+                <td>半导体</td>
+                <td>66.72</td>
+                <td>0.24</td>
+            </tr>
+        
+            <tr>
+                <td>159903</td>
+                <td>深成ETF</td>
+                <td>3.97</td>
+                <td class="positive">0.00</td>
+                <td class="positive">0.00</td>
+                <td class="positive">-0.06</td>
+                <td class="positive">-0.18</td>
+                <td class="positive">-0.36</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+        
+            <tr>
+                <td>159597</td>
+                <td>创业板成长ETF易方达</td>
+                <td>0.72</td>
+                <td class="positive">-0.01</td>
+                <td class="positive">-0.01</td>
+                <td class="positive">-0.01</td>
+                <td class="">N/A</td>
+                <td class="">N/A</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+        
+            <tr>
+                <td>513890</td>
+                <td>恒生科技HKETF</td>
+                <td>4.18</td>
+                <td class="negative">0.06</td>
+                <td class="negative">0.06</td>
+                <td class="negative">0.23</td>
+                <td class="negative">0.22</td>
+                <td class="negative">0.38</td>
+                <td>恒生科技指数</td>
+                <td>21.9</td>
+                <td>1.02</td>
+            </tr>
+        
+            <tr>
+                <td>159537</td>
+                <td>信创ETF</td>
+                <td>6.20</td>
+                <td class="positive">-0.16</td>
+                <td class="positive">-0.64</td>
+                <td class="positive">-1.45</td>
+                <td class="">N/A</td>
+                <td class="">N/A</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+        
+            <tr>
+                <td>159682</td>
+                <td>创业50ETF</td>
+                <td>50.12</td>
+                <td class="negative">0.16</td>
+                <td class="negative">0.06</td>
+                <td class="positive">-0.43</td>
+                <td class="positive">-1.04</td>
+                <td class="positive">-3.62</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+        
+            </tbody>
+        </table>
+        <div class="last-updated" id="lastUpdated">
+            Last updated: 2025/6/20 16:45:08
+        </div>
+    </div>
+    <script src="display.js"></script>
+</body>
+</html> 

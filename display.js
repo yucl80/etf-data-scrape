@@ -205,8 +205,8 @@ async function generateHTML() {
             name,
             latestSize: latestSize === 'N/A' ? 'N/A' : parseFloat(latestSize),
             indexName,
-            peValue,
-            dpValue,
+            peValue: (peValue !== null && peValue !== undefined && !isNaN(Number(peValue))) ? Number(peValue) : '-',
+            dpValue: (dpValue !== null && dpValue !== undefined && !isNaN(Number(dpValue))) ? Number(dpValue) : '-',
             oneDayChange: changes?.oneDayChange?.change ?? 'N/A',
             threeDayChange: changes?.threeDayChange?.change ?? 'N/A',
             fiveDayChange: changes?.FiveDayChange?.change ?? 'N/A',
@@ -236,9 +236,11 @@ async function generateHTML() {
 
     const updateTime = new Date().toLocaleString();
     
+    // 新增：将表格数据以JSON形式返回
     return {
         tableHtml: html,
-        updateTime: updateTime
+        updateTime: updateTime,
+        tableData: JSON.stringify(results)
     };
 }
 
@@ -269,10 +271,10 @@ async function writeHTML() {
     }
 
     // Otherwise, generate new HTML
-    const { tableHtml, updateTime } = await generateHTML();
+    const { tableHtml, updateTime, tableData } = await generateHTML();
     const templatePath = path.join(__dirname, 'index.html');
     let htmlContent = fs.readFileSync(templatePath, 'utf8');
-    htmlContent = htmlContent.replace('<!-- Data will be inserted here by JavaScript -->', tableHtml);
+    htmlContent = htmlContent.replace('<!-- Data will be inserted here by JavaScript -->', tableHtml + `\n<script id="tableData" type="application/json">${tableData}</script>`);
     htmlContent = htmlContent.replace('<span id="updateTime"></span>', updateTime);
     fs.writeFileSync(outputPath, htmlContent);
     console.log('HTML file has been generated successfully!');

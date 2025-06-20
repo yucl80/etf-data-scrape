@@ -91,5 +91,102 @@
         </div>
     </div>
     <script src="display.js"></script>
+    <script>
+    // 1. 读取JSON数据
+    function getTableData() {
+        const script = document.getElementById('tableData');
+        if (!script) return [];
+        try {
+            return JSON.parse(script.textContent);
+        } catch (e) {
+            return [];
+        }
+    }
+
+    // 2. 渲染表格
+    const columns = [
+        { key: 'stock', label: 'ETF' },
+        { key: 'name', label: 'Name' },
+        { key: 'latestSize', label: 'Size', isNumber: true },
+        { key: 'oneDayChange', label: '1-Day', isNumber: true },
+        { key: 'threeDayChange', label: '3-Day', isNumber: true },
+        { key: 'fiveDayChange', label: '5-Day', isNumber: true },
+        { key: 'tenDayChange', label: '10-Day', isNumber: true },
+        { key: 'thirtyDayChange', label: '30-Day', isNumber: true },
+        { key: 'indexName', label: 'Index' },
+        { key: 'peValue', label: 'P/E', isNumber: true },
+        { key: 'dpValue', label: 'D/P', isNumber: true }
+    ];
+
+    let tableData = getTableData();
+    let sortKey = null;
+    let sortDesc = true;
+
+    function getChangeClass(val) {
+        if (val === 'N/A' || val === '-' || val === undefined) return '';
+        return parseFloat(val) > 0 ? 'negative' : 'positive';
+    }
+    function formatNumber(val) {
+        if (val === 'N/A' || val === '-' || val === undefined) return val;
+        return (parseFloat(val)/10000).toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+    function renderTable() {
+        const tbody = document.getElementById('stockData');
+        tbody.innerHTML = '';
+        tableData.forEach(row => {
+            const tr = document.createElement('tr');
+            columns.forEach(col => {
+                const td = document.createElement('td');
+                let val = row[col.key];
+                if (col.isNumber && ["latestSize","oneDayChange","threeDayChange","fiveDayChange","tenDayChange","thirtyDayChange"].includes(col.key) && val !== 'N/A' && val !== '-' && val !== undefined) {
+                    td.textContent = formatNumber(val);
+                } else {
+                    td.textContent = val;
+                }
+                if (["oneDayChange","threeDayChange","fiveDayChange","tenDayChange","thirtyDayChange"].includes(col.key)) {
+                    td.className = getChangeClass(val);
+                }
+                tr.appendChild(td);
+            });
+            tbody.appendChild(tr);
+        });
+    }
+
+    // 3. 排序功能
+    function sortBy(key) {
+        if (sortKey === key) {
+            sortDesc = !sortDesc;
+        } else {
+            sortKey = key;
+            sortDesc = true;
+        }
+        tableData.sort((a, b) => {
+            let va = a[key], vb = b[key];
+            if (va === 'N/A' || va === '-' || va === undefined) return 1;
+            if (vb === 'N/A' || vb === '-' || vb === undefined) return -1;
+            if (!isNaN(parseFloat(va)) && !isNaN(parseFloat(vb))) {
+                va = parseFloat(va);
+                vb = parseFloat(vb);
+            }
+            if (va < vb) return sortDesc ? 1 : -1;
+            if (va > vb) return sortDesc ? -1 : 1;
+            return 0;
+        });
+        renderTable();
+    }
+
+    // 4. 给表头加点击事件
+    document.addEventListener('DOMContentLoaded', function() {
+        const thead = document.querySelector('#stockTable thead tr');
+        thead.querySelectorAll('th').forEach((th, idx) => {
+            th.style.cursor = 'pointer';
+            th.title = '点击排序';
+            th.addEventListener('click', () => {
+                sortBy(columns[idx].key);
+            });
+        });
+        renderTable();
+    });
+    </script>
 </body>
 </html> 

@@ -19,7 +19,8 @@
         "512800",
         "501025",
         "159691",
-        "515180",        
+        "515180",
+        "563180",      
         "515300",      
         "159930",  
         "159399",  
@@ -105,7 +106,7 @@
         "baseUrl": "https://www.hsi.com.hk/eng/index360/login",
         "credentials": {
             "username": "test@163.com",
-            "password": "test"
+            "password": "test@2021"
         },
         "scraping": {
             "headless": false,

@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>指数数据展示</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .header h1 {
+            color: #333;
+            margin: 0 0 10px 0;
+            font-size: 28px;
+        }
+        
+        .header p {
+            color: #666;
+            margin: 0;
+            font-size: 16px;
+        }
+        
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .filter-btn {
+            padding: 8px 16px;
+            border: 1px solid #ddd;
+            background-color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .filter-btn.active {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+        
+        .index-data-table {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        
+        .index-data-table table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        .index-data-table th,
+        .index-data-table td {
+            padding: 8px 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        
+        .index-data-table th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .index-data-table th:nth-child(1),
+        .index-data-table th:nth-child(2),
+        .index-data-table th:nth-child(3) {
+            cursor: default;
+        }
+        
+        .index-data-table th:nth-child(1):hover,
+        .index-data-table th:nth-child(2):hover,
+        .index-data-table th:nth-child(3):hover {
+            background-color: #f5f5f5;
+        }
+        
+        .index-data-table th:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .index-data-table th.sorted {
+            background-color: #007bff;
+            color: white;
+        }
+        
+        .index-data-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .index-data-table tr:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .index-data-table .total-return {
+            background-color: #e8f4f8;
+        }
+        
+        .index-data-table .total-return:hover {
+            background-color: #d1e7f0;
+        }
+        
+        .index-data-table .dividend-yield {
+            background-color: #f0f8e8;
+        }
+        
+        .index-data-table .dividend-yield:hover {
+            background-color: #e0f0d0;
+        }
+        
+        .index-data-table .pe-dp {
+            background-color: #fff3cd;
+        }
+        
+        .index-data-table .pe-dp:hover {
+            background-color: #ffeaa7;
+        }
+        
+        .index-data-table .number {
+            text-align: right;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .volatility-column {
+            display: table-cell;
+        }
+        
+        .dividend-view .volatility-column {
+            display: none;
+        }
+        
+        .pe-dp-view .volatility-column {
+            display: none;
+        }
+        
+        .pe-dp-view .return-column {
+            display: none;
+        }
+        
+        .pe-dp-view .pe-dp-column {
+            display: table-cell !important;
+        }
+        
+        .pe-dp-view .pe-dp-header {
+            display: table-row !important;
+        }
+        
+        .pe-dp-view thead tr:first-child {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">    
+        
+        <div class="controls">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">全部</button>
+                <button class="filter-btn" data-filter="price">价格指数</button>
+                <button class="filter-btn" data-filter="total">全收益指数</button>
+                <button class="filter-btn" data-filter="pe-dp">市盈率&股息率</button>
+                <button class="filter-btn" data-filter="dividend">实际股息率</button>
+            </div>
+        </div>
+        
+        <div class="index-data-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>指数代码</th>
+                        <th>指数全称</th>
+                        <th class="return-column">近一月收益(%)</th>
+                        <th class="return-column">近三月收益(%)</th>
+                        <th class="return-column">年至今收益(%)</th>
+                        <th class="return-column">近一年年化收益(%)</th>
+                        <th class="return-column">近三年年化收益(%)</th>
+                        <th class="return-column">近五年年化收益(%)</th>
+                        <th class="volatility-column">近一年波动率(%)</th>
+                        <th class="volatility-column">近三年波动率(%)</th>
+                        <th class="volatility-column">近五年波动率(%)</th>
+                    </tr>
+                    <tr class="pe-dp-header" style="display: none;">
+                        <th>指数代码</th>
+                        <th>指数全称</th>
+                        <th>市盈率(PE)1</th>
+                        <th>市盈率(PE)2</th>
+                        <th>股息率(DP)1</th>
+                        <th>股息率(DP)2</th>
+                    </tr>
+                </thead>
+                <tbody id="data-table-body">
+                    {{TABLE_ROWS}}
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="footer">           
+            <p>生成时间：{{GENERATION_TIME}}</p>
+        </div>
+    </div>
+
+    <script>
+        // 嵌入的JSON数据
+        const indexData = {{INDEX_DATA}};
+        const indexMapping = {{INDEX_MAPPING}};
+        const peDpData = {{PE_DP_DATA}};
+        
+        // 获取指数名称函数
+        function getIndexName(indexCode) {
+            return indexMapping[indexCode] || indexCode; // 如果找不到映射，返回原始代码
+        }
+        
+        // 搜索和筛选功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const tableBody = document.getElementById('data-table-body');
+            let currentSortColumn = null;
+            let currentSortDirection = null;
+            
+            // 筛选功能
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filterButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 控制波动率列的显示
+                    const table = document.querySelector('.index-data-table table');
+                    if (this.dataset.filter === 'dividend' || this.dataset.filter === 'pe-dp') {
+                        table.classList.add('dividend-view');
+                        if (this.dataset.filter === 'pe-dp') {
+                            table.classList.add('pe-dp-view');
+                        } else {
+                            table.classList.remove('pe-dp-view');
+                        }
+                    } else {
+                        table.classList.remove('dividend-view');
+                        table.classList.remove('pe-dp-view');
+                    }
+                    
+                    filterData();
+                });
+            });
+            
+            // 排序功能（事件委托到thead）
+            const thead = document.querySelector('.index-data-table thead');
+            thead.addEventListener('click', function(e) {
+                if (e.target.tagName !== 'TH') return;
+                const ths = Array.from(e.target.parentNode.children);
+                const columnIndex = ths.indexOf(e.target);
+                const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+                // PE/DP模式下只允许点击PE1、PE2、DP1、DP2（索引2~5）
+                if (activeFilter === 'pe-dp') {
+                    if (columnIndex < 2 || columnIndex > 5) return;
+                } else {
+                    if (columnIndex < 2) return;
+                }
+                // 清除之前的排序样式
+                document.querySelectorAll('.index-data-table th').forEach(h => h.classList.remove('sorted'));
+                // 如果点击的是当前排序列，切换排序方向
+                if (currentSortColumn === columnIndex) {
+                    currentSortDirection = currentSortDirection === 'desc' ? 'asc' : 'desc';
+                } else {
+                    currentSortColumn = columnIndex;
+                    currentSortDirection = 'desc';
+                }
+                e.target.classList.add('sorted');
+                filterData();
+            });
+            
+            function filterData() {
+                const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+                
+                const filteredData = indexData.filter(item => {
+                    // 类型过滤
+                    switch(activeFilter) {
+                        case 'price':
+                            return item.data.length > 0 && 
+                                   !item.data[0].name.includes('全收益') &&
+                                   !item.data[0].name.includes('净收益');
+                        case 'total':
+                            return item.data.some(data => 
+                                data.name.includes('全收益') || 
+                                data.name.includes('净收益')
+                            );
+                        case 'dividend':
+                            return item.data.length > 1;
+                        case 'pe-dp':
+                            return peDpData.some(peItem => peItem.etfCode === item.indexCode);
+                        default:
+                            return true;
+                    }
+                });
+                
+                // 应用排序
+                if (currentSortColumn !== null) {
+                    sortData(filteredData, currentSortColumn, currentSortDirection, activeFilter);
+                }
+                
+                renderTable(filteredData);
+            }
+            
+            function sortData(data, columnIndex, direction, activeFilter) {
+                if (activeFilter === 'pe-dp') {
+                    // PE/DP模式下，2:pe1, 3:pe2, 4:dp1, 5:dp2
+                    const keyMap = {2: 'pe1', 3: 'pe2', 4: 'dp1', 5: 'dp2'};
+                    const sortKey = keyMap[columnIndex];
+                    data.sort((a, b) => {
+                        const aPe = peDpData.find(peItem => peItem.etfCode === a.indexCode);
+                        const bPe = peDpData.find(peItem => peItem.etfCode === b.indexCode);
+                        let aValue = aPe ? parseFloat(aPe[sortKey]) || 0 : 0;
+                        let bValue = bPe ? parseFloat(bPe[sortKey]) || 0 : 0;
+                        if (direction === 'desc') {
+                            return aValue > bValue ? -1 : aValue < bValue ? 1 : 0;
+                        } else {
+                            return aValue < bValue ? -1 : aValue > bValue ? 1 : 0;
+                        }
+                    });
+                    return;
+                }
+                // 其它模式
+                const columnKeys = [
+                    '阶段性收益_近一月',
+                    '阶段性收益_近三月',
+                    '阶段性收益_年至今',
+                    '年化收益_近一年',
+                    '年化收益_近三年',
+                    '年化收益_近五年',
+                    '年化波动率_近一年',
+                    '年化波动率_近三年',
+                    '年化波动率_近五年'
+                ];
+                const adjustedColumnIndex = columnIndex - 2;
+                const sortKey = columnKeys[adjustedColumnIndex];
+                data.sort((a, b) => {
+                    let aValue, bValue;
+                    if (activeFilter === 'price') {
+                        const aData = a.data[0];
+                        const bData = b.data[0];
+                        aValue = parseFloat(aData[sortKey]) || 0;
+                        bValue = parseFloat(bData[sortKey]) || 0;
+                    } else if (activeFilter === 'total') {
+                        const aData = a.data.find(d => d.name.includes('全收益') || d.name.includes('净收益'));
+                        const bData = b.data.find(d => d.name.includes('全收益') || d.name.includes('净收益'));
+                        if (aData && bData) {
+                            aValue = parseFloat(aData[sortKey]) || 0;
+                            bValue = parseFloat(bData[sortKey]) || 0;
+                        } else {
+                            aValue = bValue = 0;
+                        }
+                    } else if (activeFilter === 'dividend') {
+                        if (a.data.length > 1 && b.data.length > 1) {
+                            const aDiv = calculateDividendYield(a.data[0], a.data[1]);
+                            const bDiv = calculateDividendYield(b.data[0], b.data[1]);
+                            aValue = parseFloat(aDiv[sortKey]) || 0;
+                            bValue = parseFloat(bDiv[sortKey]) || 0;
+                        } else {
+                            aValue = bValue = 0;
+                        }
+                    } else {
+                        // "全部"模式：全部使用第二行数据进行排序
+                        let aData = a.data[1] || a.data[0]; // 优先使用第二行，如果没有则使用第一行
+                        let bData = b.data[1] || b.data[0]; // 优先使用第二行，如果没有则使用第一行
+                        
+                        aValue = parseFloat(aData[sortKey]) || 0;
+                        bValue = parseFloat(bData[sortKey]) || 0;
+                    }
+                    if (direction === 'desc') {
+                        return aValue > bValue ? -1 : aValue < bValue ? 1 : 0;
+                    } else {
+                        return aValue < bValue ? -1 : aValue > bValue ? 1 : 0;
+                    }
+                });
+            }
+            
+            function calculateDividendYield(priceData, totalData) {
+                const fields = [
+                    '阶段性收益_近一月',
+                    '阶段性收益_近三月', 
+                    '阶段性收益_年至今',
+                    '年化收益_近一年',
+                    '年化收益_近三年',
+                    '年化收益_近五年'
+                ];
+                
+                const result = {};
+                fields.forEach(field => {
+                    const priceValue = parseFloat(priceData[field]) || 0;
+                    const totalValue = parseFloat(totalData[field]) || 0;
+                    result[field] = (totalValue - priceValue).toFixed(2);
+                });
+                
+                return result;
+            }
+            
+            function renderTable(data) {
+                var html = '';
+                var activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+                data.forEach(function(item) {
+                    if (item.data && item.data.length > 0) {
+                        if (activeFilter === 'price') {
+                            var d = item.data[0];
+                            html += '<tr data-index-code="' + item.indexCode + '"><td>' + item.indexCode + '</td><td>' + d.name + '</td><td class="number">' + d.阶段性收益_近一月 + '</td><td class="number">' + d.阶段性收益_近三月 + '</td><td class="number">' + d.阶段性收益_年至今 + '</td><td class="number">' + d.年化收益_近一年 + '</td><td class="number">' + d.年化收益_近三年 + '</td><td class="number">' + d.年化收益_近五年 + '</td><td class="number">' + d.年化波动率_近一年 + '</td><td class="number">' + d.年化波动率_近三年 + '</td><td class="number">' + d.年化波动率_近五年 + '</td></tr>';
+                        } else if (activeFilter === 'total' && item.data.length > 1) {
+                            var d = item.data[1];
+                            html += '<tr class="total-return" data-index-code="' + item.indexCode + '"><td>' + item.indexCode + '</td><td>' + d.name + '</td><td class="number">' + d.阶段性收益_近一月 + '</td><td class="number">' + d.阶段性收益_近三月 + '</td><td class="number">' + d.阶段性收益_年至今 + '</td><td class="number">' + d.年化收益_近一年 + '</td><td class="number">' + d.年化收益_近三年 + '</td><td class="number">' + d.年化收益_近五年 + '</td><td class="number">' + d.年化波动率_近一年 + '</td><td class="number">' + d.年化波动率_近三年 + '</td><td class="number">' + d.年化波动率_近五年 + '</td></tr>';
+                        } else if (activeFilter === 'dividend' && item.data.length > 1) {
+                            var d1 = item.data[0], d2 = item.data[1];
+                            var div = calculateDividendYield(d1, d2);
+                            html += '<tr class="dividend-yield" data-index-code="' + item.indexCode + '"><td>' + item.indexCode + '</td><td>' + d2.name + '</td><td class="number">' + div.阶段性收益_近一月 + '%</td><td class="number">' + div.阶段性收益_近三月 + '%</td><td class="number">' + div.阶段性收益_年至今 + '%</td><td class="number">' + div.年化收益_近一年 + '%</td><td class="number">' + div.年化收益_近三年 + '%</td><td class="number">' + div.年化收益_近五年 + '%</td></tr>';
+                        } else if (activeFilter === 'pe-dp') {
+                            var peItem = peDpData.find(peItem => peItem.etfCode === item.indexCode);
+                            if (peItem) {
+                                var d = item.data[0];
+                                html += '<tr class="pe-dp" data-index-code="' + item.indexCode + '"><td>' + item.indexCode + '</td><td>' + d.name + '</td><td class="number">' + (peItem.pe1 !== null ? Number(peItem.pe1).toFixed(2) : 'N/A') + '</td><td class="number">' + (peItem.pe2 !== null ? Number(peItem.pe2).toFixed(2) : 'N/A') + '</td><td class="number">' + (peItem.dp1 !== null ? Number(peItem.dp1).toFixed(2) + '%' : 'N/A') + '</td><td class="number">' + (peItem.dp2 !== null ? Number(peItem.dp2).toFixed(2) + '%' : 'N/A') + '</td></tr>';
+                            }
+                        } else {
+                            var d = item.data[0];
+                            html += '<tr data-index-code="' + item.indexCode + '"><td>' + item.indexCode + '</td><td>' + d.name + '</td><td class="number">' + d.阶段性收益_近一月 + '</td><td class="number">' + d.阶段性收益_近三月 + '</td><td class="number">' + d.阶段性收益_年至今 + '</td><td class="number">' + d.年化收益_近一年 + '</td><td class="number">' + d.年化收益_近三年 + '</td><td class="number">' + d.年化收益_近五年 + '</td><td class="number">' + d.年化波动率_近一年 + '</td><td class="number">' + d.年化波动率_近三年 + '</td><td class="number">' + d.年化波动率_近五年 + '</td></tr>';
+                            if (item.data.length > 1) {
+                                var d2 = item.data[1];
+                                html += '<tr class="total-return" data-index-code="' + item.indexCode + '"><td>' + item.indexCode + '</td><td>' + d2.name + '</td><td class="number">' + d2.阶段性收益_近一月 + '</td><td class="number">' + d2.阶段性收益_近三月 + '</td><td class="number">' + d2.阶段性收益_年至今 + '</td><td class="number">' + d2.年化收益_近一年 + '</td><td class="number">' + d2.年化收益_近三年 + '</td><td class="number">' + d2.年化收益_近五年 + '</td><td class="number">' + d2.年化波动率_近一年 + '</td><td class="number">' + d2.年化波动率_近三年 + '</td><td class="number">' + d2.年化波动率_近五年 + '</td></tr>';
+                            }
+                        }
+                    }
+                });
+                tableBody.innerHTML = html;
+            }
+        });
+    </script>
+</body>
+</html> 

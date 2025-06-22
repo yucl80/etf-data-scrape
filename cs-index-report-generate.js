@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const XLSX = require('xlsx');
+const open = require('opn');
 const CSIndexFetcher = require('./cs-index-fetcher.js');
 const { execSync } = require('child_process');
 
@@ -225,7 +226,7 @@ function generateHTML(jsonData, indexMapping, peDpData) {
 }
 
 // 主函数
-async function main() {
+async function generateIndexReport() {
     console.log('开始生成静态HTML文件...');
     
     // 读取JSON数据
@@ -254,12 +255,37 @@ async function main() {
     }
     
     // 写入文件
-    const outputPath = path.join(__dirname, 'index-report-static.html');
+    const reportDir = path.join(__dirname, 'report-data');
+    if (!fs.existsSync(reportDir)) {
+        fs.mkdirSync(reportDir, { recursive: true });
+    }
+    const today = new Date().toISOString().split('T')[0];
+    const outputPath = path.join(reportDir, `cs-index-report-${today}.html`);
     fs.writeFileSync(outputPath, htmlContent, 'utf8');
     
     console.log(`静态HTML文件已生成: ${outputPath}`);
-    console.log('可以直接在浏览器中打开该文件，无需服务器');
+    
+    // 在浏览器中打开文件
+    try {
+        await open(outputPath, { wait: false });
+        console.log('报告文件应该已经在新的浏览器标签页中打开。');
+    } catch (err) {
+        console.error('无法自动打开报告文件:', err);
+        console.log('请手动在浏览器中打开以下文件:');
+        console.log(outputPath);
+    }
 }
 
-// 运行主函数
-main(); 
+async function main() {
+    await generateReport();
+}
+
+
+// 只有在直接运行时才执行main函数
+if (require.main === module) {
+    main();
+}
+
+module.exports = {
+    generateIndexReport
+}; 

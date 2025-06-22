@@ -1,0 +1,22 @@
+{
+  "timestamp": "2025-06-22",
+  "url": "https://www.hsi.com.hk/index360/schi/indexes?id=02200.00",
+  "title": "INdex360",
+  "fundamentals": {
+    "dividendYield": 6.54,
+    "peRatio": 6.19,
+    "pbRatio": null,
+    "foundData": [
+      {
+        "type": "dividendYield",
+        "value": 6.54,
+        "text": "6.54"
+      },
+      {
+        "type": "peRatio",
+        "value": 6.19,
+        "text": "6.19"
+      }
+    ]
+  }
+}

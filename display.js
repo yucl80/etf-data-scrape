@@ -120,10 +120,13 @@ async function generateHTML() {
     // 构建Map便于查找
     const spPdfMap = new Map();
     spPdfResults.forEach(item => {
+        console.log(item);
         if (item.stock && !item.error) {
             spPdfMap.set(item.stock, item);
         }
     });
+    console.log(spPdfMap);
+  
 
     // 首先执行etf-fundamentals-batch
     console.log('🚀 开始执行ETF基本面数据批量处理...');
@@ -253,14 +256,14 @@ async function writeHTML() {
     const dd = String(today.getDate()).padStart(2, '0');
     const dateStr = `${yyyy}-${mm}-${dd}`;
 
-    // Ensure html-data directory exists
-    const htmlDataDir = path.join(process.cwd(), 'html-data');
+    // Ensure report-data directory exists
+    const htmlDataDir = path.join(process.cwd(), 'report-data');
     if (!fs.existsSync(htmlDataDir)) {
         fs.mkdirSync(htmlDataDir);
     }
 
     // Set output file path
-    const outputFileName = `output-${dateStr}.html`;
+    const outputFileName = `etf-report-${dateStr}.html`;
     const outputPath = path.join(htmlDataDir, outputFileName);
 
     // If today's file exists, open it and return
@@ -272,7 +275,7 @@ async function writeHTML() {
 
     // Otherwise, generate new HTML
     const { tableHtml, updateTime, tableData } = await generateHTML();
-    const templatePath = path.join(__dirname, 'index.html');
+    const templatePath = path.join(__dirname, 'etf-report-template.html');
     let htmlContent = fs.readFileSync(templatePath, 'utf8');
     htmlContent = htmlContent.replace('<!-- Data will be inserted here by JavaScript -->', tableHtml + `\n<script id="tableData" type="application/json">${tableData}</script>`);
     htmlContent = htmlContent.replace('<span id="updateTime"></span>', updateTime);

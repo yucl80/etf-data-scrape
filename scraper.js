@@ -2,6 +2,7 @@ const puppeteer = require('puppeteer');
 const fs = require('fs');
 const path = require('path');
 const { writeHTML, calculateSizeChanges } = require('./display.js');
+const { generateIndexReport } = require('./cs-index-report-generate.js');
 
 // Read configuration
 function readConfig() {
@@ -324,4 +325,5 @@ function shouldScrapeStock(stock) {
 (async () => {
     await processAllStocks();
     writeHTML();
+    await generateIndexReport();
 })(); 

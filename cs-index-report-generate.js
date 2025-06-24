@@ -8,7 +8,7 @@ const { execSync } = require('child_process');
 // 检查当天数据文件是否存在，如果不存在则获取数据
 function checkAndFetchData() {
     const today = new Date().toISOString().split('T')[0]; // 格式: YYYY-MM-DD
-    const dataDir = path.join(__dirname, 'index-data');
+    const dataDir = path.join(__dirname, 'index-return');
     const todayDataFile = path.join(dataDir, `all_index_returns_${today}.json`);
     const defaultDataFile = path.join(dataDir, 'all_index_returns.json');
     

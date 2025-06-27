@@ -290,30 +290,54 @@ class HSIFundamentalsScraper {
         try {
             console.log('📊 正在访问基本面数据页面...');
             await this.page.goto(this.fundamentalsUrl, {
-                waitUntil: 'domcontentloaded',
-                timeout: 60000
+                waitUntil: 'networkidle2', // 改为等待网络空闲
+                timeout: 120000 // 增加到2分钟
             });
 
             // 等待页面加载 - 智能等待机制
-            let waitTime = 0;
-            const maxWaitTime = 15000; // 最大等待15秒
-            const checkInterval = 1000; // 每秒检查一次
-            
-            while (waitTime < maxWaitTime) {
-                await this.page.waitForTimeout(checkInterval);
-                waitTime += checkInterval;
-                
-                // 检查页面是否包含基本面相关内容
-                const pageContent = await this.page.content();
-                if (pageContent.includes('fundamentals') || 
-                    pageContent.includes('指数分析') || 
-                    pageContent.includes('基本面') ||
-                    pageContent.includes('Fundamentals')) {
-                    console.log(`✅ 页面内容已加载，等待时间: ${waitTime}ms`);
-                    break;
-                }
-                
-                console.log(`⏳ 等待基本面页面加载中... ${waitTime}ms`);
+            console.log('⏳ 等待基本面数据加载...');
+            const dataLoaded = await this.smartWait(
+                async () => {
+                    try {
+                        // 检查基本面数据是否已加载
+                        const fundamentalsData = await this.page.evaluate(() => {
+                            const dividendElements = document.querySelectorAll('.styles_dividendYield__AkWop');
+                            const peElements = document.querySelectorAll('.styles_peRatio__XnHR3');
+                            
+                            // 检查是否有实际数据（不是"-"）
+                            let hasData = false;
+                            for (let i = 0; i < dividendElements.length; i++) {
+                                const text = dividendElements[i].textContent.trim();
+                                if (text && text !== '-' && text !== '周息率') {
+                                    hasData = true;
+                                    break;
+                                }
+                            }
+                            
+                            for (let i = 0; i < peElements.length; i++) {
+                                const text = peElements[i].textContent.trim();
+                                if (text && text !== '-' && text !== '市盈率 (倍)') {
+                                    hasData = true;
+                                    break;
+                                }
+                            }
+                            
+                            return hasData;
+                        });
+                        
+                        return fundamentalsData;
+                    } catch (error) {
+                        console.log('检查数据加载状态时出错:', error.message);
+                        return false;
+                    }
+                },
+                30000, // 最大等待30秒
+                2000,  // 每2秒检查一次
+                '基本面数据加载'
+            );
+
+            if (!dataLoaded) {
+                console.log('⚠️ 基本面数据可能未完全加载，但继续尝试提取...');
             }
 
             // 保存页面截图
@@ -335,9 +359,13 @@ class HSIFundamentalsScraper {
                     const currentUrl = this.page.url();
                     console.log('📍 当前页面URL:', currentUrl);
                     
-                    if (currentUrl && currentUrl.includes('fundamentals')) {
+                    // 检查是否已经到达正确的页面
+                    if (currentUrl && currentUrl.includes('indexes?id=02055.00')) {
                         console.log('🔄 基本面数据页面似乎已加载，继续执行...');
                         await this.takeScreenshot('fundamentals-timeout-continue');
+                        
+                        // 等待一段时间让页面稳定
+                        await this.page.waitForTimeout(5000);
                         return true;
                     }
                 } catch (e) {
@@ -357,8 +385,51 @@ class HSIFundamentalsScraper {
             // 等待页面完全加载
             await this.page.waitForTimeout(5000);
 
-            // 优先从页面div提取
-            const pageFundamentals = await this.extractFundamentalsFromPage();
+            // 尝试多次提取数据，因为数据可能是动态加载的
+            let attempts = 0;
+            const maxAttempts = 5;
+            let pageFundamentals = null;
+
+            while (attempts < maxAttempts) {
+                attempts++;
+                console.log(`🔄 第 ${attempts} 次尝试提取基本面数据...`);
+
+                // 等待一段时间让数据加载
+                await this.page.waitForTimeout(3000);
+
+                // 尝试从页面提取数据
+                pageFundamentals = await this.extractFundamentalsFromPage();
+                
+                if (pageFundamentals && pageFundamentals.foundData.length > 0) {
+                    console.log(`✅ 第 ${attempts} 次尝试成功提取到数据`);
+                    break;
+                } else {
+                    console.log(`⚠️ 第 ${attempts} 次尝试未提取到数据，等待后重试...`);
+                    
+                    // 尝试触发页面刷新或重新加载数据
+                    if (attempts < maxAttempts) {
+                        try {
+                            // 尝试点击刷新按钮或重新加载数据
+                            await this.page.evaluate(() => {
+                                // 查找可能的刷新按钮
+                                const refreshButtons = document.querySelectorAll('button, a');
+                                for (const button of refreshButtons) {
+                                    const text = button.textContent.toLowerCase();
+                                    if (text.includes('刷新') || text.includes('refresh') || 
+                                        text.includes('重新加载') || text.includes('reload')) {
+                                        button.click();
+                                        return true;
+                                    }
+                                }
+                                return false;
+                            });
+                        } catch (e) {
+                            console.log('尝试刷新数据时出错:', e.message);
+                        }
+                    }
+                }
+            }
+
             if (pageFundamentals && pageFundamentals.foundData.length > 0) {
                 const timestamp = new Date().toISOString().split('T')[0];
                 const dataFileName = path.join(this.outputDir, `fundamentals-data-${timestamp}.json`);
@@ -366,7 +437,8 @@ class HSIFundamentalsScraper {
                     timestamp,
                     url: this.page.url(),
                     title: await this.page.title(),
-                    fundamentals: pageFundamentals
+                    fundamentals: pageFundamentals,
+                    attempts: attempts
                 }, null, 2));
                 console.log('✅ 基本面数据提取完成:');
                 pageFundamentals.foundData.forEach(d => {
@@ -375,8 +447,20 @@ class HSIFundamentalsScraper {
                 console.log(`- 数据已保存到: ${dataFileName}`);
                 return pageFundamentals;
             } else {
-                console.log('❌ 页面未能提取到基本面数据');
+                console.log('❌ 多次尝试后仍未能提取到基本面数据');
                 await this.savePageContent('fundamentals-debug');
+                
+                // 保存当前页面状态用于调试
+                const timestamp = new Date().toISOString().split('T')[0];
+                const debugFileName = path.join(this.outputDir, `fundamentals-debug-${timestamp}.json`);
+                fs.writeFileSync(debugFileName, JSON.stringify({
+                    timestamp,
+                    url: this.page.url(),
+                    title: await this.page.title(),
+                    attempts: attempts,
+                    error: 'No data found after multiple attempts'
+                }, null, 2));
+                
                 return null;
             }
         } catch (error) {
@@ -393,7 +477,7 @@ class HSIFundamentalsScraper {
                 let dividendYield = null, peRatio = null, pbRatio = null;
                 let foundData = [];
                 
-                // 直接查找特定的CSS类
+                // 方法1: 直接查找特定的CSS类
                 const dividendElements = document.querySelectorAll('.styles_dividendYield__AkWop');
                 const peElements = document.querySelectorAll('.styles_peRatio__XnHR3');
                 
@@ -407,7 +491,7 @@ class HSIFundamentalsScraper {
                     console.log(`周息率元素 ${i}: "${text}"`);
                     
                     // 跳过标题元素（只包含"周息率"文本）
-                    if (text === '周息率' || text === '') continue;
+                    if (text === '周息率' || text === '' || text === '-') continue;
                     
                     // 提取数字
                     const match = text.match(/(\d+\.?\d*)/);
@@ -426,7 +510,7 @@ class HSIFundamentalsScraper {
                     console.log(`市盈率元素 ${i}: "${text}"`);
                     
                     // 跳过标题元素（只包含"市盈率"文本）
-                    if (text === '市盈率 (倍)' || text === '市盈率' || text === '') continue;
+                    if (text === '市盈率 (倍)' || text === '市盈率' || text === '' || text === '-') continue;
                     
                     // 提取数字
                     const match = text.match(/(\d+\.?\d*)/);
@@ -438,19 +522,47 @@ class HSIFundamentalsScraper {
                     }
                 }
                 
-                // 如果没找到，尝试其他方法
+                // 方法2: 如果没找到，尝试其他选择器
                 if (!dividendYield || !peRatio) {
-                    // 查找包含基本面数据的表格或div
-                    const fundamentalsDiv = document.querySelector('#fundamentals, [id*=fundamental], [class*=fundamental]');
-                    let text = '';
-                    if (fundamentalsDiv) {
-                        text = fundamentalsDiv.innerText || fundamentalsDiv.textContent || '';
-                    } else {
-                        text = document.body.innerText || '';
-                    }
-                    text = text.replace(/\s+/g, ' ');
+                    console.log('尝试其他选择器...');
                     
-                    console.log('页面文本:', text);
+                    // 查找包含基本面数据的表格
+                    const tables = document.querySelectorAll('table, .styles_wrapTable__FoQdk');
+                    for (const table of tables) {
+                        const rows = table.querySelectorAll('tr, .styles_item__9YTvW');
+                        for (const row of rows) {
+                            const cells = row.querySelectorAll('td, div');
+                            const rowText = Array.from(cells).map(cell => cell.textContent.trim()).join(' ');
+                            
+                            // 查找周息率
+                            if (rowText.includes('周息率') && !dividendYield) {
+                                const match = rowText.match(/周息率[^\d]*(\d+\.?\d*)/);
+                                if (match) {
+                                    dividendYield = parseFloat(match[1]);
+                                    foundData.push({ type: 'dividendYield', value: dividendYield, text: match[0] });
+                                }
+                            }
+                            
+                            // 查找市盈率
+                            if (rowText.includes('市盈率') && !peRatio) {
+                                const match = rowText.match(/市盈率[^\d]*(\d+\.?\d*)/);
+                                if (match) {
+                                    peRatio = parseFloat(match[1]);
+                                    foundData.push({ type: 'peRatio', value: peRatio, text: match[0] });
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                // 方法3: 如果还是没找到，尝试全局文本搜索
+                if (!dividendYield || !peRatio) {
+                    console.log('尝试全局文本搜索...');
+                    
+                    const bodyText = document.body.innerText || document.body.textContent || '';
+                    const text = bodyText.replace(/\s+/g, ' ');
+                    
+                    console.log('页面文本长度:', text.length);
                     
                     // 尝试精确匹配关键词
                     let m = text.match(/周息率[^\d]*(\d+\.?\d*)/);

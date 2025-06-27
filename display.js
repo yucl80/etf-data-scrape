@@ -2,8 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const opn = require('opn');
 const ETFPEDPFetcher = require('./etf-pe-dp-fetcher.js');
-const ETFFundamentalsBatchProcessor = require('./etf-fundamentals-batch.js');
 const { processAllETFs, getETFResultByStock } = require('./sp-pdf-metrics.js');
+const HSIIndexScraper = require('./hsi-index-scraper.js');
 
 function readConfig() {
     try {
@@ -128,30 +128,24 @@ async function generateHTML() {
     console.log(spPdfMap);
   
 
-    // 首先执行etf-fundamentals-batch
-    console.log('🚀 开始执行ETF基本面数据批量处理...');
-    const batchProcessor = new ETFFundamentalsBatchProcessor();
-    let batchResults = [];
-    
+    // 读取恒生指数数据（直接调用HSIFundamentalsScraper.getAllHsidata，内部已处理缓存）
+    let hsiFundamentalsMap = new Map();
     try {
-        batchResults = await batchProcessor.processAllETFs();
-        console.log(`✅ ETF基本面数据批量处理完成，共获取 ${batchResults.length} 个ETF的数据`);
-    } catch (error) {
-        console.error('❌ ETF基本面数据批量处理失败:', error);
-        console.log('⚠️ 将使用原有的单个ETF获取逻辑');
-    }
-    
-    // 将批量结果转换为Map以便快速查找
-    const batchResultsMap = new Map();
-    batchResults.forEach(result => {
-        if (result.etfCode && !result.error) {
-            batchResultsMap.set(result.etfCode, {
-                indexName: result.indexName,
-                peValue: result.peRatio,
-                dpValue: result.dividendYield
+        const config = readConfig();
+        const etfIndexMapping = config.etfIndexMapping || {};
+        const hsiScraper = new HSIIndexScraper();
+        const hsiData = await hsiScraper.getAllHsidata(etfIndexMapping);
+        if (hsiData && Array.isArray(hsiData.results)) {
+            hsiData.results.forEach(item => {
+                if (item.etfCode && item.fundamentals && item.success) {
+                    hsiFundamentalsMap.set(item.etfCode, item);
+                }
             });
         }
-    });
+        await hsiScraper.close && hsiScraper.close();
+    } catch (e) {
+        console.error('自动获取恒生指数数据失败:', e);
+    }
 
     for (const stock of config.stocks) {
         const fileName = 'data/'+stock+'_data.json';
@@ -174,20 +168,20 @@ async function generateHTML() {
             console.error(`Error reading data for stock ${stock}:`, error);
         }
 
-        // 优先使用S&P PDF指标数据
-        if (spPdfMap.has(stock)) {
+        // 优先使用恒生指数数据
+        if (hsiFundamentalsMap.has(stock)) {
+            const hsiData = hsiFundamentalsMap.get(stock);
+            indexName = hsiData.indexName || '-';
+            peValue = hsiData.fundamentals.peRatio !== null && hsiData.fundamentals.peRatio !== undefined ? hsiData.fundamentals.peRatio : '-';
+            dpValue = hsiData.fundamentals.dividendYield !== null && hsiData.fundamentals.dividendYield !== undefined ? hsiData.fundamentals.dividendYield : '-';
+            console.log(`📊 从恒生指数数据中获取 ${stock} 的数据: PE=${peValue}, DP=${dpValue}`);
+        } else if (spPdfMap.has(stock)) {
+            // 其次使用S&P PDF指标数据
             const spData = spPdfMap.get(stock);
             indexName = spData.indexName || '-';
             peValue = spData["预期市盈率"] !== null && spData["预期市盈率"] !== undefined ? spData["预期市盈率"] : '-';
             dpValue = spData["股息率"] !== null && spData["股息率"] !== undefined ? spData["股息率"] : '-';
             console.log(`📊 从S&P PDF数据中获取 ${stock} 的数据: PE=${peValue}, DP=${dpValue}`);
-        } else if (batchResultsMap.has(stock)) {
-            // 其次使用批量处理结果
-            const batchData = batchResultsMap.get(stock);
-            indexName = batchData.indexName || '-';
-            peValue = batchData.peValue !== null && batchData.peValue !== undefined ? batchData.peValue : '-';
-            dpValue = batchData.dpValue !== null && batchData.dpValue !== undefined ? batchData.dpValue : '-';
-            console.log(`📊 从批量数据中获取 ${stock} 的数据: PE=${peValue}, DP=${dpValue}`);
         } else {
             // 如果都没有，使用原有的逻辑
             try {

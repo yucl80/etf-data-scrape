@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>指数数据展示</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .header h1 {
+            color: #333;
+            margin: 0 0 10px 0;
+            font-size: 28px;
+        }
+        
+        .header p {
+            color: #666;
+            margin: 0;
+            font-size: 16px;
+        }
+        
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .filter-btn {
+            padding: 8px 16px;
+            border: 1px solid #ddd;
+            background-color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .filter-btn.active {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+        
+        .index-data-table {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        
+        .index-data-table table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        .index-data-table th,
+        .index-data-table td {
+            padding: 8px 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        
+        .index-data-table th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .index-data-table th:nth-child(1),
+        .index-data-table th:nth-child(2),
+        .index-data-table th:nth-child(3) {
+            cursor: default;
+        }
+        
+        .index-data-table th:nth-child(1):hover,
+        .index-data-table th:nth-child(2):hover,
+        .index-data-table th:nth-child(3):hover {
+            background-color: #f5f5f5;
+        }
+        
+        .index-data-table th:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .index-data-table th.sorted {
+            background-color: #007bff;
+            color: white;
+        }
+        
+        .index-data-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .index-data-table tr:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .index-data-table .total-return {
+            background-color: #e8f4f8;
+        }
+        
+        .index-data-table .total-return:hover {
+            background-color: #d1e7f0;
+        }
+        
+        .index-data-table .dividend-yield {
+            background-color: #f0f8e8;
+        }
+        
+        .index-data-table .dividend-yield:hover {
+            background-color: #e0f0d0;
+        }
+        
+        .index-data-table .pe-dp {
+            background-color: #fff3cd;
+        }
+        
+        .index-data-table .pe-dp:hover {
+            background-color: #ffeaa7;
+        }
+        
+        .index-data-table .number {
+            text-align: right;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .volatility-column {
+            display: table-cell;
+        }
+        
+        .dividend-view .volatility-column {
+            display: none;
+        }
+        
+        .pe-dp-view .volatility-column {
+            display: none;
+        }
+        
+        .pe-dp-view .return-column {
+            display: none;
+        }
+        
+        .pe-dp-view .pe-dp-column {
+            display: table-cell !important;
+        }
+        
+        .pe-dp-view .pe-dp-header {
+            display: table-row !important;
+        }
+        
+        .pe-dp-view thead tr:first-child {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">    
+        
+        <div class="controls">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">全部</button>
+                <button class="filter-btn" data-filter="price">价格指数</button>
+                <button class="filter-btn" data-filter="total">全收益指数</button>
+                <button class="filter-btn" data-filter="pe-dp">市盈率&股息率</button>
+                <button class="filter-btn" data-filter="dividend">实际股息率</button>
+            </div>
+        </div>
+        
+        <div class="index-data-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>指数代码</th>
+                        <th>指数全称</th>
+                        <th class="return-column">近一月收益(%)</th>
+                        <th class="return-column">近三月收益(%)</th>
+                        <th class="return-column">年至今收益(%)</th>
+                        <th class="return-column">近一年年化收益(%)</th>
+                        <th class="return-column">近三年年化收益(%)</th>
+                        <th class="return-column">近五年年化收益(%)</th>
+                        <th class="volatility-column">近一年波动率(%)</th>
+                        <th class="volatility-column">近三年波动率(%)</th>
+                        <th class="volatility-column">近五年波动率(%)</th>
+                    </tr>
+                    <tr class="pe-dp-header" style="display: none;">
+                        <th>指数代码</th>
+                        <th>指数全称</th>
+                        <th>市盈率(PE)1</th>
+                        <th>市盈率(PE)2</th>
+                        <th>股息率(DP)1</th>
+                        <th>股息率(DP)2</th>
+                    </tr>
+                </thead>
+                <tbody id="data-table-body">
+                    <tr data-index-code="000015"><td>000015</td><td>红利指数</td><td class="number">0.34</td><td class="number">1.37</td><td class="number">3.69</td><td class="number">1.78</td><td class="number">3.24</td><td class="number">5.20</td><td class="number">18.74</td><td class="number">15.94</td><td class="number">17.47</td></tr><tr class="total-return" data-index-code="000015"><td>000015</td><td>红利收益</td><td class="number">1.03</td><td class="number">3.42</td><td class="number">1.05</td><td class="number">4.54</td><td class="number">9.73</td><td class="number">11.31</td><td class="number">18.65</td><td class="number">15.82</td><td class="number">17.38</td></tr><tr data-index-code="000151"><td>000151</td><td>上国红利</td><td class="number">0.20</td><td class="number">1.90</td><td class="number">4.11</td><td class="number">3.16</td><td class="number">6.32</td><td class="number">8.36</td><td class="number">19.16</td><td class="number">17.15</td><td class="number">19.07</td></tr><tr class="total-return" data-index-code="000151"><td>000151</td><td>上国红利全收益</td><td class="number">1.44</td><td class="number">3.71</td><td class="number">1.52</td><td class="number">2.87</td><td class="number">13.11</td><td class="number">15.03</td><td class="number">19.08</td><td class="number">17.01</td><td class="number">18.97</td></tr><tr data-index-code="000821"><td>000821</td><td>300红利</td><td class="number">2.27</td><td class="number">5.40</td><td class="number">1.67</td><td class="number">10.99</td><td class="number">4.09</td><td class="number">4.85</td><td class="number">18.18</td><td class="number">15.84</td><td class="number">16.82</td></tr><tr class="total-return" data-index-code="000821"><td>000821</td><td>300红利全收益</td><td class="number">2.90</td><td class="number">6.44</td><td class="number">3.22</td><td class="number">17.80</td><td class="number">9.91</td><td class="number">10.38</td><td class="number">18.13</td><td class="number">15.74</td><td class="number">16.74</td></tr><tr data-index-code="000824"><td>000824</td><td>国企红利</td><td class="number">0.13</td><td class="number">1.25</td><td class="number">1.98</td><td class="number">3.84</td><td class="number">3.12</td><td class="number">6.73</td><td class="number">19.45</td><td class="number">16.35</td><td class="number">18.04</td></tr><tr class="total-return" data-index-code="000824"><td>000824</td><td>国企红利全收益</td><td class="number">1.14</td><td class="number">2.89</td><td class="number">0.06</td><td class="number">9.51</td><td class="number">8.36</td><td class="number">12.10</td><td class="number">19.39</td><td class="number">16.29</td><td class="number">18.00</td></tr><tr data-index-code="000825"><td>000825</td><td>央企红利</td><td class="number">0.71</td><td class="number">1.34</td><td class="number">1.23</td><td class="number">9.48</td><td class="number">5.30</td><td class="number">6.65</td><td class="number">18.68</td><td class="number">16.32</td><td class="number">17.86</td></tr><tr class="total-return" data-index-code="000825"><td>000825</td><td>央企红利全收益</td><td class="number">1.31</td><td class="number">2.38</td><td class="number">0.25</td><td class="number">15.10</td><td class="number">10.31</td><td class="number">11.65</td><td class="number">18.62</td><td class="number">16.23</td><td class="number">17.79</td></tr><tr data-index-code="000922"><td>000922</td><td>中证红利</td><td class="number">1.05</td><td class="number">0.31</td><td class="number">3.12</td><td class="number">0.19</td><td class="number">2.37</td><td class="number">5.78</td><td class="number">19.01</td><td class="number">15.68</td><td class="number">17.15</td></tr><tr class="total-return" data-index-code="000922"><td>000922</td><td>中证红利SGD</td><td class="number">0.77</td><td class="number">2.82</td><td class="number">6.60</td><td class="number">--</td><td class="number">--</td><td class="number">--</td><td class="number">14.39</td><td class="number">14.39</td><td class="number">14.39</td></tr><tr data-index-code="930740"><td>930740</td><td>300红利低波</td><td class="number">0.16</td><td class="number">3.82</td><td class="number">0.57</td><td class="number">9.20</td><td class="number">9.11</td><td class="number">7.85</td><td class="number">16.01</td><td class="number">14.10</td><td class="number">14.93</td></tr><tr class="total-return" data-index-code="930740"><td>930740</td><td>300红利低波全收益</td><td class="number">0.53</td><td class="number">5.08</td><td class="number">1.05</td><td class="number">14.59</td><td class="number">14.57</td><td class="number">12.97</td><td class="number">15.99</td><td class="number">14.01</td><td class="number">14.85</td></tr><tr data-index-code="930914"><td>930914</td><td>港股通高股息</td><td class="number">3.62</td><td class="number">10.53</td><td class="number">12.49</td><td class="number">14.88</td><td class="number">8.72</td><td class="number">4.02</td><td class="number">25.71</td><td class="number">23.75</td><td class="number">23.57</td></tr><tr class="total-return" data-index-code="930914"><td>930914</td><td>港股通高股息CNY</td><td class="number">3.33</td><td class="number">8.50</td><td class="number">9.53</td><td class="number">13.00</td><td class="number">11.24</td><td class="number">4.10</td><td class="number">25.40</td><td class="number">22.69</td><td class="number">22.72</td></tr><tr data-index-code="930917"><td>930917</td><td>SHS高股息</td><td class="number">1.94</td><td class="number">2.81</td><td class="number">3.95</td><td class="number">6.60</td><td class="number">5.01</td><td class="number">3.38</td><td class="number">20.78</td><td class="number">18.13</td><td class="number">18.43</td></tr><tr class="total-return" data-index-code="930917"><td>930917</td><td>SHS高股息(全)HKD</td><td class="number">4.26</td><td class="number">7.69</td><td class="number">10.44</td><td class="number">16.95</td><td class="number">9.94</td><td class="number">10.34</td><td class="number">21.13</td><td class="number">19.43</td><td class="number">19.61</td></tr><tr data-index-code="930955"><td>930955</td><td>红利低波100</td><td class="number">1.03</td><td class="number">0.53</td><td class="number">2.61</td><td class="number">6.99</td><td class="number">4.64</td><td class="number">7.06</td><td class="number">18.72</td><td class="number">15.24</td><td class="number">15.99</td></tr><tr class="total-return" data-index-code="930955"><td>930955</td><td>红利低波100全收益</td><td class="number">0.29</td><td class="number">2.37</td><td class="number">0.48</td><td class="number">12.92</td><td class="number">9.85</td><td class="number">12.28</td><td class="number">18.68</td><td class="number">15.19</td><td class="number">15.93</td></tr><tr data-index-code="931157"><td>931157</td><td>SHS红利成长LV</td><td class="number">2.83</td><td class="number">6.27</td><td class="number">6.96</td><td class="number">19.48</td><td class="number">11.51</td><td class="number">10.05</td><td class="number">16.89</td><td class="number">14.35</td><td class="number">15.35</td></tr><tr class="total-return" data-index-code="931157"><td>931157</td><td>SHS红利成长LVHKD</td><td class="number">3.11</td><td class="number">8.25</td><td class="number">9.86</td><td class="number">21.47</td><td class="number">8.99</td><td class="number">9.96</td><td class="number">17.31</td><td class="number">15.72</td><td class="number">16.60</td></tr><tr data-index-code="931446"><td>931446</td><td>东证红利低波</td><td class="number">1.42</td><td class="number">5.91</td><td class="number">1.42</td><td class="number">14.88</td><td class="number">11.13</td><td class="number">11.93</td><td class="number">18.14</td><td class="number">14.85</td><td class="number">15.78</td></tr><tr class="total-return" data-index-code="931446"><td>931446</td><td>东证红利低波全收益</td><td class="number">2.46</td><td class="number">7.33</td><td class="number">3.27</td><td class="number">20.94</td><td class="number">16.65</td><td class="number">17.15</td><td class="number">18.11</td><td class="number">14.79</td><td class="number">15.73</td></tr><tr data-index-code="931468"><td>931468</td><td>红利质量</td><td class="number">1.84</td><td class="number">0.86</td><td class="number">2.32</td><td class="number">3.77</td><td class="number">3.28</td><td class="number">0.75</td><td class="number">26.98</td><td class="number">20.36</td><td class="number">21.29</td></tr><tr class="total-return" data-index-code="931468"><td>931468</td><td>红利质量全收益</td><td class="number">0.92</td><td class="number">0.34</td><td class="number">1.00</td><td class="number">6.46</td><td class="number">0.11</td><td class="number">3.51</td><td class="number">26.97</td><td class="number">20.32</td><td class="number">21.29</td></tr><tr data-index-code="932039"><td>932039</td><td>央企股东回报</td><td class="number">1.08</td><td class="number">2.12</td><td class="number">4.34</td><td class="number">1.65</td><td class="number">2.03</td><td class="number">8.21</td><td class="number">20.47</td><td class="number">18.04</td><td class="number">19.61</td></tr><tr class="total-return" data-index-code="932039"><td>932039</td><td>央企股东回报全收益</td><td class="number">0.18</td><td class="number">1.18</td><td class="number">3.39</td><td class="number">5.47</td><td class="number">5.62</td><td class="number">11.79</td><td class="number">20.43</td><td class="number">17.98</td><td class="number">19.60</td></tr><tr data-index-code="CESFHY"><td>CESFHY</td><td>中华预期高股息</td><td class="number">6.46</td><td class="number">10.94</td><td class="number">18.07</td><td class="number">25.51</td><td class="number">0.57</td><td class="number">3.86</td><td class="number">25.89</td><td class="number">26.98</td><td class="number">27.35</td></tr><tr class="total-return" data-index-code="CESFHY"><td>CESFHY</td><td>中华预期高股息全收益</td><td class="number">8.11</td><td class="number">13.71</td><td class="number">21.65</td><td class="number">36.45</td><td class="number">7.29</td><td class="number">3.92</td><td class="number">25.82</td><td class="number">26.90</td><td class="number">27.29</td></tr><tr data-index-code="H11140"><td>H11140</td><td>香港红利</td><td class="number">4.52</td><td class="number">7.69</td><td class="number">13.98</td><td class="number">15.51</td><td class="number">12.14</td><td class="number">7.87</td><td class="number">22.49</td><td class="number">20.19</td><td class="number">19.41</td></tr><tr class="total-return" data-index-code="H11140"><td>H11140</td><td>香港红利净收益</td><td class="number">5.78</td><td class="number">10.05</td><td class="number">17.93</td><td class="number">25.65</td><td class="number">21.48</td><td class="number">16.05</td><td class="number">22.07</td><td class="number">19.44</td><td class="number">18.76</td></tr><tr data-index-code="H30089"><td>H30089</td><td>红利潜力</td><td class="number">4.83</td><td class="number">3.75</td><td class="number">6.48</td><td class="number">0.10</td><td class="number">4.13</td><td class="number">0.10</td><td class="number">22.16</td><td class="number">18.55</td><td class="number">19.68</td></tr><tr class="total-return" data-index-code="H30089"><td>H30089</td><td>红利潜力全收益</td><td class="number">4.03</td><td class="number">2.48</td><td class="number">5.03</td><td class="number">4.81</td><td class="number">0.50</td><td class="number">4.23</td><td class="number">22.12</td><td class="number">18.51</td><td class="number">19.66</td></tr><tr data-index-code="H30094"><td>H30094</td><td>消费红利</td><td class="number">3.96</td><td class="number">0.37</td><td class="number">3.97</td><td class="number">2.28</td><td class="number">8.49</td><td class="number">0.73</td><td class="number">25.15</td><td class="number">20.86</td><td class="number">22.58</td></tr><tr class="total-return" data-index-code="H30094"><td>H30094</td><td>消费红利全收益</td><td class="number">3.13</td><td class="number">1.44</td><td class="number">2.01</td><td class="number">5.93</td><td class="number">5.71</td><td class="number">2.18</td><td class="number">25.12</td><td class="number">20.83</td><td class="number">22.56</td></tr><tr data-index-code="H30269"><td>H30269</td><td>红利低波</td><td class="number">2.27</td><td class="number">6.48</td><td class="number">4.01</td><td class="number">8.06</td><td class="number">7.69</td><td class="number">9.21</td><td class="number">18.61</td><td class="number">16.00</td><td class="number">17.62</td></tr><tr class="total-return" data-index-code="H30269"><td>H30269</td><td>红利低波全收益</td><td class="number">3.36</td><td class="number">8.11</td><td class="number">6.32</td><td class="number">15.05</td><td class="number">13.79</td><td class="number">15.21</td><td class="number">18.52</td><td class="number">15.87</td><td class="number">17.51</td></tr><tr data-index-code="H50040"><td>H50040</td><td>上红低波</td><td class="number">3.07</td><td class="number">8.32</td><td class="number">5.64</td><td class="number">13.17</td><td class="number">10.74</td><td class="number">11.36</td><td class="number">18.58</td><td class="number">15.92</td><td class="number">17.26</td></tr><tr class="total-return" data-index-code="H50040"><td>H50040</td><td>上红低波全收益</td><td class="number">3.83</td><td class="number">9.51</td><td class="number">7.57</td><td class="number">20.21</td><td class="number">16.94</td><td class="number">17.41</td><td class="number">18.52</td><td class="number">15.80</td><td class="number">17.16</td></tr><tr data-index-code="930839"><td>930839</td><td>港股通高息精选</td><td class="number">1.44</td><td class="number">4.97</td><td class="number">7.95</td><td class="number">0.97</td><td class="number">0.89</td><td class="number">3.88</td><td class="number">23.12</td><td class="number">23.54</td><td class="number">23.05</td></tr><tr class="total-return" data-index-code="930839"><td>930839</td><td>港股通高息精选(全)</td><td class="number">3.48</td><td class="number">7.22</td><td class="number">10.50</td><td class="number">6.73</td><td class="number">8.87</td><td class="number">11.17</td><td class="number">22.96</td><td class="number">23.29</td><td class="number">22.93</td></tr><tr data-index-code="931132"><td>931132</td><td>诚通央企红利</td><td class="number">0.34</td><td class="number">1.84</td><td class="number">4.25</td><td class="number">2.87</td><td class="number">3.29</td><td class="number">8.81</td><td class="number">19.92</td><td class="number">17.95</td><td class="number">19.87</td></tr><tr class="total-return" data-index-code="931132"><td>931132</td><td>诚通央企红利全收益</td><td class="number">0.66</td><td class="number">0.76</td><td class="number">3.15</td><td class="number">1.15</td><td class="number">7.46</td><td class="number">12.85</td><td class="number">19.85</td><td class="number">17.85</td><td class="number">19.82</td></tr><tr data-index-code="931231"><td>931231</td><td>央企红利50</td><td class="number">0.73</td><td class="number">1.57</td><td class="number">3.97</td><td class="number">2.08</td><td class="number">2.11</td><td class="number">9.78</td><td class="number">20.50</td><td class="number">18.21</td><td class="number">20.23</td></tr><tr class="total-return" data-index-code="931231"><td>931231</td><td>央企红利50全收益</td><td class="number">0.18</td><td class="number">0.61</td><td class="number">3.00</td><td class="number">5.91</td><td class="number">5.63</td><td class="number">13.46</td><td class="number">20.44</td><td class="number">18.15</td><td class="number">20.20</td></tr><tr data-index-code="931233"><td>931233</td><td>港股通央企红利</td><td class="number">4.50</td><td class="number">8.44</td><td class="number">11.55</td><td class="number">24.56</td><td class="number">9.20</td><td class="number">8.19</td><td class="number">30.74</td><td class="number">24.07</td><td class="number">22.41</td></tr><tr class="total-return" data-index-code="931233"><td>931233</td><td>港股通央企红利人民币中间价(全)</td><td class="number">6.14</td><td class="number">10.07</td><td class="number">13.38</td><td class="number">35.33</td><td class="number">20.14</td><td class="number">16.09</td><td class="number">30.27</td><td class="number">23.61</td><td class="number">22.00</td></tr><tr data-index-code="931722"><td>931722</td><td>国新港股通央企红利</td><td class="number">0.14</td><td class="number">3.96</td><td class="number">4.13</td><td class="number">1.32</td><td class="number">10.60</td><td class="number">11.24</td><td class="number">24.68</td><td class="number">21.52</td><td class="number">21.38</td></tr><tr class="total-return" data-index-code="931722"><td>931722</td><td>国新港股通央企红利(净)</td><td class="number">2.91</td><td class="number">7.03</td><td class="number">7.20</td><td class="number">5.51</td><td class="number">18.28</td><td class="number">18.80</td><td class="number">24.47</td><td class="number">21.32</td><td class="number">21.23</td></tr><tr data-index-code="932305"><td>932305</td><td>智选高股息</td><td class="number">4.02</td><td class="number">1.23</td><td class="number">2.92</td><td class="number">--</td><td class="number">--</td><td class="number">--</td><td class="number">21.72</td><td class="number">21.72</td><td class="number">21.72</td></tr><tr class="total-return" data-index-code="932305"><td>932305</td><td>智选高股息全收益</td><td class="number">0.43</td><td class="number">2.87</td><td class="number">1.62</td><td class="number">--</td><td class="number">--</td><td class="number">--</td><td class="number">21.64</td><td class="number">21.64</td><td class="number">21.64</td></tr><tr data-index-code="932315"><td>932315</td><td>中证红利质量</td><td class="number">2.81</td><td class="number">1.99</td><td class="number">3.32</td><td class="number">1.47</td><td class="number">0.18</td><td class="number">4.92</td><td class="number">21.36</td><td class="number">17.61</td><td class="number">18.83</td></tr><tr class="total-return" data-index-code="932315"><td>932315</td><td>中证红利质量全收益</td><td class="number">1.91</td><td class="number">0.41</td><td class="number">1.72</td><td class="number">5.04</td><td class="number">4.46</td><td class="number">8.85</td><td class="number">21.37</td><td class="number">17.58</td><td class="number">18.82</td></tr><tr data-index-code="H30270"><td>H30270</td><td>红利价值</td><td class="number">2.03</td><td class="number">5.13</td><td class="number">0.90</td><td class="number">2.71</td><td class="number">5.83</td><td class="number">7.90</td><td class="number">19.54</td><td class="number">17.01</td><td class="number">18.93</td></tr><tr class="total-return" data-index-code="H30270"><td>H30270</td><td>红利价值全收益</td><td class="number">2.91</td><td class="number">6.59</td><td class="number">3.05</td><td class="number">9.13</td><td class="number">12.60</td><td class="number">14.23</td><td class="number">19.45</td><td class="number">16.88</td><td class="number">18.83</td></tr><tr data-index-code="H30366"><td>H30366</td><td>高息策略</td><td class="number">1.40</td><td class="number">1.09</td><td class="number">5.98</td><td class="number">0.57</td><td class="number">3.19</td><td class="number">4.65</td><td class="number">17.84</td><td class="number">15.28</td><td class="number">16.33</td></tr><tr class="total-return" data-index-code="H30366"><td>H30366</td><td>高息策略全收益</td><td class="number">0.41</td><td class="number">0.37</td><td class="number">4.54</td><td class="number">6.68</td><td class="number">9.50</td><td class="number">10.61</td><td class="number">17.75</td><td class="number">15.12</td><td class="number">16.18</td></tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="footer">           
+            <p>生成时间：2025/6/27 14:41:28</p>
+        </div>
+    </div>
+
+    <script>
+        // 嵌入的JSON数据
+        const indexData = [{"indexCode":"000015","data":[{"name":"红利指数","阶段性收益_近一月":"0.34","阶段性收益_近三月":"1.37","阶段性收益_年至今":"3.69","年化收益_近一年":"1.78","年化收益_近三年":"3.24","年化收益_近五年":"5.20","年化波动率_近一年":"18.74","年化波动率_近三年":"15.94","年化波动率_近五年":"17.47"},{"name":"红利收益","阶段性收益_近一月":"1.03","阶段性收益_近三月":"3.42","阶段性收益_年至今":"1.05","年化收益_近一年":"4.54","年化收益_近三年":"9.73","年化收益_近五年":"11.31","年化波动率_近一年":"18.65","年化波动率_近三年":"15.82","年化波动率_近五年":"17.38"}]},{"indexCode":"000151","data":[{"name":"上国红利","阶段性收益_近一月":"0.20","阶段性收益_近三月":"1.90","阶段性收益_年至今":"4.11","年化收益_近一年":"3.16","年化收益_近三年":"6.32","年化收益_近五年":"8.36","年化波动率_近一年":"19.16","年化波动率_近三年":"17.15","年化波动率_近五年":"19.07"},{"name":"上国红利全收益","阶段性收益_近一月":"1.44","阶段性收益_近三月":"3.71","阶段性收益_年至今":"1.52","年化收益_近一年":"2.87","年化收益_近三年":"13.11","年化收益_近五年":"15.03","年化波动率_近一年":"19.08","年化波动率_近三年":"17.01","年化波动率_近五年":"18.97"}]},{"indexCode":"000821","data":[{"name":"300红利","阶段性收益_近一月":"2.27","阶段性收益_近三月":"5.40","阶段性收益_年至今":"1.67","年化收益_近一年":"10.99","年化收益_近三年":"4.09","年化收益_近五年":"4.85","年化波动率_近一年":"18.18","年化波动率_近三年":"15.84","年化波动率_近五年":"16.82"},{"name":"300红利全收益","阶段性收益_近一月":"2.90","阶段性收益_近三月":"6.44","阶段性收益_年至今":"3.22","年化收益_近一年":"17.80","年化收益_近三年":"9.91","年化收益_近五年":"10.38","年化波动率_近一年":"18.13","年化波动率_近三年":"15.74","年化波动率_近五年":"16.74"}]},{"indexCode":"000824","data":[{"name":"国企红利","阶段性收益_近一月":"0.13","阶段性收益_近三月":"1.25","阶段性收益_年至今":"1.98","年化收益_近一年":"3.84","年化收益_近三年":"3.12","年化收益_近五年":"6.73","年化波动率_近一年":"19.45","年化波动率_近三年":"16.35","年化波动率_近五年":"18.04"},{"name":"国企红利全收益","阶段性收益_近一月":"1.14","阶段性收益_近三月":"2.89","阶段性收益_年至今":"0.06","年化收益_近一年":"9.51","年化收益_近三年":"8.36","年化收益_近五年":"12.10","年化波动率_近一年":"19.39","年化波动率_近三年":"16.29","年化波动率_近五年":"18.00"}]},{"indexCode":"000825","data":[{"name":"央企红利","阶段性收益_近一月":"0.71","阶段性收益_近三月":"1.34","阶段性收益_年至今":"1.23","年化收益_近一年":"9.48","年化收益_近三年":"5.30","年化收益_近五年":"6.65","年化波动率_近一年":"18.68","年化波动率_近三年":"16.32","年化波动率_近五年":"17.86"},{"name":"央企红利全收益","阶段性收益_近一月":"1.31","阶段性收益_近三月":"2.38","阶段性收益_年至今":"0.25","年化收益_近一年":"15.10","年化收益_近三年":"10.31","年化收益_近五年":"11.65","年化波动率_近一年":"18.62","年化波动率_近三年":"16.23","年化波动率_近五年":"17.79"}]},{"indexCode":"000922","data":[{"name":"中证红利","阶段性收益_近一月":"1.05","阶段性收益_近三月":"0.31","阶段性收益_年至今":"3.12","年化收益_近一年":"0.19","年化收益_近三年":"2.37","年化收益_近五年":"5.78","年化波动率_近一年":"19.01","年化波动率_近三年":"15.68","年化波动率_近五年":"17.15"},{"name":"中证红利SGD","阶段性收益_近一月":"0.77","阶段性收益_近三月":"2.82","阶段性收益_年至今":"6.60","年化收益_近一年":"--","年化收益_近三年":"--","年化收益_近五年":"--","年化波动率_近一年":"14.39","年化波动率_近三年":"14.39","年化波动率_近五年":"14.39"}]},{"indexCode":"930740","data":[{"name":"300红利低波","阶段性收益_近一月":"0.16","阶段性收益_近三月":"3.82","阶段性收益_年至今":"0.57","年化收益_近一年":"9.20","年化收益_近三年":"9.11","年化收益_近五年":"7.85","年化波动率_近一年":"16.01","年化波动率_近三年":"14.10","年化波动率_近五年":"14.93"},{"name":"300红利低波全收益","阶段性收益_近一月":"0.53","阶段性收益_近三月":"5.08","阶段性收益_年至今":"1.05","年化收益_近一年":"14.59","年化收益_近三年":"14.57","年化收益_近五年":"12.97","年化波动率_近一年":"15.99","年化波动率_近三年":"14.01","年化波动率_近五年":"14.85"}]},{"indexCode":"930914","data":[{"name":"港股通高股息","阶段性收益_近一月":"3.62","阶段性收益_近三月":"10.53","阶段性收益_年至今":"12.49","年化收益_近一年":"14.88","年化收益_近三年":"8.72","年化收益_近五年":"4.02","年化波动率_近一年":"25.71","年化波动率_近三年":"23.75","年化波动率_近五年":"23.57"},{"name":"港股通高股息CNY","阶段性收益_近一月":"3.33","阶段性收益_近三月":"8.50","阶段性收益_年至今":"9.53","年化收益_近一年":"13.00","年化收益_近三年":"11.24","年化收益_近五年":"4.10","年化波动率_近一年":"25.40","年化波动率_近三年":"22.69","年化波动率_近五年":"22.72"}]},{"indexCode":"930917","data":[{"name":"SHS高股息","阶段性收益_近一月":"1.94","阶段性收益_近三月":"2.81","阶段性收益_年至今":"3.95","年化收益_近一年":"6.60","年化收益_近三年":"5.01","年化收益_近五年":"3.38","年化波动率_近一年":"20.78","年化波动率_近三年":"18.13","年化波动率_近五年":"18.43"},{"name":"SHS高股息(全)HKD","阶段性收益_近一月":"4.26","阶段性收益_近三月":"7.69","阶段性收益_年至今":"10.44","年化收益_近一年":"16.95","年化收益_近三年":"9.94","年化收益_近五年":"10.34","年化波动率_近一年":"21.13","年化波动率_近三年":"19.43","年化波动率_近五年":"19.61"}]},{"indexCode":"930955","data":[{"name":"红利低波100","阶段性收益_近一月":"1.03","阶段性收益_近三月":"0.53","阶段性收益_年至今":"2.61","年化收益_近一年":"6.99","年化收益_近三年":"4.64","年化收益_近五年":"7.06","年化波动率_近一年":"18.72","年化波动率_近三年":"15.24","年化波动率_近五年":"15.99"},{"name":"红利低波100全收益","阶段性收益_近一月":"0.29","阶段性收益_近三月":"2.37","阶段性收益_年至今":"0.48","年化收益_近一年":"12.92","年化收益_近三年":"9.85","年化收益_近五年":"12.28","年化波动率_近一年":"18.68","年化波动率_近三年":"15.19","年化波动率_近五年":"15.93"}]},{"indexCode":"931157","data":[{"name":"SHS红利成长LV","阶段性收益_近一月":"2.83","阶段性收益_近三月":"6.27","阶段性收益_年至今":"6.96","年化收益_近一年":"19.48","年化收益_近三年":"11.51","年化收益_近五年":"10.05","年化波动率_近一年":"16.89","年化波动率_近三年":"14.35","年化波动率_近五年":"15.35"},{"name":"SHS红利成长LVHKD","阶段性收益_近一月":"3.11","阶段性收益_近三月":"8.25","阶段性收益_年至今":"9.86","年化收益_近一年":"21.47","年化收益_近三年":"8.99","年化收益_近五年":"9.96","年化波动率_近一年":"17.31","年化波动率_近三年":"15.72","年化波动率_近五年":"16.60"}]},{"indexCode":"931446","data":[{"name":"东证红利低波","阶段性收益_近一月":"1.42","阶段性收益_近三月":"5.91","阶段性收益_年至今":"1.42","年化收益_近一年":"14.88","年化收益_近三年":"11.13","年化收益_近五年":"11.93","年化波动率_近一年":"18.14","年化波动率_近三年":"14.85","年化波动率_近五年":"15.78"},{"name":"东证红利低波全收益","阶段性收益_近一月":"2.46","阶段性收益_近三月":"7.33","阶段性收益_年至今":"3.27","年化收益_近一年":"20.94","年化收益_近三年":"16.65","年化收益_近五年":"17.15","年化波动率_近一年":"18.11","年化波动率_近三年":"14.79","年化波动率_近五年":"15.73"}]},{"indexCode":"931468","data":[{"name":"红利质量","阶段性收益_近一月":"1.84","阶段性收益_近三月":"0.86","阶段性收益_年至今":"2.32","年化收益_近一年":"3.77","年化收益_近三年":"3.28","年化收益_近五年":"0.75","年化波动率_近一年":"26.98","年化波动率_近三年":"20.36","年化波动率_近五年":"21.29"},{"name":"红利质量全收益","阶段性收益_近一月":"0.92","阶段性收益_近三月":"0.34","阶段性收益_年至今":"1.00","年化收益_近一年":"6.46","年化收益_近三年":"0.11","年化收益_近五年":"3.51","年化波动率_近一年":"26.97","年化波动率_近三年":"20.32","年化波动率_近五年":"21.29"}]},{"indexCode":"932039","data":[{"name":"央企股东回报","阶段性收益_近一月":"1.08","阶段性收益_近三月":"2.12","阶段性收益_年至今":"4.34","年化收益_近一年":"1.65","年化收益_近三年":"2.03","年化收益_近五年":"8.21","年化波动率_近一年":"20.47","年化波动率_近三年":"18.04","年化波动率_近五年":"19.61"},{"name":"央企股东回报全收益","阶段性收益_近一月":"0.18","阶段性收益_近三月":"1.18","阶段性收益_年至今":"3.39","年化收益_近一年":"5.47","年化收益_近三年":"5.62","年化收益_近五年":"11.79","年化波动率_近一年":"20.43","年化波动率_近三年":"17.98","年化波动率_近五年":"19.60"}]},{"indexCode":"CESFHY","data":[{"name":"中华预期高股息","阶段性收益_近一月":"6.46","阶段性收益_近三月":"10.94","阶段性收益_年至今":"18.07","年化收益_近一年":"25.51","年化收益_近三年":"0.57","年化收益_近五年":"3.86","年化波动率_近一年":"25.89","年化波动率_近三年":"26.98","年化波动率_近五年":"27.35"},{"name":"中华预期高股息全收益","阶段性收益_近一月":"8.11","阶段性收益_近三月":"13.71","阶段性收益_年至今":"21.65","年化收益_近一年":"36.45","年化收益_近三年":"7.29","年化收益_近五年":"3.92","年化波动率_近一年":"25.82","年化波动率_近三年":"26.90","年化波动率_近五年":"27.29"}]},{"indexCode":"H11140","data":[{"name":"香港红利","阶段性收益_近一月":"4.52","阶段性收益_近三月":"7.69","阶段性收益_年至今":"13.98","年化收益_近一年":"15.51","年化收益_近三年":"12.14","年化收益_近五年":"7.87","年化波动率_近一年":"22.49","年化波动率_近三年":"20.19","年化波动率_近五年":"19.41"},{"name":"香港红利净收益","阶段性收益_近一月":"5.78","阶段性收益_近三月":"10.05","阶段性收益_年至今":"17.93","年化收益_近一年":"25.65","年化收益_近三年":"21.48","年化收益_近五年":"16.05","年化波动率_近一年":"22.07","年化波动率_近三年":"19.44","年化波动率_近五年":"18.76"}]},{"indexCode":"H30089","data":[{"name":"红利潜力","阶段性收益_近一月":"4.83","阶段性收益_近三月":"3.75","阶段性收益_年至今":"6.48","年化收益_近一年":"0.10","年化收益_近三年":"4.13","年化收益_近五年":"0.10","年化波动率_近一年":"22.16","年化波动率_近三年":"18.55","年化波动率_近五年":"19.68"},{"name":"红利潜力全收益","阶段性收益_近一月":"4.03","阶段性收益_近三月":"2.48","阶段性收益_年至今":"5.03","年化收益_近一年":"4.81","年化收益_近三年":"0.50","年化收益_近五年":"4.23","年化波动率_近一年":"22.12","年化波动率_近三年":"18.51","年化波动率_近五年":"19.66"}]},{"indexCode":"H30094","data":[{"name":"消费红利","阶段性收益_近一月":"3.96","阶段性收益_近三月":"0.37","阶段性收益_年至今":"3.97","年化收益_近一年":"2.28","年化收益_近三年":"8.49","年化收益_近五年":"0.73","年化波动率_近一年":"25.15","年化波动率_近三年":"20.86","年化波动率_近五年":"22.58"},{"name":"消费红利全收益","阶段性收益_近一月":"3.13","阶段性收益_近三月":"1.44","阶段性收益_年至今":"2.01","年化收益_近一年":"5.93","年化收益_近三年":"5.71","年化收益_近五年":"2.18","年化波动率_近一年":"25.12","年化波动率_近三年":"20.83","年化波动率_近五年":"22.56"}]},{"indexCode":"H30269","data":[{"name":"红利低波","阶段性收益_近一月":"2.27","阶段性收益_近三月":"6.48","阶段性收益_年至今":"4.01","年化收益_近一年":"8.06","年化收益_近三年":"7.69","年化收益_近五年":"9.21","年化波动率_近一年":"18.61","年化波动率_近三年":"16.00","年化波动率_近五年":"17.62"},{"name":"红利低波全收益","阶段性收益_近一月":"3.36","阶段性收益_近三月":"8.11","阶段性收益_年至今":"6.32","年化收益_近一年":"15.05","年化收益_近三年":"13.79","年化收益_近五年":"15.21","年化波动率_近一年":"18.52","年化波动率_近三年":"15.87","年化波动率_近五年":"17.51"}]},{"indexCode":"H50040","data":[{"name":"上红低波","阶段性收益_近一月":"3.07","阶段性收益_近三月":"8.32","阶段性收益_年至今":"5.64","年化收益_近一年":"13.17","年化收益_近三年":"10.74","年化收益_近五年":"11.36","年化波动率_近一年":"18.58","年化波动率_近三年":"15.92","年化波动率_近五年":"17.26"},{"name":"上红低波全收益","阶段性收益_近一月":"3.83","阶段性收益_近三月":"9.51","阶段性收益_年至今":"7.57","年化收益_近一年":"20.21","年化收益_近三年":"16.94","年化收益_近五年":"17.41","年化波动率_近一年":"18.52","年化波动率_近三年":"15.80","年化波动率_近五年":"17.16"}]},{"indexCode":"930839","data":[{"name":"港股通高息精选","阶段性收益_近一月":"1.44","阶段性收益_近三月":"4.97","阶段性收益_年至今":"7.95","年化收益_近一年":"0.97","年化收益_近三年":"0.89","年化收益_近五年":"3.88","年化波动率_近一年":"23.12","年化波动率_近三年":"23.54","年化波动率_近五年":"23.05"},{"name":"港股通高息精选(全)","阶段性收益_近一月":"3.48","阶段性收益_近三月":"7.22","阶段性收益_年至今":"10.50","年化收益_近一年":"6.73","年化收益_近三年":"8.87","年化收益_近五年":"11.17","年化波动率_近一年":"22.96","年化波动率_近三年":"23.29","年化波动率_近五年":"22.93"}]},{"indexCode":"931132","data":[{"name":"诚通央企红利","阶段性收益_近一月":"0.34","阶段性收益_近三月":"1.84","阶段性收益_年至今":"4.25","年化收益_近一年":"2.87","年化收益_近三年":"3.29","年化收益_近五年":"8.81","年化波动率_近一年":"19.92","年化波动率_近三年":"17.95","年化波动率_近五年":"19.87"},{"name":"诚通央企红利全收益","阶段性收益_近一月":"0.66","阶段性收益_近三月":"0.76","阶段性收益_年至今":"3.15","年化收益_近一年":"1.15","年化收益_近三年":"7.46","年化收益_近五年":"12.85","年化波动率_近一年":"19.85","年化波动率_近三年":"17.85","年化波动率_近五年":"19.82"}]},{"indexCode":"931231","data":[{"name":"央企红利50","阶段性收益_近一月":"0.73","阶段性收益_近三月":"1.57","阶段性收益_年至今":"3.97","年化收益_近一年":"2.08","年化收益_近三年":"2.11","年化收益_近五年":"9.78","年化波动率_近一年":"20.50","年化波动率_近三年":"18.21","年化波动率_近五年":"20.23"},{"name":"央企红利50全收益","阶段性收益_近一月":"0.18","阶段性收益_近三月":"0.61","阶段性收益_年至今":"3.00","年化收益_近一年":"5.91","年化收益_近三年":"5.63","年化收益_近五年":"13.46","年化波动率_近一年":"20.44","年化波动率_近三年":"18.15","年化波动率_近五年":"20.20"}]},{"indexCode":"931233","data":[{"name":"港股通央企红利","阶段性收益_近一月":"4.50","阶段性收益_近三月":"8.44","阶段性收益_年至今":"11.55","年化收益_近一年":"24.56","年化收益_近三年":"9.20","年化收益_近五年":"8.19","年化波动率_近一年":"30.74","年化波动率_近三年":"24.07","年化波动率_近五年":"22.41"},{"name":"港股通央企红利人民币中间价(全)","阶段性收益_近一月":"6.14","阶段性收益_近三月":"10.07","阶段性收益_年至今":"13.38","年化收益_近一年":"35.33","年化收益_近三年":"20.14","年化收益_近五年":"16.09","年化波动率_近一年":"30.27","年化波动率_近三年":"23.61","年化波动率_近五年":"22.00"}]},{"indexCode":"931722","data":[{"name":"国新港股通央企红利","阶段性收益_近一月":"0.14","阶段性收益_近三月":"3.96","阶段性收益_年至今":"4.13","年化收益_近一年":"1.32","年化收益_近三年":"10.60","年化收益_近五年":"11.24","年化波动率_近一年":"24.68","年化波动率_近三年":"21.52","年化波动率_近五年":"21.38"},{"name":"国新港股通央企红利(净)","阶段性收益_近一月":"2.91","阶段性收益_近三月":"7.03","阶段性收益_年至今":"7.20","年化收益_近一年":"5.51","年化收益_近三年":"18.28","年化收益_近五年":"18.80","年化波动率_近一年":"24.47","年化波动率_近三年":"21.32","年化波动率_近五年":"21.23"}]},{"indexCode":"932305","data":[{"name":"智选高股息","阶段性收益_近一月":"4.02","阶段性收益_近三月":"1.23","阶段性收益_年至今":"2.92","年化收益_近一年":"--","年化收益_近三年":"--","年化收益_近五年":"--","年化波动率_近一年":"21.72","年化波动率_近三年":"21.72","年化波动率_近五年":"21.72"},{"name":"智选高股息全收益","阶段性收益_近一月":"0.43","阶段性收益_近三月":"2.87","阶段性收益_年至今":"1.62","年化收益_近一年":"--","年化收益_近三年":"--","年化收益_近五年":"--","年化波动率_近一年":"21.64","年化波动率_近三年":"21.64","年化波动率_近五年":"21.64"}]},{"indexCode":"932315","data":[{"name":"中证红利质量","阶段性收益_近一月":"2.81","阶段性收益_近三月":"1.99","阶段性收益_年至今":"3.32","年化收益_近一年":"1.47","年化收益_近三年":"0.18","年化收益_近五年":"4.92","年化波动率_近一年":"21.36","年化波动率_近三年":"17.61","年化波动率_近五年":"18.83"},{"name":"中证红利质量全收益","阶段性收益_近一月":"1.91","阶段性收益_近三月":"0.41","阶段性收益_年至今":"1.72","年化收益_近一年":"5.04","年化收益_近三年":"4.46","年化收益_近五年":"8.85","年化波动率_近一年":"21.37","年化波动率_近三年":"17.58","年化波动率_近五年":"18.82"}]},{"indexCode":"H30270","data":[{"name":"红利价值","阶段性收益_近一月":"2.03","阶段性收益_近三月":"5.13","阶段性收益_年至今":"0.90","年化收益_近一年":"2.71","年化收益_近三年":"5.83","年化收益_近五年":"7.90","年化波动率_近一年":"19.54","年化波动率_近三年":"17.01","年化波动率_近五年":"18.93"},{"name":"红利价值全收益","阶段性收益_近一月":"2.91","阶段性收益_近三月":"6.59","阶段性收益_年至今":"3.05","年化收益_近一年":"9.13","年化收益_近三年":"12.60","年化收益_近五年":"14.23","年化波动率_近一年":"19.45","年化波动率_近三年":"16.88","年化波动率_近五年":"18.83"}]},{"indexCode":"H30366","data":[{"name":"高息策略","阶段性收益_近一月":"1.40","阶段性收益_近三月":"1.09","阶段性收益_年至今":"5.98","年化收益_近一年":"0.57","年化收益_近三年":"3.19","年化收益_近五年":"4.65","年化波动率_近一年":"17.84","年化波动率_近三年":"15.28","年化波动率_近五年":"16.33"},{"name":"高息策略全收益","阶段性收益_近一月":"0.41","阶段性收益_近三月":"0.37","阶段性收益_年至今":"4.54","年化收益_近一年":"6.68","年化收益_近三年":"9.50","年化收益_近五年":"10.61","年化波动率_近一年":"17.75","年化波动率_近三年":"15.12","年化波动率_近五年":"16.18"}]}];
+        const indexMapping = {"930740":"沪深300红利低波动指数","930839":"中证港股通高股息精选指数","930914":"中证港股通高股息投资指数","930917":"中证沪港深高股息指数","930955":"中证红利低波动100指数","931132":"中证诚通央企红利指数","931157":"中证沪港深红利成长低波动指数","931231":"中证央企红利50指数","931233":"中证港股通央企红利指数","931446":"中证东方红红利低波动指数","931468":"中证红利质量指数","931722":"中证国新港股通央企红利指数","932039":"中证国新央企股东回报指数","932305":"中证智选高股息策略指数","932315":"中证全指红利质量指数","000015":"上证红利指数","000151":"上证国有企业红利指数","000821":"沪深300红利指数","000824":"中证国有企业红利指数","000825":"中证中央企业红利指数","000922":"中证红利指数","CESFHY":"中华交易服务预期高股息指数","H11140":"中证香港红利指数","H30089":"中证红利潜力指数","H30094":"中证主要消费红利指数","H30269":"中证红利低波动指数","H50040":"上证红利低波动指数","H30270":"中证红利价值指数","H30366":"中证高股息策略指数"};
+        const peDpData = [{"etfCode":"000015","fundName":"","indexName":"红利指数","pe1":7.75,"pe2":8.9,"dp1":6.18,"dp2":6.42,"success":true,"retryCount":0},{"etfCode":"000151","fundName":"","indexName":"上国红利","pe1":7.86,"pe2":8.32,"dp1":6.22,"dp2":6.05,"success":true,"retryCount":0},{"etfCode":"000821","fundName":"","indexName":"300红利","pe1":8.25,"pe2":8.38,"dp1":5.41,"dp2":6.06,"success":true,"retryCount":0},{"etfCode":"000824","fundName":"","indexName":"国企红利","pe1":8.2,"pe2":9.33,"dp1":5.71,"dp2":5.88,"success":true,"retryCount":0},{"etfCode":"000825","fundName":"","indexName":"央企红利","pe1":8.69,"pe2":9.41,"dp1":5.38,"dp2":4.82,"success":true,"retryCount":0},{"etfCode":"000922","fundName":"","indexName":"中证红利","pe1":8.04,"pe2":9.78,"dp1":5.93,"dp2":6.06,"success":true,"retryCount":0},{"etfCode":"930740","fundName":"","indexName":"300红利低波","pe1":9.05,"pe2":9.81,"dp1":5.09,"dp2":4.78,"success":true,"retryCount":0},{"etfCode":"930914","fundName":"","indexName":"港股通高股息","pe1":9.62,"pe2":9.51,"dp1":7.75,"dp2":8.03,"success":true,"retryCount":0},{"etfCode":"930917","fundName":"","indexName":"SHS高股息","pe1":8.18,"pe2":9.53,"dp1":7.65,"dp2":7.08,"success":true,"retryCount":0},{"etfCode":"930955","fundName":"","indexName":"红利低波100","pe1":8.02,"pe2":10.5,"dp1":5.77,"dp2":5.96,"success":true,"retryCount":0},{"etfCode":"931157","fundName":"","indexName":"SHS红利成长LV","pe1":9.15,"pe2":9.04,"dp1":5.65,"dp2":4.88,"success":true,"retryCount":0},{"etfCode":"931446","fundName":"","indexName":"东证红利低波","pe1":8.67,"pe2":8.95,"dp1":5.07,"dp2":4.78,"success":true,"retryCount":0},{"etfCode":"931468","fundName":"","indexName":"红利质量","pe1":17.44,"pe2":17.74,"dp1":3.05,"dp2":2.65,"success":true,"retryCount":0},{"etfCode":"932039","fundName":"","indexName":"央企股东回报","pe1":11.04,"pe2":11.19,"dp1":4.35,"dp2":4,"success":true,"retryCount":0},{"etfCode":"CESFHY","fundName":"","indexName":"中华预期高股息","pe1":7.22,"pe2":7.92,"dp1":8.39,"dp2":7.48,"success":true,"retryCount":0},{"etfCode":"H11140","fundName":"","indexName":"香港红利","pe1":8.06,"pe2":7.83,"dp1":8.4,"dp2":8.33,"success":true,"retryCount":0},{"etfCode":"H30089","fundName":"","indexName":"红利潜力","pe1":15.67,"pe2":13.32,"dp1":3.76,"dp2":3.96,"success":true,"retryCount":0},{"etfCode":"H30094","fundName":"","indexName":"消费红利","pe1":19.03,"pe2":19.92,"dp1":4.26,"dp2":3.9,"success":true,"retryCount":0},{"etfCode":"H30269","fundName":"","indexName":"红利低波","pe1":7.61,"pe2":8.34,"dp1":5.85,"dp2":6.09,"success":true,"retryCount":0},{"etfCode":"H50040","fundName":"","indexName":"上红低波","pe1":7.5,"pe2":7.81,"dp1":5.83,"dp2":5.95,"success":true,"retryCount":0},{"etfCode":"930839","fundName":"","indexName":"港股通高息精选","pe1":11.15,"pe2":11.47,"dp1":5.87,"dp2":5.59,"success":true,"retryCount":0},{"etfCode":"931132","fundName":"","indexName":"诚通央企红利","pe1":11.64,"pe2":11.29,"dp1":4.47,"dp2":4.3,"success":true,"retryCount":0},{"etfCode":"931231","fundName":"","indexName":"央企红利50","pe1":11.69,"pe2":11.52,"dp1":4.4,"dp2":3.97,"success":true,"retryCount":0},{"etfCode":"931233","fundName":"","indexName":"港股通央企红利","pe1":7.88,"pe2":7.74,"dp1":7.68,"dp2":7.04,"success":true,"retryCount":0},{"etfCode":"931722","fundName":"","indexName":"国新港股通央企红利","pe1":9.87,"pe2":8.75,"dp1":6.15,"dp2":7.51,"success":true,"retryCount":0},{"etfCode":"932305","fundName":"","indexName":"智选高股息","pe1":8.18,"pe2":9.89,"dp1":5.3,"dp2":5.84,"success":true,"retryCount":0},{"etfCode":"932315","fundName":"","indexName":"中证红利质量","pe1":16.84,"pe2":15.87,"dp1":3.49,"dp2":3.66,"success":true,"retryCount":0},{"etfCode":"H30270","fundName":"","indexName":"红利价值","pe1":7.46,"pe2":7.87,"dp1":5.87,"dp2":6.45,"success":true,"retryCount":0},{"etfCode":"H30366","fundName":"","indexName":"高息策略","pe1":10.98,"pe2":10.91,"dp1":5.76,"dp2":5.94,"success":true,"retryCount":0}];
+        
+        // 获取指数名称函数
+        function getIndexName(indexCode) {
+            return indexMapping[indexCode] || indexCode; // 如果找不到映射，返回原始代码
+        }
+        
+        // 搜索和筛选功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const tableBody = document.getElementById('data-table-body');
+            let currentSortColumn = null;
+            let currentSortDirection = null;
+            
+            // 筛选功能
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filterButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 控制波动率列的显示
+                    const table = document.querySelector('.index-data-table table');
+                    if (this.dataset.filter === 'dividend' || this.dataset.filter === 'pe-dp') {
+                        table.classList.add('dividend-view');
+                        if (this.dataset.filter === 'pe-dp') {
+                            table.classList.add('pe-dp-view');
+                        } else {
+                            table.classList.remove('pe-dp-view');
+                        }
+                    } else {
+                        table.classList.remove('dividend-view');
+                        table.classList.remove('pe-dp-view');
+                    }
+                    
+                    filterData();
+                });
+            });
+            
+            // 排序功能（事件委托到thead）
+            const thead = document.querySelector('.index-data-table thead');
+            thead.addEventListener('click', function(e) {
+                if (e.target.tagName !== 'TH') return;
+                const ths = Array.from(e.target.parentNode.children);
+                const columnIndex = ths.indexOf(e.target);
+                const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+                // PE/DP模式下只允许点击PE1、PE2、DP1、DP2（索引2~5）
+                if (activeFilter === 'pe-dp') {
+                    if (columnIndex < 2 || columnIndex > 5) return;
+                } else {
+                    if (columnIndex < 2) return;
+                }
+                // 清除之前的排序样式
+                document.querySelectorAll('.index-data-table th').forEach(h => h.classList.remove('sorted'));
+                // 如果点击的是当前排序列，切换排序方向
+                if (currentSortColumn === columnIndex) {
+                    currentSortDirection = currentSortDirection === 'desc' ? 'asc' : 'desc';
+                } else {
+                    currentSortColumn = columnIndex;
+                    currentSortDirection = 'desc';
+                }
+                e.target.classList.add('sorted');
+                filterData();
+            });
+            
+            function filterData() {
+                const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+                
+                const filteredData = indexData.filter(item => {
+                    // 类型过滤
+                    switch(activeFilter) {
+                        case 'price':
+                            return item.data.length > 0 && 
+                                   !item.data[0].name.includes('全收益') &&
+                                   !item.data[0].name.includes('净收益');
+                        case 'total':
+                            return item.data.some(data => 
+                                data.name.includes('全收益') || 
+                                data.name.includes('净收益')
+                            );
+                        case 'dividend':
+                            return item.data.length > 1;
+                        case 'pe-dp':
+                            return peDpData.some(peItem => peItem.etfCode === item.indexCode);
+                        default:
+                            return true;
+                    }
+                });
+                
+                // 应用排序
+                if (currentSortColumn !== null) {
+                    sortData(filteredData, currentSortColumn, currentSortDirection, activeFilter);
+                }
+                
+                renderTable(filteredData);
+            }
+            
+            function sortData(data, columnIndex, direction, activeFilter) {
+                if (activeFilter === 'pe-dp') {
+                    // PE/DP模式下，2:pe1, 3:pe2, 4:dp1, 5:dp2
+                    const keyMap = {2: 'pe1', 3: 'pe2', 4: 'dp1', 5: 'dp2'};
+                    const sortKey = keyMap[columnIndex];
+                    data.sort((a, b) => {
+                        const aPe = peDpData.find(peItem => peItem.etfCode === a.indexCode);
+                        const bPe = peDpData.find(peItem => peItem.etfCode === b.indexCode);
+                        let aValue = aPe ? parseFloat(aPe[sortKey]) || 0 : 0;
+                        let bValue = bPe ? parseFloat(bPe[sortKey]) || 0 : 0;
+                        if (direction === 'desc') {
+                            return aValue > bValue ? -1 : aValue < bValue ? 1 : 0;
+                        } else {
+                            return aValue < bValue ? -1 : aValue > bValue ? 1 : 0;
+                        }
+                    });
+                    return;
+                }
+                // 其它模式
+                const columnKeys = [
+                    '阶段性收益_近一月',
+                    '阶段性收益_近三月',
+                    '阶段性收益_年至今',
+                    '年化收益_近一年',
+                    '年化收益_近三年',
+                    '年化收益_近五年',
+                    '年化波动率_近一年',
+                    '年化波动率_近三年',
+                    '年化波动率_近五年'
+                ];
+                const adjustedColumnIndex = columnIndex - 2;
+                const sortKey = columnKeys[adjustedColumnIndex];
+                data.sort((a, b) => {
+                    let aValue, bValue;
+                    if (activeFilter === 'price') {
+                        const aData = a.data[0];
+                        const bData = b.data[0];
+                        aValue = parseFloat(aData[sortKey]) || 0;
+                        bValue = parseFloat(bData[sortKey]) || 0;
+                    } else if (activeFilter === 'total') {
+                        const aData = a.data.find(d => d.name.includes('全收益') || d.name.includes('净收益'));
+                        const bData = b.data.find(d => d.name.includes('全收益') || d.name.includes('净收益'));
+                        if (aData && bData) {
+                            aValue = parseFloat(aData[sortKey]) || 0;
+                            bValue = parseFloat(bData[sortKey]) || 0;
+                        } else {
+                            aValue = bValue = 0;
+                        }
+                    } else if (activeFilter === 'dividend') {
+                        if (a.data.length > 1 && b.data.length > 1) {
+                            const aDiv = calculateDividendYield(a.data[0], a.data[1]);
+                            const bDiv = calculateDividendYield(b.data[0], b.data[1]);
+                            aValue = parseFloat(aDiv[sortKey]) || 0;
+                            bValue = parseFloat(bDiv[sortKey]) || 0;
+                        } else {
+                            aValue = bValue = 0;
+                        }
+                    } else {
+                        // "全部"模式：全部使用第二行数据进行排序
+                        let aData = a.data[1] || a.data[0]; // 优先使用第二行，如果没有则使用第一行
+                        let bData = b.data[1] || b.data[0]; // 优先使用第二行，如果没有则使用第一行
+                        
+                        aValue = parseFloat(aData[sortKey]) || 0;
+                        bValue = parseFloat(bData[sortKey]) || 0;
+                    }
+                    if (direction === 'desc') {
+                        return aValue > bValue ? -1 : aValue < bValue ? 1 : 0;
+                    } else {
+                        return aValue < bValue ? -1 : aValue > bValue ? 1 : 0;
+                    }
+                });
+            }
+            
+            function calculateDividendYield(priceData, totalData) {
+                const fields = [
+                    '阶段性收益_近一月',
+                    '阶段性收益_近三月', 
+                    '阶段性收益_年至今',
+                    '年化收益_近一年',
+                    '年化收益_近三年',
+                    '年化收益_近五年'
+                ];
+                
+                const result = {};
+                fields.forEach(field => {
+                    const priceValue = parseFloat(priceData[field]) || 0;
+                    const totalValue = parseFloat(totalData[field]) || 0;
+                    result[field] = (totalValue - priceValue).toFixed(2);
+                });
+                
+                return result;
+            }
+            
+            function renderTable(data) {
+                var html = '';
+                var activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+                data.forEach(function(item) {
+                    if (item.data && item.data.length > 0) {
+                        if (activeFilter === 'price') {
+                            var d = item.data[0];
+                            html += '<tr data-index-code="' + item.indexCode + '"><td>' + item.indexCode + '</td><td>' + d.name + '</td><td class="number">' + d.阶段性收益_近一月 + '</td><td class="number">' + d.阶段性收益_近三月 + '</td><td class="number">' + d.阶段性收益_年至今 + '</td><td class="number">' + d.年化收益_近一年 + '</td><td class="number">' + d.年化收益_近三年 + '</td><td class="number">' + d.年化收益_近五年 + '</td><td class="number">' + d.年化波动率_近一年 + '</td><td class="number">' + d.年化波动率_近三年 + '</td><td class="number">' + d.年化波动率_近五年 + '</td></tr>';
+                        } else if (activeFilter === 'total' && item.data.length > 1) {
+                            var d = item.data[1];
+                            html += '<tr class="total-return" data-index-code="' + item.indexCode + '"><td>' + item.indexCode + '</td><td>' + d.name + '</td><td class="number">' + d.阶段性收益_近一月 + '</td><td class="number">' + d.阶段性收益_近三月 + '</td><td class="number">' + d.阶段性收益_年至今 + '</td><td class="number">' + d.年化收益_近一年 + '</td><td class="number">' + d.年化收益_近三年 + '</td><td class="number">' + d.年化收益_近五年 + '</td><td class="number">' + d.年化波动率_近一年 + '</td><td class="number">' + d.年化波动率_近三年 + '</td><td class="number">' + d.年化波动率_近五年 + '</td></tr>';
+                        } else if (activeFilter === 'dividend' && item.data.length > 1) {
+                            var d1 = item.data[0], d2 = item.data[1];
+                            var div = calculateDividendYield(d1, d2);
+                            html += '<tr class="dividend-yield" data-index-code="' + item.indexCode + '"><td>' + item.indexCode + '</td><td>' + d2.name + '</td><td class="number">' + div.阶段性收益_近一月 + '%</td><td class="number">' + div.阶段性收益_近三月 + '%</td><td class="number">' + div.阶段性收益_年至今 + '%</td><td class="number">' + div.年化收益_近一年 + '%</td><td class="number">' + div.年化收益_近三年 + '%</td><td class="number">' + div.年化收益_近五年 + '%</td></tr>';
+                        } else if (activeFilter === 'pe-dp') {
+                            var peItem = peDpData.find(peItem => peItem.etfCode === item.indexCode);
+                            if (peItem) {
+                                var d = item.data[0];
+                                html += '<tr class="pe-dp" data-index-code="' + item.indexCode + '"><td>' + item.indexCode + '</td><td>' + d.name + '</td><td class="number">' + (peItem.pe1 !== null ? Number(peItem.pe1).toFixed(2) : 'N/A') + '</td><td class="number">' + (peItem.pe2 !== null ? Number(peItem.pe2).toFixed(2) : 'N/A') + '</td><td class="number">' + (peItem.dp1 !== null ? Number(peItem.dp1).toFixed(2) + '%' : 'N/A') + '</td><td class="number">' + (peItem.dp2 !== null ? Number(peItem.dp2).toFixed(2) + '%' : 'N/A') + '</td></tr>';
+                            }
+                        } else {
+                            var d = item.data[0];
+                            html += '<tr data-index-code="' + item.indexCode + '"><td>' + item.indexCode + '</td><td>' + d.name + '</td><td class="number">' + d.阶段性收益_近一月 + '</td><td class="number">' + d.阶段性收益_近三月 + '</td><td class="number">' + d.阶段性收益_年至今 + '</td><td class="number">' + d.年化收益_近一年 + '</td><td class="number">' + d.年化收益_近三年 + '</td><td class="number">' + d.年化收益_近五年 + '</td><td class="number">' + d.年化波动率_近一年 + '</td><td class="number">' + d.年化波动率_近三年 + '</td><td class="number">' + d.年化波动率_近五年 + '</td></tr>';
+                            if (item.data.length > 1) {
+                                var d2 = item.data[1];
+                                html += '<tr class="total-return" data-index-code="' + item.indexCode + '"><td>' + item.indexCode + '</td><td>' + d2.name + '</td><td class="number">' + d2.阶段性收益_近一月 + '</td><td class="number">' + d2.阶段性收益_近三月 + '</td><td class="number">' + d2.阶段性收益_年至今 + '</td><td class="number">' + d2.年化收益_近一年 + '</td><td class="number">' + d2.年化收益_近三年 + '</td><td class="number">' + d2.年化收益_近五年 + '</td><td class="number">' + d2.年化波动率_近一年 + '</td><td class="number">' + d2.年化波动率_近三年 + '</td><td class="number">' + d2.年化波动率_近五年 + '</td></tr>';
+                            }
+                        }
+                    }
+                });
+                tableBody.innerHTML = html;
+            }
+        });
+    </script>
+</body>
+</html> 

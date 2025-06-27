@@ -1,0 +1,542 @@
+{
+  "requestName" : "nav",
+  "requestDate" : "2025-05-19 12:46:12",
+  "dateFormat" : "YYYY-MM-DD HH:mm:ss",
+  "duration" : "00:00:631",
+  "contentList" : [ {
+    "label" : "main_1",
+    "url" : "/eng/indexes/indexes-overview",
+    "urlAction" : "",
+    "title" : "Indexes",
+    "state" : "",
+    "summary" : "A full list of indexes under each category selected.",
+    "imageUrl" : "",
+    "submenu" : {
+      "column1" : {
+        "label" : "main_1_1_clickable",
+        "url" : "/eng/indexes/indexes-overview",
+        "columnTitle" : "CATEGORIES",
+        "columnItem" : [ {
+          "label" : "main_1_1_0",
+          "url" : "/eng/indexes/all-indexes",
+          "urlAction" : "",
+          "title" : "All Indexes",
+          "state" : "",
+          "summary" : "",
+          "imageUrl" : "",
+          "fragment" : ""
+        }, {
+          "label" : "main_1_1_1",
+          "url" : "/eng/indexes/all-indexes",
+          "urlAction" : "",
+          "title" : "Market",
+          "state" : "",
+          "summary" : "Broad-based indexes that can be used as benchmarks to track the overall performance of the overall market.",
+          "imageUrl" : "/static/uploads/assets/images/menu/market.png",
+          "fragment" : "market"
+        }, {
+          "label" : "main_1_1_2",
+          "url" : "/eng/indexes/all-indexes",
+          "urlAction" : "",
+          "title" : "Factor",
+          "state" : "",
+          "summary" : "Indexes to reflect the performance of investment strategy that focuses on specific risk factor exposure, e.g. value, momentum, quality, etc.",
+          "imageUrl" : "/static/uploads/assets/images/menu/factor.png",
+          "fragment" : "factor"
+        }, {
+          "label" : "main_1_1_3",
+          "url" : "/eng/indexes/all-indexes",
+          "urlAction" : "",
+          "title" : "Strategy",
+          "state" : "",
+          "summary" : "Indexes that are designed to reflect the performance of a specific investment strategy or approach, helping index users to meet their corresponding investment objectives.",
+          "imageUrl" : "/static/uploads/assets/images/menu/strategy.png",
+          "fragment" : "strategy"
+        }, {
+          "label" : "main_1_1_4",
+          "url" : "/eng/indexes/all-indexes",
+          "urlAction" : "",
+          "title" : "Sector",
+          "state" : "",
+          "summary" : "Indexes that select constituents from specific sector, aiming to reflect the overall performance of the securities within the sector.",
+          "imageUrl" : "/static/uploads/assets/images/menu/sector.png",
+          "fragment" : "sector"
+        }, {
+          "label" : "main_1_1_5",
+          "url" : "/eng/indexes/all-indexes",
+          "urlAction" : "",
+          "title" : "Sustainability",
+          "state" : "",
+          "summary" : "Indexes that are incorporating sustainable investment strategies/focus into consideration. Indexes are constructed in different ways to fit index users’ various needs in sustainable investment practice, e.g. best-in-class, negative screening, etc.",
+          "imageUrl" : "/static/uploads/assets/images/menu/sustainability.png",
+          "fragment" : "sustainability"
+        }, {
+          "label" : "main_1_1_6",
+          "url" : "/eng/indexes/all-indexes",
+          "urlAction" : "",
+          "title" : "Global",
+          "state" : "",
+          "summary" : "Indexes to reflect the performance of the global equity markets.",
+          "imageUrl" : "/static/uploads/assets/images/menu/global.png",
+          "fragment" : "global"
+        }, {
+          "label" : "main_1_1_7",
+          "url" : "/eng/indexes/all-indexes",
+          "urlAction" : "",
+          "title" : "Fixed Income",
+          "state" : "",
+          "summary" : "Indexes that are designed to reflect performance of different segments of fixed income products.",
+          "imageUrl" : "/static/uploads/assets/images/menu/fixed_income.png",
+          "fragment" : "fixed-income"
+        } ],
+        "summary" : "A top-down investment approach that focus on opportunities created by macroeconomic, geopolitical and technological trends.",
+        "imageUrl" : "/static/uploads/assets/images/icon/green/play2022.png"
+      },
+      "column2" : {
+        "label" : "main_1_2_clickable",
+        "url" : "/eng/indexes/indexes-overview",
+        "columnTitle" : "INDEX RESOURCES",
+        "columnItem" : [ {
+          "label" : "main_1_2_1",
+          "url" : "/eng/resources-education/index-catalogue",
+          "urlAction" : "",
+          "title" : "Index Catalogue",
+          "state" : "",
+          "summary" : "A full list of Hang Seng Family of Indexes with index categories, names, tickers, launch date and current share class coverage.",
+          "imageUrl" : "/static/uploads/assets/images/icon/green/play2022.png",
+          "fragment" : ""
+        }, {
+          "label" : "main_1_2_2",
+          "url" : "/eng/resources-education/daily-reports",
+          "urlAction" : "",
+          "title" : "Index Reports",
+          "state" : "",
+          "summary" : "Daily performance and summary of our indexes.",
+          "imageUrl" : "/static/uploads/assets/images/menu/daily-reports.jpg",
+          "fragment" : ""
+        }, {
+          "label" : "main_1_2_3",
+          "url" : "/eng/resources-education/factsheets",
+          "urlAction" : "",
+          "title" : "Factsheets",
+          "state" : "",
+          "summary" : "Key features, performance, constituents and weighting details of our indexes that normally would be updated on a monthly basis.",
+          "imageUrl" : "/static/uploads/assets/images/menu/factsheets.jpg",
+          "fragment" : ""
+        }, {
+          "label" : "main_1_2_4",
+          "url" : "/eng/resources-education/brochures",
+          "urlAction" : "",
+          "title" : "Brochures",
+          "state" : "",
+          "summary" : "A more detailed information of our indexes, such as index description, universe, selection criteria, methodology, index overview and etc.",
+          "imageUrl" : "/static/uploads/assets/images/menu/brochures.jpg",
+          "fragment" : ""
+        }, {
+          "label" : "main_1_2_5",
+          "url" : "/eng/resources-education/index-methodologies",
+          "urlAction" : "",
+          "title" : "Index Methodologies",
+          "state" : "",
+          "summary" : "A resource for all methodologies for the Hang Seng Family of Indexes.",
+          "imageUrl" : "/static/uploads/assets/images/icon/green/play2022.png",
+          "fragment" : ""
+        }, {
+          "label" : "main_1_2_6",
+          "url" : "/eng/resources-education/index-operation-guide",
+          "urlAction" : "",
+          "title" : "Index Operation Guide",
+          "state" : "",
+          "summary" : "A document describes the general maintenance policies and detailed guidelines for the management of the Hang Seng Family of Indexes.",
+          "imageUrl" : "/static/uploads/assets/images/icon/green/play2022.png",
+          "fragment" : ""
+        } ],
+        "summary" : "A top-down investment approach that focus on opportunities created by macroeconomic, geopolitical and technological trends.",
+        "imageUrl" : "/static/uploads/assets/images/icon/green/play2022.png"
+      },
+      "column3" : {
+        "label" : "main_1_3_emptyheader",
+        "url" : "",
+        "columnTitle" : "",
+        "columnItem" : [ {
+          "label" : "main_1_3_1",
+          "url" : "/eng/our-services/hsics",
+          "urlAction" : "",
+          "title" : "Hang Seng Industry Classification System",
+          "state" : "",
+          "summary" : "A comprehensive industry classification system designed for the Hong Kong and China stock markets.",
+          "imageUrl" : "/static/uploads/assets/images/icon/green/play2022.png",
+          "fragment" : ""
+        }, {
+          "label" : "main_1_3_2",
+          "url" : "/eng/indexes/index-schedule",
+          "urlAction" : "",
+          "title" : "Index Schedule",
+          "state" : "",
+          "summary" : "Schedule of Index Rebalancing, AH Share Class Switches, Index Dissemination Time and Holiday Schedule.",
+          "imageUrl" : "/static/uploads/assets/images/menu/index-schedule.jpg",
+          "fragment" : ""
+        }, {
+          "label" : "main_1_3_3",
+          "url" : "/eng/indexes/all-indexes/totalreturn",
+          "urlAction" : "",
+          "title" : "Total Return Index Series",
+          "state" : "",
+          "summary" : "An introduction on the Hang Seng Total Return Index Series.",
+          "imageUrl" : "/static/uploads/assets/images/icon/green/play2022.png",
+          "fragment" : ""
+        } ],
+        "summary" : "",
+        "imageUrl" : ""
+      },
+      "column4" : "",
+      "column5" : "",
+      "column6" : ""
+    },
+    "menuBanner" : {
+      "title" : "",
+      "url" : "/eng/indexes/all-indexes/hstech",
+      "isRoute" : true,
+      "urlAction" : "_self",
+      "buttonText" : "More",
+      "imageUrl" : "/static/uploads/assets/images/banners/eng/63f808a6-4d6e-4633-ab1c-18f1f3b49ae6-d.jpg",
+      "bannerStyle" : 0
+    }
+  }, {
+    "label" : "main_2",
+    "url" : "",
+    "urlAction" : "",
+    "title" : "Solutions",
+    "state" : "",
+    "summary" : "",
+    "imageUrl" : "",
+    "submenu" : {
+      "column1" : {
+        "label" : "main_2_1_emptyheader",
+        "url" : "",
+        "columnTitle" : "SUSTAINABILITY",
+        "columnItem" : [ {
+          "label" : "main_2_1_1",
+          "url" : "/eng/esg/esg-introduction",
+          "urlAction" : "",
+          "title" : "Sustainability Solutions",
+          "state" : "",
+          "summary" : "Meet your sustainability investment goals with our suite of indexing and data solutions.",
+          "imageUrl" : "/static/uploads/assets/images/menu/sustainability.png",
+          "fragment" : ""
+        }, {
+          "label" : "main_2_1_2",
+          "url" : "/eng/esg/esg-rating-model",
+          "urlAction" : "",
+          "title" : "ESG Rating Model",
+          "state" : "",
+          "summary" : "Meet your sustainability investment goals with our suite of indexing and data solutions",
+          "imageUrl" : "/static/uploads/assets/images/menu/esg.png",
+          "fragment" : ""
+        }, {
+          "label" : "main_2_1_3",
+          "url" : "/eng/esg/company-search",
+          "urlAction" : "",
+          "title" : "Search Company ESG Rating",
+          "state" : "",
+          "summary" : "A top-down investment approach that focus on opportunities created by macroeconomic, geopolitical and technological trends.",
+          "imageUrl" : "/static/uploads/assets/images/icon/green/play2022.png",
+          "fragment" : ""
+        }, {
+          "label" : "main_2_1_4",
+          "url" : "/eng/insights-and-reports",
+          "urlAction" : "",
+          "title" : "ESG Insights",
+          "state" : "",
+          "summary" : "A top-down investment approach that focus on opportunities created by macroeconomic, geopolitical and technological trends.",
+          "imageUrl" : "/static/uploads/assets/images/icon/green/play2022.png",
+          "fragment" : "esg-insights"
+        } ],
+        "summary" : "",
+        "imageUrl" : ""
+      },
+      "column2" : {
+        "label" : "main_2_2_emptyheader",
+        "url" : "",
+        "columnTitle" : "FACTOR",
+        "columnItem" : [ {
+          "label" : "main_2_2_1",
+          "url" : "/eng/smart-beta/introduction",
+          "urlAction" : "",
+          "title" : "Factor Investing",
+          "state" : "",
+          "summary" : "Our strategies help investors achieve their objectives through systematic stock selection, weighting, and rebalancing.",
+          "imageUrl" : "/static/uploads/assets/images/menu/factor.png",
+          "fragment" : ""
+        }, {
+          "label" : "main_2_2_2",
+          "url" : "/eng/smart-beta/single-factor-approach",
+          "urlAction" : "",
+          "title" : "Single Factor Approach",
+          "state" : "",
+          "summary" : "A top-down investment approach that focus on opportunities created by macroeconomic, geopolitical and technological trends.",
+          "imageUrl" : "/static/uploads/assets/images/icon/green/play2022.png",
+          "fragment" : ""
+        }, {
+          "label" : "main_2_2_3",
+          "url" : "/eng/smart-beta/multi-factor-approach",
+          "urlAction" : "",
+          "title" : "Multi Factor Approach",
+          "state" : "",
+          "summary" : "A top-down investment approach that focus on opportunities created by macroeconomic, geopolitical and technological trends.",
+          "imageUrl" : "/static/uploads/assets/images/icon/green/play2022.png",
+          "fragment" : ""
+        }, {
+          "label" : "main_2_2_4",
+          "url" : "/eng/smart-beta/factor-index-performances",
+          "urlAction" : "",
+          "title" : "Factor Index Performances",
+          "state" : "",
+          "summary" : "A top-down investment approach that focus on opportunities created by macroeconomic, geopolitical and technological trends.",
+          "imageUrl" : "/static/uploads/assets/images/icon/green/play2022.png",
+          "fragment" : ""
+        } ],
+        "summary" : "",
+        "imageUrl" : ""
+      },
+      "column3" : {
+        "label" : "main_2_3_emptyheader",
+        "url" : "",
+        "columnTitle" : "DATA",
+        "columnItem" : [ {
+          "label" : "main_2_3_1",
+          "url" : "/eng/our-services/data-dissemination",
+          "urlAction" : "",
+          "title" : "Data Dissemination",
+          "state" : "",
+          "summary" : "Data Product Service offers a comprehensive data package to enable fund managers, derivative issuers and traders to track our indexes, analyze our index performance and use our indexes as benchmarks",
+          "imageUrl" : "/static/uploads/assets/images/menu/data_dissemination.png",
+          "fragment" : ""
+        }, {
+          "label" : "main_2_3_2",
+          "url" : "/eng/our-services/data-products",
+          "urlAction" : "",
+          "title" : "Data Product Service",
+          "state" : "",
+          "summary" : "We offer a comprehensive data package to enable investors to track, analyze, and benchmarks our indexes.",
+          "imageUrl" : "/static/uploads/assets/images/menu/data.png",
+          "fragment" : ""
+        }, {
+          "label" : "main_2_3_3",
+          "url" : "/eng/our-services/historical-data-order",
+          "urlAction" : "",
+          "title" : "Historical Data",
+          "state" : "",
+          "summary" : "A top-down investment approach that focus on opportunities created by macroeconomic, geopolitical and technological trends.",
+          "imageUrl" : "/static/uploads/assets/images/icon/green/play2022.png",
+          "fragment" : ""
+        } ],
+        "summary" : "",
+        "imageUrl" : ""
+      },
+      "column4" : {
+        "label" : "main_2_4_emptyheader",
+        "url" : "",
+        "columnTitle" : "CUSTOM SOLUTION",
+        "columnItem" : [ {
+          "label" : "main_2_4_1",
+          "url" : "/eng/our-services/customised-index-solutions",
+          "urlAction" : "",
+          "title" : "Customised Index Solutions",
+          "state" : "",
+          "summary" : "We offer tailor-made index solutions based on clients’ need for own benchmarking or for clients’ product structuring purpose.",
+          "imageUrl" : "/static/uploads/assets/images/menu/customised.png",
+          "fragment" : ""
+        } ],
+        "summary" : "",
+        "imageUrl" : ""
+      },
+      "column5" : {
+        "label" : "main_2_5_emptyheader",
+        "url" : "",
+        "columnTitle" : "LICENSING",
+        "columnItem" : [ {
+          "label" : "main_2_5_1",
+          "url" : "/eng/our-services/licenses-index-linked-products",
+          "urlAction" : "",
+          "title" : "Index Licensing",
+          "state" : "",
+          "summary" : "Different types of licenses are available according to the usage of the Hang Seng Indexes.",
+          "imageUrl" : "/static/uploads/assets/images/menu/licensing.png",
+          "fragment" : ""
+        } ],
+        "summary" : "",
+        "imageUrl" : ""
+      },
+      "column6" : {
+        "label" : "main_2_6_emptyheader",
+        "url" : "",
+        "columnTitle" : "ANALYTICS",
+        "columnItem" : [ {
+          "label" : "main_2_6_1",
+          "url" : "/eng/indexlab",
+          "urlAction" : "",
+          "title" : "Hang Seng INdexLab",
+          "state" : "",
+          "summary" : "",
+          "imageUrl" : "",
+          "fragment" : ""
+        } ],
+        "summary" : "",
+        "imageUrl" : ""
+      }
+    },
+    "menuBanner" : {
+      "title" : "",
+      "url" : "/eng/indexes/all-indexes/hstech",
+      "isRoute" : true,
+      "urlAction" : "_self",
+      "buttonText" : "More",
+      "imageUrl" : "/static/uploads/assets/images/banners/eng/63f808a6-4d6e-4633-ab1c-18f1f3b49ae6-d.jpg",
+      "bannerStyle" : 0
+    }
+  }, {
+    "label" : "main_3",
+    "url" : "/eng/insights-and-reports",
+    "urlAction" : "",
+    "title" : "Insights & Reports",
+    "state" : "",
+    "summary" : "",
+    "imageUrl" : "",
+    "submenu" : {
+      "column1" : {
+        "label" : "main_3_1_emptyheader",
+        "url" : "",
+        "columnTitle" : "INSIGHTS & REPORTS",
+        "columnItem" : [ {
+          "label" : "main_3_1_1",
+          "url" : "/eng/insights-and-reports",
+          "urlAction" : "",
+          "title" : "Insights",
+          "state" : "",
+          "summary" : "A top-down investment approach that focus on opportunities created by macroeconomic, geopolitical and technological trends.",
+          "imageUrl" : "/static/uploads/assets/images/icon/green/play2022.png",
+          "fragment" : "insights"
+        }, {
+          "label" : "main_3_1_2",
+          "url" : "/eng/insights-and-reports",
+          "urlAction" : "",
+          "title" : "Reports",
+          "state" : "",
+          "summary" : "A top-down investment approach that focus on opportunities created by macroeconomic, geopolitical and technological trends.",
+          "imageUrl" : "/static/uploads/assets/images/icon/green/play2022.png",
+          "fragment" : "reports"
+        }, {
+          "label" : "main_3_1_3",
+          "url" : "/eng/insights-and-reports",
+          "urlAction" : "",
+          "title" : "Videos & Podcasts",
+          "state" : "",
+          "summary" : "A top-down investment approach that focus on opportunities created by macroeconomic, geopolitical and technological trends.",
+          "imageUrl" : "/static/uploads/assets/images/icon/green/play2022.png",
+          "fragment" : "videos-and-podcasts"
+        } ],
+        "summary" : "",
+        "imageUrl" : ""
+      },
+      "column2" : {
+        "label" : "main_3_2_emptyheader",
+        "url" : "",
+        "columnTitle" : "INDEX EDUCATION",
+        "columnItem" : [ {
+          "label" : "main_3_2_1",
+          "url" : "/eng/resources-education/about-hsi-family",
+          "urlAction" : "",
+          "title" : "About Index",
+          "state" : "",
+          "summary" : "",
+          "imageUrl" : "",
+          "fragment" : ""
+        }, {
+          "label" : "main_3_2_2",
+          "url" : "/eng/resources-education/about-index-investment",
+          "urlAction" : "",
+          "title" : "About Index Investment",
+          "state" : "",
+          "summary" : "",
+          "imageUrl" : "",
+          "fragment" : ""
+        } ],
+        "summary" : "",
+        "imageUrl" : ""
+      },
+      "column3" : "",
+      "column4" : "",
+      "column5" : "",
+      "column6" : ""
+    },
+    "menuBanner" : {
+      "title" : "",
+      "url" : "/eng/indexes/all-indexes/hstech",
+      "isRoute" : true,
+      "urlAction" : "_self",
+      "buttonText" : "More",
+      "imageUrl" : "/static/uploads/assets/images/banners/eng/63f808a6-4d6e-4633-ab1c-18f1f3b49ae6-d.jpg",
+      "bannerStyle" : 0
+    }
+  }, {
+    "label" : "main_4",
+    "url" : "/eng/media-room",
+    "urlAction" : "",
+    "title" : "Media Room",
+    "state" : "",
+    "summary" : "",
+    "imageUrl" : "",
+    "submenu" : {
+      "column1" : {
+        "label" : "main_4_1_emptyheader",
+        "url" : "",
+        "columnTitle" : "MEDIA ROOM",
+        "columnItem" : [ {
+          "label" : "main_4_1_1",
+          "url" : "/eng/media-room",
+          "urlAction" : "",
+          "title" : "Press Releases",
+          "state" : "",
+          "summary" : "A top-down investment approach that focus on opportunities created by macroeconomic, geopolitical and technological trends.",
+          "imageUrl" : "/static/uploads/assets/images/icon/green/play2022.png",
+          "fragment" : "press-releases"
+        }, {
+          "label" : "main_4_1_2",
+          "url" : "/eng/media-room",
+          "urlAction" : "",
+          "title" : "Index / Other Notices",
+          "state" : "",
+          "summary" : "A top-down investment approach that focus on opportunities created by macroeconomic, geopolitical and technological trends.",
+          "imageUrl" : "/static/uploads/assets/images/icon/green/play2022.png",
+          "fragment" : "index-other-notices"
+        }, {
+          "label" : "main_4_1_3",
+          "url" : "/eng/media-room",
+          "urlAction" : "",
+          "title" : "Consultations / Proposals",
+          "state" : "",
+          "summary" : "A top-down investment approach that focus on opportunities created by macroeconomic, geopolitical and technological trends.",
+          "imageUrl" : "/static/uploads/assets/images/icon/green/play2022.png",
+          "fragment" : "consultations"
+        } ],
+        "summary" : "",
+        "imageUrl" : ""
+      },
+      "column2" : "",
+      "column3" : "",
+      "column4" : "",
+      "column5" : "",
+      "column6" : ""
+    },
+    "menuBanner" : {
+      "title" : "",
+      "url" : "/eng/indexes/all-indexes/hstech",
+      "isRoute" : true,
+      "urlAction" : "_self",
+      "buttonText" : "More",
+      "imageUrl" : "/static/uploads/assets/images/banners/eng/63f808a6-4d6e-4633-ab1c-18f1f3b49ae6-d.jpg",
+      "bannerStyle" : 0
+    }
+  } ]
+}

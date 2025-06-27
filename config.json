@@ -107,8 +107,8 @@
     "hsi": {
         "baseUrl": "https://www.hsi.com.hk/eng/index360/login",
         "credentials": {
-            "username": "devmail@163.com",
-            "password": "Yucl@2021"
+            "username": "test@163.com",
+            "password": "test@2021"
         },
         "scraping": {
             "headless": false,

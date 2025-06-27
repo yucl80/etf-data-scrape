@@ -1,0 +1,183 @@
+{
+  "timestamp": "2025-06-27",
+  "totalIndexes": 6,
+  "successfulIndexes": 6,
+  "failedIndexes": 0,
+  "results": [
+    {
+      "etfCode": "159545",
+      "indexCode": "02033.00",
+      "indexName": "恒生港股通高股息低波动指数",
+      "description": "hshylv",
+      "timestamp": "2025-06-27",
+      "url": "https://www.hsi.com.hk/index360/schi/indexes?id=02033.00",
+      "navigationSuccess": false,
+      "title": "INdex360",
+      "fundamentals": {
+        "dividendYield": 6.4,
+        "peRatio": 7.67,
+        "pbRatio": null,
+        "foundData": [
+          {
+            "type": "dividendYield",
+            "value": 6.4,
+            "text": "6.40"
+          },
+          {
+            "type": "peRatio",
+            "value": 7.67,
+            "text": "7.67"
+          }
+        ]
+      },
+      "attempts": 1,
+      "success": true
+    },
+    {
+      "etfCode": "159920",
+      "indexCode": "00001.00",
+      "indexName": "恒生指数",
+      "description": "hsi",
+      "timestamp": "2025-06-27",
+      "url": "https://www.hsi.com.hk/index360/schi/indexes?id=00001.00",
+      "navigationSuccess": false,
+      "title": "INdex360",
+      "fundamentals": {
+        "dividendYield": 3.32,
+        "peRatio": 12.26,
+        "pbRatio": null,
+        "foundData": [
+          {
+            "type": "dividendYield",
+            "value": 3.32,
+            "text": "3.32"
+          },
+          {
+            "type": "peRatio",
+            "value": 12.26,
+            "text": "12.26"
+          }
+        ]
+      },
+      "attempts": 1,
+      "success": true
+    },
+    {
+      "etfCode": "513690",
+      "indexCode": "02055.00",
+      "indexName": "恒生港股通高股息率指数",
+      "description": "hsschky",
+      "timestamp": "2025-06-27",
+      "url": "https://www.hsi.com.hk/index360/schi/indexes?id=02055.00",
+      "navigationSuccess": false,
+      "title": "INdex360",
+      "fundamentals": {
+        "dividendYield": 6.41,
+        "peRatio": 8.25,
+        "pbRatio": null,
+        "foundData": [
+          {
+            "type": "dividendYield",
+            "value": 6.41,
+            "text": "6.41"
+          },
+          {
+            "type": "peRatio",
+            "value": 8.25,
+            "text": "8.25"
+          }
+        ]
+      },
+      "attempts": 1,
+      "success": true
+    },
+    {
+      "etfCode": "513890",
+      "indexCode": "02083.00",
+      "indexName": "恒生科技指数",
+      "description": "hstech",
+      "timestamp": "2025-06-27",
+      "url": "https://www.hsi.com.hk/index360/schi/indexes?id=02083.00",
+      "navigationSuccess": false,
+      "title": "INdex360",
+      "fundamentals": {
+        "dividendYield": 0.97,
+        "peRatio": 23,
+        "pbRatio": null,
+        "foundData": [
+          {
+            "type": "dividendYield",
+            "value": 0.97,
+            "text": "0.97"
+          },
+          {
+            "type": "peRatio",
+            "value": 23,
+            "text": "23.00"
+          }
+        ]
+      },
+      "attempts": 1,
+      "success": true
+    },
+    {
+      "etfCode": "513920",
+      "indexCode": "02200.00",
+      "indexName": "恒生港股通中国央企红利指数",
+      "description": "hsscsoy",
+      "timestamp": "2025-06-27",
+      "url": "https://www.hsi.com.hk/index360/schi/indexes?id=02200.00",
+      "navigationSuccess": false,
+      "title": "INdex360",
+      "fundamentals": {
+        "dividendYield": 6.44,
+        "peRatio": 6.28,
+        "pbRatio": null,
+        "foundData": [
+          {
+            "type": "dividendYield",
+            "value": 6.44,
+            "text": "6.44"
+          },
+          {
+            "type": "peRatio",
+            "value": 6.28,
+            "text": "6.28"
+          }
+        ]
+      },
+      "attempts": 1,
+      "success": true
+    },
+    {
+      "etfCode": "513950",
+      "indexCode": "02033.00",
+      "indexName": "恒生港股通高股息低波动指数",
+      "description": "hshylv",
+      "timestamp": "2025-06-27",
+      "url": "https://www.hsi.com.hk/index360/schi/indexes?id=02033.00",
+      "navigationSuccess": false,
+      "title": "INdex360",
+      "fundamentals": {
+        "dividendYield": 6.4,
+        "peRatio": 7.67,
+        "pbRatio": null,
+        "foundData": [
+          {
+            "type": "dividendYield",
+            "value": 6.4,
+            "text": "6.40"
+          },
+          {
+            "type": "peRatio",
+            "value": 7.67,
+            "text": "7.67"
+          }
+        ]
+      },
+      "attempts": 1,
+      "success": true
+    }
+  ],
+  "fromCache": false
+}

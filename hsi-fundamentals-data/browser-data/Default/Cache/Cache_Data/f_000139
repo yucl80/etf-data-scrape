@@ -1,0 +1,2443 @@
+{
+  "breadcrumb-indexes-label": "Indexes",
+  "breadcrumb-all-indexes-label": "All Indexes",
+  "breadcrumb-tagged-info-label": "Hang Seng Family of Indexes-linked Products",
+  "breadcrumb-top-10-label": "Top 10 Ups and Downs of Indexes",
+  "breadcrumb-new-indexes-updates-label": "New Indexes Updates",
+  "breadcrumb-index-schedule-label": "Index Schedule",
+  "breadcrumb-index-catalogue-label": "Index Catalogue",
+  "breadcrumb-our-services-label": "Solutions",
+  "breadcrumb-historical-data-order-order-label": "Historical Data Order Form",
+  "breadcrumb-resources-education-label": "Resources",
+  "breadcrumb-customised-index-solution-label": "Customised Index Solutions",
+  "breadcrumb-customised-indexes-label": "Customised Indexes",
+  "breadcrumb-quarterly-publications-label": "Quarterly Publications",
+  "breadcrumb-index-weekly-update-label": "HSTECH Weekly Update",
+  "breadcrumb-reports-label": "Year-end Market Reports",
+  "breadcrumb-factsheets-label": "Factsheets",
+  "breadcrumb-brochures-label": "Brochures",
+  "breadcrumb-index-methodologies-label": "Index Methodologies",
+  "breadcrumb-index-videos-label": "Videos & Podcasts",
+  "breadcrumb-index-podcasts-label": "Videos & Podcasts",
+  "breadcrumb-daily-reports-label": "Index Reports",
+  "breadcrumb-index-operation-guide-label": "Index Operation Guide",
+  "breadcrumb-faf-cap-factor-label": "FAF & CAP Factor",
+  "breadcrumb-feature-articles-label": "Feature Articles",
+  "breadcrumb-blog-label": "Blog",
+  "breadcrumb-esg-insights-label": "ESG Insights",
+  "breadcrumb-index-flash-label": "Index Flash",
+  "breadcrumb-biotech-weekly-label": "Hang Seng HK Biotech Weekly",
+  "breadcrumb-research-paper-label": "Research Papers",
+  "breadcrumb-monthly-roundup-label": "Monthly Roundup",
+  "breadcrumb-esge-weekly-label": "HSI ESG Enhanced Index Weekly",
+  "breadcrumb-about-index-investment-label": "About Index Investment",
+  "breadcrumb-about-hsi-family-label": "About Indexes",
+  "breadcrumb-newsroom-label": "Media Room",
+  "breadcrumb-press-releases-label": "Press Releases",
+  "breadcrumb-index-other-notices-label": "Index / Other Notices",
+  "breadcrumb-consultations-label": "Consultations / Proposals",
+  "breadcrumb-about-us-label": "About Us",
+  "breadcrumb-company-profile-label": "Company Profile",
+  "breadcrumb-company-milestones-label": "Milestones",
+  "breadcrumb-advisory-committee-label": "Advisory Committee",
+  "breadcrumb-about-corporate-governance-label": "Corporate Governance",
+  "breadcrumb-index-resources-label": "Index Resources",
+  "breadcrumb-others-label": "Others",
+  "breadcrumb-customised-label": "Custom Solution",
+  "breadcrumb-data-label": "Data",
+  "breadcrumb-publications-label": "Insights",
+  "breadcrumb-investor-education-label": "Index Education",
+  "breadcrumb-our-solutions-label": "Solutions",
+  "breadcrumb-research-insights-label": "Insights & Reports",
+  "breadcrumb-data-dissemination-label": "Data Dissemination",
+  "breadcrumb-data-products-label": "Data Product Service",
+  "breadcrumb-historical-data-order-label": "Historical Data",
+  "breadcrumb-licenses-label": "Licensing",
+  "breadcrumb-licenses-index-linked-products-label": "Index Licensing",
+  "breadcrumb-hsics-label": "Hang Seng Industry Classification System",
+  "breadcrumb-privacy-notice-label": "Privacy Notice",
+  "notification-header-label": "📢 What's new",
+  "search-keyword-label": "Search by Keyword",
+  "search-by-series-label": "Search by Series",
+  "header-daily-report": "Index Reports",
+  "footer-disclaimer": "Online Important Notices",
+  "footer-subscribe": "Subscribe Now",
+  "footer-subscribe-text": "Receive the latest updates of Hang Seng Indexes Company",
+  "footer-unsubscribe-text": "To unsubscribe from the upcoming emails from Hang Seng Indexes Company, please click Next.",
+  "footer-unsubscribe-next-label": "Next",
+  "footer-company-name": "Hang Seng Indexes Company Limited",
+  "footer-company-text": "A wholly-owned subsidiary of Hang Seng Bank",
+  "footer-sitemap": "Sitemap",
+  "footer-pics": "Privacy Notice",
+  "footer-sys-maintenance": "System Maintenance Schedule",
+  "footer-view-desktop": "View Desktop Version",
+  "footer-view-mobile": "View Mobile Version",
+  "footer-unsubscribe-title": "<b>I would like to unsubscribe the following updates:</b>",
+  "footer-unsubscribe-button-label": "Unsubscribe",
+  "unsubscribe-prefix": "Unsubscribe-",
+  "footer-subscribe-title": "<b>I would like to receive the latest updates of</b>",
+  "footer-subscribe-button-label": "Subscribe Now",
+  "footer-subscribe-selectAll-label": "Select All",
+  "footer-subscribe-pressRelease-label": "Press Releases",
+  "footer-subscribe-factsheets-label": "Factsheets",
+  "footer-subscribe-blog-label": "Blog",
+  "footer-subscribe-esgInsights-label": "ESG Insights",
+  "footer-subscribe-indexFlash-label": "Index Flash",
+  "footer-subscribe-biotechWeekly-label": "Hang Seng HK Biotech Weekly",
+  "footer-subscribe-weeklyUpdate-label": "HSTECH Weekly Update",
+  "footer-subscribe-monthlyRoundup-label": "Monthly Roundup",
+  "footer-subscribe-esgeWeekly-label": "HSI ESG Enhanced Index Weekly",
+  "footer-subscribe-researchPaper-label": "Research Papers",
+  "footer-subscribe-indexNotices-label": "Index Notices",
+  "footer-subscribe-events-label": "Events",
+  "footer-subscribe-reports-label": "Year-end Market Reports",
+  "footer-subscribe-disagree-label": "Please do NOT use my personal data in direct marketing.",
+  "footer-subscribe-disagreeOther-label": "Please do NOT provide my personal data to others for their use in direct marketing.",
+  "footer-subscribe-tncAgree-label": "I acknowledge that I have read, understood and agreed to the <a target='_blank' href='/eng/tnc'>Terms and Conditions of Historical Data Order</a> and <a target='_blank' href='/static/uploads/contents/en/products/data_subscription/pdf_eng.pdf'>Notes on Data Availability</a>.",
+  "footer-subscribe-picsAgree-label": "I acknowledge that I have read, understood and agreed to the <a target='_blank' href='/eng/privacynotice'>Privacy Notice</a>.",
+  "footer-subscribe-enter-email-label": "Enter Your Email",
+  "footer-subscribe-enter-firstName-label": "Enter Your First Name",
+  "footer-subscribe-enter-lastName-label": "Enter Your Last Name",
+  "footer-subscribe-enter-job-label": "Enter Your Job Title",
+  "footer-subscribe-enter-company-label": "Enter Your Company Name",
+  "footer-subscribe-enter-tel1-label": "",
+  "footer-subscribe-enter-tel2-label": "Enter Your Phone Number",
+  "footer-subscribe-email-label": "Email",
+  "footer-subscribe-firstName-label": "First Name",
+  "footer-subscribe-lastName-label": "Last Name",
+  "footer-subscribe-job-label": "Job Title",
+  "footer-subscribe-company-label": "Company Name",
+  "footer-subscribe-tel1-label": "Region Code",
+  "footer-subscribe-tel2-label": "Phone Number",
+  "footer-subscribe-salutation-label": "Title",
+  "footer-subscribe-salutation-value": ["mr", "miss", "mrs", "ms", "na"],
+  "footer-subscribe-salutation-mr-label": "Mr.",
+  "footer-subscribe-salutation-miss-label": "Miss",
+  "footer-subscribe-salutation-mrs-label": "Mrs.",
+  "footer-subscribe-salutation-ms-label": "Ms.",
+  "footer-subscribe-salutation-na-label": "Prefer not to disclose",
+  "footer-subscribe-location-label": "Country/Region",
+  "footer-subscribe-location-value": [
+    "HK",
+    "CN",
+    "AF",
+    "AL",
+    "DZ",
+    "AS",
+    "AD",
+    "AO",
+    "AI",
+    "AQ",
+    "AG",
+    "AR",
+    "AM",
+    "AW",
+    "AU",
+    "AT",
+    "AZ",
+    "BS",
+    "BH",
+    "BD",
+    "BB",
+    "BY",
+    "BE",
+    "BZ",
+    "BJ",
+    "BM",
+    "BT",
+    "BO",
+    "BA",
+    "BW",
+    "BV",
+    "BR",
+    "IO",
+    "BN",
+    "BG",
+    "BF",
+    "BI",
+    "KH",
+    "CM",
+    "CA",
+    "CV",
+    "KY",
+    "CF",
+    "TD",
+    "CL",
+    "CX",
+    "CC",
+    "CO",
+    "KM",
+    "CG",
+    "CD",
+    "CK",
+    "CR",
+    "CI",
+    "HR",
+    "CU",
+    "CY",
+    "CZ",
+    "DK",
+    "DJ",
+    "DM",
+    "DO",
+    "TL",
+    "EC",
+    "EG",
+    "SV",
+    "GQ",
+    "ER",
+    "EE",
+    "ET",
+    "FK",
+    "FO",
+    "FJ",
+    "FI",
+    "MK",
+    "FR",
+    "GF",
+    "PF",
+    "TF",
+    "GA",
+    "GM",
+    "GE",
+    "DE",
+    "GH",
+    "GI",
+    "GR",
+    "GL",
+    "GD",
+    "GP",
+    "GU",
+    "GT",
+    "GN",
+    "GW",
+    "GY",
+    "HT",
+    "HM",
+    "VA",
+    "HN",
+    "HU",
+    "IS",
+    "IN",
+    "ID",
+    "IR",
+    "IQ",
+    "IE",
+    "IL",
+    "IT",
+    "JM",
+    "JP",
+    "JO",
+    "KZ",
+    "KE",
+    "KI",
+    "KP",
+    "KR",
+    "KW",
+    "KG",
+    "LA",
+    "LV",
+    "LB",
+    "LS",
+    "LR",
+    "LY",
+    "LI",
+    "LT",
+    "LU",
+    "MO",
+    "MG",
+    "MW",
+    "MY",
+    "MV",
+    "ML",
+    "MT",
+    "MH",
+    "MQ",
+    "MR",
+    "MU",
+    "YT",
+    "MX",
+    "FM",
+    "MD",
+    "MC",
+    "MN",
+    "MS",
+    "MA",
+    "MZ",
+    "MM",
+    "NA",
+    "NR",
+    "NP",
+    "NL",
+    "AN",
+    "NC",
+    "NZ",
+    "NI",
+    "NE",
+    "NG",
+    "NU",
+    "NF",
+    "MP",
+    "NO",
+    "OM",
+    "PK",
+    "PW",
+    "PS",
+    "PA",
+    "PG",
+    "PY",
+    "PE",
+    "PH",
+    "PN",
+    "PL",
+    "PT",
+    "PR",
+    "QA",
+    "ME",
+    "RE",
+    "RO",
+    "RU",
+    "RW",
+    "SH",
+    "KN",
+    "LC",
+    "PM",
+    "WS",
+    "SM",
+    "ST",
+    "SA",
+    "SN",
+    "RS",
+    "SC",
+    "SL",
+    "SG",
+    "SK",
+    "SI",
+    "SB",
+    "SO",
+    "ZA",
+    "ES",
+    "LK",
+    "VC",
+    "GS",
+    "SD",
+    "SR",
+    "SJ",
+    "SZ",
+    "SE",
+    "CH",
+    "SY",
+    "TW",
+    "TJ",
+    "TZ",
+    "TH",
+    "TG",
+    "TK",
+    "TO",
+    "TT",
+    "TN",
+    "TR",
+    "TM",
+    "TC",
+    "TV",
+    "UG",
+    "UA",
+    "AE",
+    "GB",
+    "US",
+    "UY",
+    "UM",
+    "UZ",
+    "VU",
+    "VE",
+    "VN",
+    "VG",
+    "VI",
+    "WF",
+    "EH",
+    "YE",
+    "YU",
+    "ZM",
+    "ZW"
+  ],
+  "footer-subscribe-location-HK-label": "Hong Kong SAR",
+  "footer-subscribe-location-CN-label": "China",
+  "footer-subscribe-location-AF-label": "Afghanistan",
+  "footer-subscribe-location-AL-label": "Albania",
+  "footer-subscribe-location-DZ-label": "Algeria",
+  "footer-subscribe-location-AS-label": "American Samoa",
+  "footer-subscribe-location-AD-label": "Andorra",
+  "footer-subscribe-location-AO-label": "Angola",
+  "footer-subscribe-location-AI-label": "Anguilla",
+  "footer-subscribe-location-AQ-label": "Antarctica",
+  "footer-subscribe-location-AG-label": "Antigua and Barbuda",
+  "footer-subscribe-location-AR-label": "Argentina",
+  "footer-subscribe-location-AM-label": "Armenia",
+  "footer-subscribe-location-AW-label": "Aruba",
+  "footer-subscribe-location-AU-label": "Australia",
+  "footer-subscribe-location-AT-label": "Austria",
+  "footer-subscribe-location-AZ-label": "Azerbaijan",
+  "footer-subscribe-location-BS-label": "Bahamas",
+  "footer-subscribe-location-BH-label": "Bahrain",
+  "footer-subscribe-location-BD-label": "Bangladesh",
+  "footer-subscribe-location-BB-label": "Barbados",
+  "footer-subscribe-location-BY-label": "Belarus",
+  "footer-subscribe-location-BE-label": "Belgium",
+  "footer-subscribe-location-BZ-label": "Belize",
+  "footer-subscribe-location-BJ-label": "Benin",
+  "footer-subscribe-location-BM-label": "Bermuda",
+  "footer-subscribe-location-BT-label": "Bhutan",
+  "footer-subscribe-location-BO-label": "Bolivia",
+  "footer-subscribe-location-BA-label": "Bosnia and Herzegovina",
+  "footer-subscribe-location-BW-label": "Botswana",
+  "footer-subscribe-location-BV-label": "Bouvet Island",
+  "footer-subscribe-location-BR-label": "Brazil",
+  "footer-subscribe-location-IO-label": "British Indian Ocean Territory",
+  "footer-subscribe-location-BN-label": "Brunei Darussalam",
+  "footer-subscribe-location-BG-label": "Bulgaria",
+  "footer-subscribe-location-BF-label": "Burkina Faso",
+  "footer-subscribe-location-BI-label": "Burundi",
+  "footer-subscribe-location-KH-label": "Cambodia",
+  "footer-subscribe-location-CM-label": "Cameroon",
+  "footer-subscribe-location-CA-label": "Canada",
+  "footer-subscribe-location-CV-label": "Cape Verde",
+  "footer-subscribe-location-KY-label": "Cayman Islands",
+  "footer-subscribe-location-CF-label": "Central African Republic",
+  "footer-subscribe-location-TD-label": "Chad",
+  "footer-subscribe-location-CL-label": "Chile",
+  "footer-subscribe-location-CX-label": "Christmas Island",
+  "footer-subscribe-location-CC-label": "Cocos (Keeling) Islands",
+  "footer-subscribe-location-CO-label": "Colombia",
+  "footer-subscribe-location-KM-label": "Comoros",
+  "footer-subscribe-location-CG-label": "Congo",
+  "footer-subscribe-location-CD-label": "Congo, The Democratic Republic",
+  "footer-subscribe-location-CK-label": "Cook Islands",
+  "footer-subscribe-location-CR-label": "Costa Rica",
+  "footer-subscribe-location-CI-label": "Cote D'Ivoire",
+  "footer-subscribe-location-HR-label": "Croatia",
+  "footer-subscribe-location-CU-label": "Cuba",
+  "footer-subscribe-location-CY-label": "Cyprus",
+  "footer-subscribe-location-CZ-label": "Czech Republic",
+  "footer-subscribe-location-DK-label": "Denmark",
+  "footer-subscribe-location-DJ-label": "Djibouti",
+  "footer-subscribe-location-DM-label": "Dominica",
+  "footer-subscribe-location-DO-label": "Dominican Republic",
+  "footer-subscribe-location-TL-label": "East Timor",
+  "footer-subscribe-location-EC-label": "Ecuador",
+  "footer-subscribe-location-EG-label": "Egypt",
+  "footer-subscribe-location-SV-label": "El Salvador",
+  "footer-subscribe-location-GQ-label": "Equatorial Guinea",
+  "footer-subscribe-location-ER-label": "Eritrea",
+  "footer-subscribe-location-EE-label": "Estonia",
+  "footer-subscribe-location-ET-label": "Ethiopia",
+  "footer-subscribe-location-FK-label": "Falkland Islands (Malvinas)",
+  "footer-subscribe-location-FO-label": "Faroe Islands",
+  "footer-subscribe-location-FJ-label": "Fiji",
+  "footer-subscribe-location-FI-label": "Finland",
+  "footer-subscribe-location-MK-label": "Fmr Yugoslav Rep of Macedonia",
+  "footer-subscribe-location-FR-label": "France",
+  "footer-subscribe-location-GF-label": "French Guiana",
+  "footer-subscribe-location-PF-label": "French Polynesia",
+  "footer-subscribe-location-TF-label": "French Southern Territories",
+  "footer-subscribe-location-GA-label": "Gabon",
+  "footer-subscribe-location-GM-label": "Gambia",
+  "footer-subscribe-location-GE-label": "Georgia",
+  "footer-subscribe-location-DE-label": "Germany",
+  "footer-subscribe-location-GH-label": "Ghana",
+  "footer-subscribe-location-GI-label": "Gibraltar",
+  "footer-subscribe-location-GR-label": "Greece",
+  "footer-subscribe-location-GL-label": "Greenland",
+  "footer-subscribe-location-GD-label": "Grenada",
+  "footer-subscribe-location-GP-label": "Guadeloupe",
+  "footer-subscribe-location-GU-label": "Guam",
+  "footer-subscribe-location-GT-label": "Guatemala",
+  "footer-subscribe-location-GN-label": "Guinea",
+  "footer-subscribe-location-GW-label": "Guinea-Bissau",
+  "footer-subscribe-location-GY-label": "Guyana",
+  "footer-subscribe-location-HT-label": "Haiti",
+  "footer-subscribe-location-HM-label": "Heard and McDonald Islands",
+  "footer-subscribe-location-VA-label": "Holy See (Vatican City State)",
+  "footer-subscribe-location-HN-label": "Honduras",
+  "footer-subscribe-location-HU-label": "Hungary",
+  "footer-subscribe-location-IS-label": "Iceland",
+  "footer-subscribe-location-IN-label": "India",
+  "footer-subscribe-location-ID-label": "Indonesia",
+  "footer-subscribe-location-IR-label": "Iran (Islamic Republic Of)",
+  "footer-subscribe-location-IQ-label": "Iraq",
+  "footer-subscribe-location-IE-label": "Ireland",
+  "footer-subscribe-location-IL-label": "Israel",
+  "footer-subscribe-location-IT-label": "Italy",
+  "footer-subscribe-location-JM-label": "Jamaica",
+  "footer-subscribe-location-JP-label": "Japan",
+  "footer-subscribe-location-JO-label": "Jordan",
+  "footer-subscribe-location-KZ-label": "Kazakhstan",
+  "footer-subscribe-location-KE-label": "Kenya",
+  "footer-subscribe-location-KI-label": "Kiribati",
+  "footer-subscribe-location-KP-label": "Korea, Democratic People's Rep",
+  "footer-subscribe-location-KR-label": "Korea, Republic of",
+  "footer-subscribe-location-KW-label": "Kuwait",
+  "footer-subscribe-location-KG-label": "Kyrgyzstan",
+  "footer-subscribe-location-LA-label": "Lao People's Democratic Rep",
+  "footer-subscribe-location-LV-label": "Latvia",
+  "footer-subscribe-location-LB-label": "Lebanon",
+  "footer-subscribe-location-LS-label": "Lesotho",
+  "footer-subscribe-location-LR-label": "Liberia",
+  "footer-subscribe-location-LY-label": "Libyan Arab Jamahiriya",
+  "footer-subscribe-location-LI-label": "Liechtenstein",
+  "footer-subscribe-location-LT-label": "Lithuania",
+  "footer-subscribe-location-LU-label": "Luxembourg",
+  "footer-subscribe-location-MO-label": "Macau SAR",
+  "footer-subscribe-location-MG-label": "Madagascar",
+  "footer-subscribe-location-MW-label": "Malawi",
+  "footer-subscribe-location-MY-label": "Malaysia",
+  "footer-subscribe-location-MV-label": "Maldives",
+  "footer-subscribe-location-ML-label": "Mali",
+  "footer-subscribe-location-MT-label": "Malta",
+  "footer-subscribe-location-MH-label": "Marshall Islands",
+  "footer-subscribe-location-MQ-label": "Martinique",
+  "footer-subscribe-location-MR-label": "Mauritania",
+  "footer-subscribe-location-MU-label": "Mauritius",
+  "footer-subscribe-location-YT-label": "Mayotte",
+  "footer-subscribe-location-MX-label": "Mexico",
+  "footer-subscribe-location-FM-label": "Micronesia, Federated States",
+  "footer-subscribe-location-MD-label": "Moldova, Republic of",
+  "footer-subscribe-location-MC-label": "Monaco",
+  "footer-subscribe-location-MN-label": "Mongolia",
+  "footer-subscribe-location-MS-label": "Montserrat",
+  "footer-subscribe-location-MA-label": "Morocco",
+  "footer-subscribe-location-MZ-label": "Mozambique",
+  "footer-subscribe-location-MM-label": "Myanmar",
+  "footer-subscribe-location-NA-label": "Namibia",
+  "footer-subscribe-location-NR-label": "Nauru",
+  "footer-subscribe-location-NP-label": "Nepal",
+  "footer-subscribe-location-NL-label": "Netherlands",
+  "footer-subscribe-location-AN-label": "Netherlands Antilles",
+  "footer-subscribe-location-NC-label": "New Caledonia",
+  "footer-subscribe-location-NZ-label": "New Zealand",
+  "footer-subscribe-location-NI-label": "Nicaragua",
+  "footer-subscribe-location-NE-label": "Niger",
+  "footer-subscribe-location-NG-label": "Nigeria",
+  "footer-subscribe-location-NU-label": "Niue",
+  "footer-subscribe-location-NF-label": "Norfolk Island",
+  "footer-subscribe-location-MP-label": "Northern Mariana Islands",
+  "footer-subscribe-location-NO-label": "Norway",
+  "footer-subscribe-location-OM-label": "Oman",
+  "footer-subscribe-location-PK-label": "Pakistan",
+  "footer-subscribe-location-PW-label": "Palau",
+  "footer-subscribe-location-PS-label": "Palestine Territory Occupied",
+  "footer-subscribe-location-PA-label": "Panama",
+  "footer-subscribe-location-PG-label": "Papua New Guinea",
+  "footer-subscribe-location-PY-label": "Paraguay",
+  "footer-subscribe-location-PE-label": "Peru",
+  "footer-subscribe-location-PH-label": "Philippines",
+  "footer-subscribe-location-PN-label": "Pitcairn",
+  "footer-subscribe-location-PL-label": "Poland",
+  "footer-subscribe-location-PT-label": "Portugal",
+  "footer-subscribe-location-PR-label": "Puerto Rico",
+  "footer-subscribe-location-QA-label": "Qatar",
+  "footer-subscribe-location-ME-label": "Republic of Montenegro",
+  "footer-subscribe-location-RE-label": "Reunion",
+  "footer-subscribe-location-RO-label": "Romania",
+  "footer-subscribe-location-RU-label": "Russian Federation",
+  "footer-subscribe-location-RW-label": "Rwanda",
+  "footer-subscribe-location-SH-label": "Saint Helena",
+  "footer-subscribe-location-KN-label": "Saint Kitts and Nevis",
+  "footer-subscribe-location-LC-label": "Saint Lucia",
+  "footer-subscribe-location-PM-label": "Saint Pierre and Miquelon",
+  "footer-subscribe-location-WS-label": "Samoa",
+  "footer-subscribe-location-SM-label": "San Marino",
+  "footer-subscribe-location-ST-label": "Sao Tome and Principe",
+  "footer-subscribe-location-SA-label": "Saudi Arabia",
+  "footer-subscribe-location-SN-label": "Senegal",
+  "footer-subscribe-location-RS-label": "Serbia",
+  "footer-subscribe-location-SC-label": "Seychelles",
+  "footer-subscribe-location-SL-label": "Sierra Leone",
+  "footer-subscribe-location-SG-label": "Singapore",
+  "footer-subscribe-location-SK-label": "Slovakia",
+  "footer-subscribe-location-SI-label": "Slovenia",
+  "footer-subscribe-location-SB-label": "Solomon Islands",
+  "footer-subscribe-location-SO-label": "Somalia",
+  "footer-subscribe-location-ZA-label": "South Africa",
+  "footer-subscribe-location-ES-label": "Spain",
+  "footer-subscribe-location-LK-label": "Sri Lanka",
+  "footer-subscribe-location-VC-label": "St Vincent and the Grenadines",
+  "footer-subscribe-location-GS-label": "Sth Georgia & Sth Sandwich Is",
+  "footer-subscribe-location-SD-label": "Sudan",
+  "footer-subscribe-location-SR-label": "Suriname",
+  "footer-subscribe-location-SJ-label": "Svalbard and Jan Mayen",
+  "footer-subscribe-location-SZ-label": "Swaziland",
+  "footer-subscribe-location-SE-label": "Sweden",
+  "footer-subscribe-location-CH-label": "Switzerland",
+  "footer-subscribe-location-SY-label": "Syrian Arab Republic",
+  "footer-subscribe-location-TW-label": "Taiwan",
+  "footer-subscribe-location-TJ-label": "Tajikistan",
+  "footer-subscribe-location-TZ-label": "Tanzania, United Republic of",
+  "footer-subscribe-location-TH-label": "Thailand",
+  "footer-subscribe-location-TG-label": "Togo",
+  "footer-subscribe-location-TK-label": "Tokelau",
+  "footer-subscribe-location-TO-label": "Tonga",
+  "footer-subscribe-location-TT-label": "Trinidad and Tobago",
+  "footer-subscribe-location-TN-label": "Tunisia",
+  "footer-subscribe-location-TR-label": "Turkey",
+  "footer-subscribe-location-TM-label": "Turkmenistan",
+  "footer-subscribe-location-TC-label": "Turks and Caicos Islands",
+  "footer-subscribe-location-TV-label": "Tuvalu",
+  "footer-subscribe-location-UG-label": "Uganda",
+  "footer-subscribe-location-UA-label": "Ukraine",
+  "footer-subscribe-location-AE-label": "United Arab Emirates",
+  "footer-subscribe-location-GB-label": "United Kingdom",
+  "footer-subscribe-location-US-label": "United States",
+  "footer-subscribe-location-UY-label": "Uruguay",
+  "footer-subscribe-location-UM-label": "US Minor Outlying Islands",
+  "footer-subscribe-location-UZ-label": "Uzbekistan",
+  "footer-subscribe-location-VU-label": "Vanuatu",
+  "footer-subscribe-location-VE-label": "Venezuela",
+  "footer-subscribe-location-VN-label": "Viet Nam",
+  "footer-subscribe-location-VG-label": "Virgin Islands (British)",
+  "footer-subscribe-location-VI-label": "Virgin Islands (U.S.)",
+  "footer-subscribe-location-WF-label": "Wallis and Futuna Islands",
+  "footer-subscribe-location-EH-label": "Western Sahara",
+  "footer-subscribe-location-YE-label": "Yemen",
+  "footer-subscribe-location-YU-label": "Yugoslavia",
+  "footer-subscribe-location-ZM-label": "Zambia",
+  "footer-subscribe-location-ZW-label": "Zimbabwe",
+  "footer-statement-title": "<b>Use of Personal Data in Direct Marketing</b>",
+  "footer-statement-content": "I have read and I understand the <a target='_blank' href='/eng/privacynotice'>Notice to Customers and Other Individuals relating to the Personal Data (Privacy) Ordinance</a> (the “Notice”) issued by you, including the information about the use and transfer of my personal data for direct marketing.  I understand that I have the right to opt out by ticking (&radic;) one or both box(es) below.  If I do not tick the relevant box, I will be taken as having given consent for direct marketing as more particularly set out in paragraph 7 of the Notice.",
+  "hong-kong-label": "Hong Kong",
+  "cross-market-label": "Cross Market",
+  "mainland-china-label": "Mainland China",
+  "indexType-PI-label": "Price Index",
+  "indexType-IBOND-label": "Bond Index",
+  "indexType-TRI-label": "Gross Total Return Index",
+  "indexType-NTRI-label": "Net Total Return Index",
+  "yes-btn=label": "Yes",
+  "no-btn=label": "No",
+  "historical-data-order-title": "Historical Data Order Form",
+  "historical-data-order-confirm-back-title": "Are you sure you want to return? All inputted information will be cleared.<br>Press 'Yes' to continue, or 'No' to stay on the current page.",
+  "historical-data-order-thankyou-title": "Thank you for your order. We will contact you shortly.",
+  "historical-data-order-selection-title": "Your Selection",
+  "historical-data-order-select-data-remark": "*A service fee of HK$1,000 will be charged for the subscription of every 5-year (or less) consecutive Daily Open-High-Low-Close data.",
+  "historical-data-order-personal-info-title": "Personal Information of Subscriber",
+  "historical-data-order-payment-title": "Payment Details",
+  "historical-data-order-back-label": "Back",
+  "historical-data-order-next-label": "Next",
+  "historical-data-order-print-label": "Print",
+  "historical-data-order-save-label": "Save",
+  "historical-data-order-step-1-label": "Order",
+  "historical-data-order-step-2-label": "Payment Details",
+  "historical-data-order-step-3-label": "Submit",
+  "historical-data-order-step-4-label": "Done",
+  "historical-data-type-data-availability-label": "See Data Availability >",
+  "historical-data-type-data-format-label": "See Data Format >",
+  "historical-data-type-daily-label": "Daily Open-High-Low-Close data",
+  "historical-data-type-intraday-label": "Intraday data",
+  "historical-data-type-daily-data-availability-path": "/static/uploads/contents/en/products/data_subscription/pdf_eng.pdf",
+  "historical-data-type-intraday-data-availability-path": "/static/uploads/contents/en/products/data_subscription/pdf_eng.pdf",
+  "historical-data-type-data-format-path": "/static/uploads/contents/en/products/data_subscription/Data%20Format_E.pdf",
+  "historical-data-consecutive-label": "consecutive",
+  "historical-data-price-label": "HK$ {{value}}",
+  "historical-data-year-label": "years",
+  "historical-data-month-label": "month",
+  "historical-data-order-index-type-label": "Index Type",
+  "historical-data-order-index-label": "Index",
+  "historical-data-order-data-type-label": "Data Type",
+  "historical-data-order-data-period-label": "Data Period",
+  "historical-data-order-from-label": "From",
+  "historical-data-order-to-label": "to",
+  "historical-data-order-amount-label": "Amount",
+  "historical-data-order-total-label": "Total",
+  "historical-data-order-add-more-order-label": "Add More Order",
+  "historical-data-order-select-index-type-label": "Select Index Type",
+  "historical-data-order-select-index-label": "Select Index",
+  "historical-data-order-select-data-needed-label": "Select Data Needed",
+  "historical-data-order-select-data-period-label": "Select Data Period",
+  "historical-data-order-full-name-label": "Full Name",
+  "historical-data-order-optional-label": "(optional)",
+  "historical-data-order-company-label": "Company",
+  "historical-data-order-email-label": "Email",
+  "historical-data-order-contact-number-label": "Contact Number",
+  "historical-data-order-card-type-label": "Credit Card Type",
+  "historical-data-order-card-type-VISA-label": "VISA",
+  "historical-data-order-card-type-MASTER-label": "MASTER",
+  "historical-data-order-card-number-label": "Credit Card Number",
+  "historical-data-order-card-sec-label": "3-digit security code (after card number at the signature panel)",
+  "historical-data-order-card-name-label": "Name of Cardholder",
+  "historical-data-order-card-expiry-label": "Credit Card Expiry Date",
+  "historical-data-order-personal-info-remark": "The personal information you provide to us in this form is collected to enable HSIL and its affiliated companies to provide the subscription service to the subscriber and such information may be transferred to any of the company or companies within the Hang Seng Bank Group for the purpose of providing such subscription service.",
+  "historical-data-order-payment-remark": "The subscriber will be contacted within one week upon submission of the Historical Data Order Form (\"Form\") to Hang Seng Indexes Company Limited (\"HSIL\").<br><br>Upon successful debiting of the service fee, the historical data subscribed will be emailed to the subscriber's e-mail address as specified in this Form. In case of undeliverable data files due to large file size or other technical reasons, the relevant data file(s) will be saved on a CD-ROM and sent to the subscriber's mailing address as specified in this Form by ordinary mail.",
+  "historical-data-order-title-label": "Title",
+  "historical-data-order-title-mr-label": "Mr",
+  "historical-data-order-title-miss-label": "Miss",
+  "historical-data-order-title-mrs-label": "Mrs",
+  "historical-data-order-title-ms-label": "Ms",
+  "historical-data-order-index-exclusion-list": [
+    "04001.00",
+    "04002.00",
+    "04003.00",
+    "04004.00",
+    "04005.00",
+    "04006.00",
+    "04007.00",
+    "23100.00"
+  ],
+  "form-error": {
+    "MAX_ORDER_ERROR": "Only a maximum of 5 historical data subscription orders is allowed.",
+    "MAX_SUBSCRIBE_ERROR": "Only a maximum of {maxSize} latest update types is allowed.",
+    "CHAREGABLE_AMOUNT_ERROR": "Invalid chargeable amount in the selected orders. Please remove and try again.",
+    "DATE_REQUIRE_ERROR": "Please select Data Period",
+    "DATE_RANGE_ERROR": "The selected period is invalid.  Please re-select.",
+    "DATE_RANGE_NO_DATA_ERROR": "Data is unavailable in the period selected.  Please refer to the notes on data availability and re-select.",
+    "DATE_RANGE_NO_DATA_PARTIALY_ERROR": "Part of the required data is unavailable in the period selected.  Please refer to the notes on data availability and re-select if needed.",
+    "CARDNO_REQUIRED_ERROR": "Please enter Credit Card Number",
+    "CARDNO_FORMAT_ERROR": "Please enter your Credit Card Number in numeric format",
+    "CARDNO_DIGIT_ERROR": "Please enter valid Credit Card Number",
+    "CARDEXP_MONTH_REQUIRED_ERROR": "Card Expiry Date is a mandatory field",
+    "CARDEXP_RANGE_ERROR": "Please enter valid Card Expiry Date",
+    "MAXLENGTH_CONSTRAINT_ERROR": "Field length must not be longer than {maxLen}",
+    "EMAIL_REQUIRED_ERROR": "Please enter your E-mail Address",
+    "EMAIL_FORMAT_ERROR": "Please enter a valid E-mail address",
+    "SUBJECT_REQUIRED_ERROR": "Please select the Subject",
+    "MSG_REQUIRED_ERROR": "Please enter your message",
+    "NAME_REQUIRED_ERROR": "Please enter your Name",
+    "NAME_CONSTRAINT_ERROR": "Please enter your Name in alphabets",
+    "PHONE_FORMAT_ERROR": "Please enter your Contact Phone Number in numeric format",
+    "IDXTYPE_REQUIRED_ERROR": "Please select Index Type",
+    "CROSS_SCRIPT_ERROR": "The information is not accepted, please enter again",
+    "IDX_REQUIRED_ERROR": "Please select Index",
+    "DATA_REQUIRED_ERROR": "Please select Data Needed",
+    "DATE_CONVERSION_ERROR": "Date could not be converted",
+    "TITLE_REQUIRED_ERROR": "Please select your Title",
+    "ENG_ONLY_ERROR": "Please enter in English",
+    "PHONE_REQUIRED_ERROR": "Please enter your Contact Phone Number",
+    "CARD_SEC_CODE_REQUIRED_ERROR": "Please enter the 3-digit Security Code",
+    "MINLEN_CARD_SEC_CODE_CONSTRAINT_ERROR": "Please enter the 3-digit Security Code",
+    "CARD_SEC_CODE_FORMAT_ERROR": "Please enter the 3-digit Security Code in numeric format",
+    "CARD_HOLDER_NAME_REQUIRED_ERROR": "Please enter Name of Cardholder",
+    "CARD_HOLDER_NAME_CONSTRAINT_ERROR": "Please enter the Name of Cardholder in alphabets",
+    "FIRSTNAME_REQUIRED_ERROR": "Please enter your First Name",
+    "SURNAME_REQUIRED_ERROR": "Please enter your Last Name",
+    "JOB_REQUIRED_ERROR": "Please enter your Job Title",
+    "COMPANY_REQUIRED_ERROR": "Please enter your Company Name",
+    "TEL1_REQUIRED_ERROR": "Please enter Country/Area code",
+    "TEL1_FORMAT_ERROR": "Please enter Country/Area code in numeric format",
+    "TEL2_REQUIRED_ERROR": "Please enter your Phone Number",
+    "TEL2_FORMAT_ERROR": "Please enter your Phone Number in numeric format",
+    "FIRSTNAME_FORMAT_ERROR": "Please enter a valid First Name",
+    "SURNAME_FORMAT_ERROR": "Please enter a valid Last Name",
+    "JOB_FORMAT_ERROR": "Please enter a valid Job Title",
+    "COMPANY_FORMAT_ERROR": "Please enter a valid Company Name",
+    "COUNTRY_REGION_REQUIRED_ERROR": "Please select your Country/Region",
+    "SALUTATION_REQUIRED_ERROR": "Please select your Title"
+  },
+  "selectbox-please-select-label": "Please select",
+  "selectbox-please-select-country-region-label": "Please Select Your Country/Region",
+  "submit-button-label": "Submit",
+  "add-button-label": "Add",
+  "viewnow-button-label": "View Now",
+  "viewnow-popup-desc4": "Or, click \"Continue to view\" to view the limited index data.",
+  "viewnow-popup-continue-view": "Continue to view",
+  "listennow-button-label": "Listen Now",
+  "ordernow-button-label": "Order Now",
+  "view-all-button-label": "View All",
+  "viewmore-button-label": "View More",
+  "listenmore-button-label": "Listen More",
+  "download-button-label": "Download Now",
+  "register-button-label": "Register now",
+  "download-popup-title": "Looking for more data?",
+  "download-popup-desc1": "Register a ",
+  "download-popup-desc2": "Hang Seng INdex360",
+  "download-popup-desc3": " account with some simple steps and gain access to a wider range of index data.",
+
+  "download-popup-desc4": "Or, click \"Continue download\" to view the limited index data.",
+
+  "download-data-title": "Download data",
+
+  "constituents-popup-desc1": "Logon to your ",
+  "constituents-popup-desc2": "Hang Seng INdex360",
+  "constituents-popup-desc3": " account to easily access the full Constituent List.",
+  "historical-change-popup-desc1": "Logon to your ",
+  "historical-change-popup-desc2": "Hang Seng INdex360 ",
+  "historical-change-popup-desc3": "account to easily access the full Historical Change of Constituents Report.",
+  "advance-chart-popup-desc1": "Logon to your ",
+  "advance-chart-popup-desc2": "Hang Seng INdex360 ",
+  "advance-chart-popup-desc3": "account to easily access the advanced chart function.",
+  "compare-chart-popup-desc1": "Logon to your ",
+  "compare-chart-popup-desc2": "Hang Seng INdex360 ",
+  "compare-chart-popup-desc3": "account to compare more indexes.",
+  "industry-summary-popup-desc1": "Logon to your ",
+  "industry-summary-popup-desc2": "Hang Seng INdex360 ",
+  "industry-summary-popup-desc3": "account to easily access the Industry Summary data.",
+  "index-fundamentals-popup-desc1": "Logon to your ",
+  "index-fundamentals-popup-desc2": "Hang Seng INdex360 ",
+  "index-fundamentals-popup-desc3": "account to easily access the Index Fundamentals data.",
+  "index-summary-popup-desc1": "Logon to your ",
+  "index-summary-popup-desc2": "Hang Seng INdex360 ",
+  "index-summary-popup-desc3": "account to easily access Constituent Daily Performance Report for free.",
+  "index-reports-popup-desc1": "Logon ",
+  "index-reports-popup-desc2": "to your ",
+  "index-reports-popup-desc3": "Hang Seng INdex360 ",
+  "index-reports-popup-desc4": "account to easily access the Constituent Daily Performance Report for free.",
+  "index-reports-popup-desc5": "Download the Constituent Performance (Month-end) Report now.",
+
+  "historical-pe-reports-popup-desc1": "Logon ",
+  "historical-pe-reports-popup-desc2": "to your ",
+  "historical-pe-reports-popup-desc3": "Hang Seng INdex360 ",
+  "historical-pe-reports-popup-desc4": "account to easily access the full Historical PE Ratio Report for free.",
+  "historical-pe-reports-popup-desc5": "Download the last 12 months of Historical PE Ratio Report now.",
+
+  "historical-dividend-yield-popup-desc1": "Logon ",
+  "historical-dividend-yield-popup-desc2": "to your ",
+  "historical-dividend-yield-popup-desc3": "Hang Seng INdex360 ",
+  "historical-dividend-yield-popup-desc4": "account to easily access the full Historical Dividend Yield Report for free.",
+  "historical-dividend-yield-popup-desc5": "Download the last 12 months of Historical Dividend Yield Report now.",
+
+
+  "download-popup-continue-download": "Continue download",
+  "last-update-label": "^As of",
+  "no-result-label": "No Result",
+  "date-format-label": "Date Format",
+  "delete-label": "Delete",
+  "home-label": "Home",
+  "home-newsroom-title": "Newsroom",
+  "home-updates-title": "Indexes Updates",
+  "our-services-title": "Our Services",
+  "region-order": ["hongkong", "mainland", "cross", "blue1", "red1"],
+  "category-order": [
+    "market",
+    "factor",
+    "strategy",
+    "sector",
+    "sustainability",
+    "global",
+    "fixed-income"
+  ],
+  "feature-order": ["stock-connect"],
+  "video-category-order": [
+    "All",
+    "Market",
+    "Sector",
+    "Sustainability",
+    "Factor",
+    "Strategy",
+    "Fixed Income"
+  ],
+  "podcast-category-order": ["All", "Market", "Sustainability"],
+  "index-detail": {
+    "unlock-advanced-chart": "Unlock Advanced Chart",
+    "coming-soon": "Coming soon",
+    "compare-button-label": "Compare",
+    "add-compare-indexes": "Add Compare Indexes",
+    "add-compare-limit": "It seems you've reached the limit.",
+    "add-compare-limit-join": "Join us",
+    "add-compare-limit-more": "now for free and compare more!",
+    "apply-button-label": "Apply",
+    "register-popup-title": "Want more data at your fingertips?",
+    "register-popup-desc": "Create an account for free to unlock additional content today.",
+    "register-button-label": "Register now",
+    "register-popup-has-account": "Already have an account?",
+    "register-popup-log-on": "Log on.",
+    "feature-title": "New features are on the way to enhance your experience!",
+    "feature-desc1": "Stay updated by",
+    "feature-desc2": "subscribing to our newsletters",
+    "feature-desc3": "or emailing us at",
+    "feature-desc4": "if you have any questions.",
+    "performance-table-label-index": "Index",
+    "previous-close": "Previous Close",
+    "today-low": "Today Low",
+    "today-high": "Today High",
+    "update": "Updated: ",
+    "fundamentals-title": "Index Fundamentals",
+    "fundamentals-desc": "Explore valuable insights, including Dividend Yield and PE Ratio of Indexes.",
+    "unlock-for-free": "Unlock for free",
+    "learn-more": "Learn more",
+    "top-contributors-title": "Top 10 Constituents",
+    "sector-summary-title": "Industry Summary",
+    "show-more": "Show more",
+    "top-contributors-price": "Close Price",
+    "top-contributors-name": "Name",
+    "top-contributors-company-name": "Company Name",
+    "top-contributors-no-data": "Not applicable"
+  },
+  "no-data-download": {
+    "register-button-label": "Log on",
+    "register-popup-has-account": "Do not have an account?",
+    "register-popup-log-on": "Register now."
+  },
+
+  "meta-data": {
+    "homepage-title": "Hang Seng Indexes Homepage - A leading index compiler covering Hong Kong and mainland China markets",
+    "homepage-description": "Discover our diversified range of index solutions. Stay informed with our latest news, and insights & reports of our indexes.",
+    "indexes-overview-title": "Overview of Hang Seng Family of Indexes and Index resources",
+    "indexes-overview-description": "Explore our diverse index categories. Access factsheets, index methodologies, daily reports, the Hang Seng Classification System, and more in our comprehensive index resources section.",
+    "insights-title": "Insights and Reports - Hang Seng Indexes",
+    "insights-description": "Stay informed with our latest index insights and reports, which provide our in-depth analysis, market trends, and valuable information on indexes.",
+    "media-room-title": "Media Room - Latest news and updates of Hang Seng Indexes",
+    "media-room-description": "Stay up-to-date with the latest press releases, index notices, and announcements in our media room.",
+    "about-us-title": "Company profile of Hang Seng Indexes",
+    "about-us-description": "Hang Seng Indexes Company Limited (Hang Seng Indexes), a wholly-owned subsidiary of Hang Seng Bank, was established in 1984 and is Hong Kong's leading index compiler covering Hong Kong and mainland China markets.",
+    "contact-us-title": "Contact Us - Hang Seng Indexes",
+    "contact-us-description": "If you have any questions or need support, please call +852 2877 0704 or email info@hsi.com.hk",
+    "index360-title":"Hang Seng INdex360 - Learn More",
+    "index360-description":"The one-stop self-service platform for investors to access our comprehensive index data and analytics solutions.",
+    "registration-title":"Hang Seng INdex360 - Register Now",
+    "registration-description":"Explore the full potential of Hang Seng INdex360 now.",
+    "logon-title":"Hang Seng INdex360 - Logon",
+    "logon-description":"Logon and access your account with ease."
+  },
+  "dashboard-last-update-label": "Last Update",
+  "dashboard-title": "Show results for",
+  "dashboard-search-label-category": "Search by category",
+  "dashboard-search-label-location": "Search by location",
+  "dashboard-search-label-index": "Search by index",
+  "highchart-index-label": "Index",
+  "highchart-index-level-label": "Index Close",
+  "highchart-index-return-label": "% Change",
+  "highchart-rebase-label": "All information in the chart and table are index close values but will be rebased to 100 in the event of index comparison. Index Close in the table refers to the latest index close value. As indexes may have different index calculation calendars, index close of different indexes may not always fall on the same day.",
+  "highchart-change-label": "Percentage change is calculated according to the latest index close value in the table and the selected time period in the chart. Information for an index prior to its launch date is back-tested. Back-tested performance reflects hypothetical historical performance.",
+  "highchart-single-label": "All information in the chart and table are index close values. Information for an index prior to its launch date are back-tested. Back-tested performance reflects hypothetical historical performance.",
+  "relatedinfo-title": "Index-linked Products",
+  "resources-title": "Index Resources",
+  "resources-viewnow-popup-desc": "Create a free account to unlock full access or Click \"Continue download\" for limited access to past year data",
+  "daily-report-title": "Index Reports",
+  "select-daily-report-label": "Select index report",
+  "constituent-title": "Constituents",
+  "constituent-historical-change-title": "Historical Change of Constituents",
+  "constituent-historical-not-available": "Unlock historical change of constituents by clicking \"View Now\".",
+  "constituent-table-label": {
+    "code": "Code",
+    "aCode": "A Shares",
+    "bCode": "B Shares",
+    "hCode": "H Shares",
+    "rCode": "Red Chips",
+    "oCode": "Others",
+    "stockCode": "Stock Code",
+    "constituentName": "Constituent Name",
+    "contributionChange": "Contribution of Index Change",
+    "currentIndex": "Current Index",
+    "percentageChange": "% Change",
+    "pointChange": "Point Change",
+    "hkListedStockCode": "HK shares Stock Code",
+    "mainlandListedAShares": "A shares Stock Code",
+    "stockCodeBShares": "B shares Stock Code",
+    "lastUpdate": "Last Update (dd-mm-yyyy hh:mm:ss)"
+  },
+  "constituent-description": "Number of Constituents: ",
+  "performance-title": "Performance",
+  "performance-sub-index": "Sub Indexes",
+  "performance-table-label": {
+    "indexValue": "Index Value",
+    "todayHigh": "Today High",
+    "todayLow": "Today Low",
+    "previousClose": "Previous Close",
+    "changeValue": "Point Change",
+    "changePercentage": "% Change",
+    "durationYears": "Duration (years)",
+    "semiAnnualDuration": "Semi-Annual Modified Duration (years) ",
+    "semiAnnualYield": "Semi-Annual Yield (%)",
+    "expectedRemainingLife": "Expected Remaining Life (years)",
+    "coupon": "Coupon (%)",
+    "nominalValue": "Nominal Value (RMB billion)",
+    "marketValue": "Market Value (RMB billion)",
+    "bonds": "No. of Bonds",
+    "lastUpdate": "Last update (dd-mm-yyyy hh:mm)",
+    "lastUpdateNRT": "Last update (dd/mm)"
+  },
+  "performance-table-na": "--",
+  "history-and-milestones-title": "History and Milestones",
+  "gallery-title": "Gallery",
+  "top-10-Title": {
+    "current_year-percentage": "Current Year - Percentage",
+    "current_year-point": "Current Year - Point",
+    "historical-percentage": "Historical - Percentage",
+    "historical-point": "Historical - Point"
+  },
+  "top-10-Direction-Title": {
+    "up": "Top 10 Ups",
+    "down": "Top 10 Downs"
+  },
+  "top-10-remark-1": "Current year counts from",
+  "top-10-remark-2": "to",
+  "top-10-remark-3": "of the calendar year",
+  "top-10-label": {
+    "rank": "Rank",
+    "point": "Point",
+    "date": "Date (dd-mm-yyyy)",
+    "percentage": "Percentage (%)",
+    "closingIndex": "Closing Index"
+  },
+  "top-10-description": "Current year counts from 1 Jan to 31 Dec of the calendar year",
+  "report-type-label": {
+    "idx": "Index Daily Bulletin",
+    "con": "Constituent Daily Performance (csv format)",
+    "con-xls": "Constituent Daily Performance (xls format)",
+    "ips": "Hang Seng Family of Indexes Performance Summary",
+    "con-pdf-1": "Constituent Performance (Month-end) (pdf format)"
+  },
+  "factsheets-title": "Show Factsheets for",
+  "brochures-title": "Show Brochures for",
+  "methodologies-title": "Show results for",
+  "daily-bulletin-title": "Index Reports",
+  "index-video-title": "Show results for",
+  "index-video-search-label-category": "Search by category",
+  "index-video-order-label": "Order by",
+  "index-video-order-label-value": ["Newest to oldest", "Oldest to newest"],
+  "index-video-thumb-title": "The hyperlink may allow you to leave Hang Seng Indexes Company Limited website.  The website accessed through this hyperlink may not provide you with any regulatory protections. Hang Seng Indexes Company Limited has no control over the linked website and is not liable for your use of the hyperlinked website.",
+  "index-video-no-data": "Stay tuned",
+  "index-video-details-slickTitle": "Other Videos",
+  "index-podcast-title": "Show results for",
+  "index-podcast-search-label-category": "Search by category",
+  "index-podcast-order-label": "Order by",
+  "index-podcast-order-label-value": ["Newest to oldest", "Oldest to newest"],
+  "index-podcast-no-data": "Stay tuned",
+  "index-podcast-details-slickTitle": "Other Podcasts",
+  "about-us-committee-chairman": "Convenor",
+  "about-us-committee-members": "Members",
+  "contact-us-title": "Contact Us",
+  "contact-us-desc": "For product specification and sample data files, please contact us for more information.",
+  "contact-us-call-title": "CALL",
+  "contact-us-call-desc": "<a href='tel:+85228770704'>+852 2877 0704</a><br>Mon - Fri 8:45am - 6pm HKT<br>(excluding Hong Kong public holidays)",
+  "contact-us-email-title": "EMAIL",
+  "contact-us-email-desc": "<a href='mailto:info@hsi.com.hk?subject=Contact%20Us%20-%20General%20Enquiry&body=Please%20provide%20details%20of%20the%20enquiry.'>info@hsi.com.hk</a>",
+  "contact-us-address-title": "ADDRESS",
+  "contact-us-address-desc": "19/F, Hang Seng Bank Headquarter Building,<br> 83 Des Voeux Road, Central, Hong Kong",
+  "contact-us-form-title": "Contact Form",
+  "contact-us-form-desc": "You are welcome to reach us via the following means. We will respond to you as promptly as we can.",
+  "contact-us-form-optional-label": "(Optional)",
+  "contact-us-form-enquiry-label": "Your enquiry is about",
+  "contact-us-form-name-label": "Your Name",
+  "contact-us-form-name-alert": "Please enter your name.",
+  "contact-us-form-email-label": "E-mail Address",
+  "contact-us-form-email-alert": "Please enter a valid email.",
+  "contact-us-form-company-label": "Company Name",
+  "contact-us-form-contact-label": "Contact Number",
+  "contact-us-form-contact-alert": "Please enter a valid number.",
+  "contact-us-form-message-label": "Do you have a message?",
+  "contact-us-form-remark-label": "Online information transmission is encrypted to ensure security and confidentiality. Before submitting your email, you agree to our <a href='/eng/disclaimer' target='_blank'>Privacy Policy</a>",
+  "contact-us-form-enquiry-value": [
+    "customised-index-solution",
+    "esg-service",
+    "smart-beta",
+    "suggestion",
+    "complaint",
+    "others"
+  ],
+  "contact-us-form-customised-index-solution-label": "Customised Index Solutions",
+  "contact-us-form-esg-service-label": "ESG Service",
+  "contact-us-form-smart-beta-label": "Smart Beta",
+  "contact-us-form-suggestion-label": "Suggestions and feedback",
+  "contact-us-form-complaint-label": "Complaint",
+  "contact-us-form-others-label": "Others",
+  "contact-us-form-submitted-title": "Submitted.",
+  "contact-us-form-submitted-desc": "Your email is delivered to our team. We will reply you within 1 working day.",
+  "popup-close": "Close",
+  "popup-confirm": "Confirm",
+  "privacy-policy-title": "Privacy Policy",
+  "disclaimer-title": "Online Important Notices",
+  "disclaimer-content": "/static/uploads/eng/html/business/disclaimer.html",
+  "pics-title": "Privacy Notice",
+  "pics-content": "/static/uploads/eng/html/business/pics.html",
+  "sys-maintenance-title": "System Maintenance Schedule",
+  "sys-maintenance-content": "/static/uploads/eng/html/business/sys-maintenance.html",
+  "sys-maintenance-contact": "/static/uploads/eng/html/business/sys-maintenance-contact.html",
+  "tnc-title": "Terms and Conditions of Historical Data Order",
+  "tnc-content": "/static/uploads/eng/html/business/tnc.html",
+  "sitemap-title": "Sitemap",
+  "404-title": "Page Not Found (404).",
+  "404-desc": "We are sorry, that page can't be found. The page may have been moved or deleted. Please try finding the new page from the navigation.",
+  "404-desc2": "You may want to check the",
+  "error-title": "Error",
+  "breadcrumb-esg-label": "Sustainability",
+  "breadcrumb-esg-introduction-label": "Sustainability Solutions",
+  "breadcrumb-esg-assessment-label": "ESG Rating Model",
+  "breadcrumb-esg-company-search-label": "Search Company ESG Rating",
+  "breadcrumb-esg-indexes-label": "ESG Indexes",
+  "esg-service-company-search-placeholder-label": "Search Company Name or Stock Code",
+  "esg-service-company-search-search-result-label": "Search Result",
+  "esg-service-company-search-company-name-label": "Company Name",
+  "esg-service-company-search-stock-code-label": "Stock Code",
+  "esg-service-company-search-listed-exchange-label": "Exchange Listed",
+  "esg-service-company-search-company-not-found": "Company not found.",
+  "esg-service-company-search-industry-label": "Industry",
+  "esg-service-company-search-download-report-label": "Download Report",
+  "esg-service-company-search-hkqaa-label": "Overall",
+  "esg-service-company-search-esg-rankings-label": "ESG Rating",
+  "esg-service-company-search-esg-performance-comparison-label": "ESG Performance Comparison",
+  "esg-service-company-search-high-level-esg-performance-label": "High Level ESG Performance",
+  "esg-service-company-search-historical-performance-label": "Historical Performance",
+  "esg-service-company-performance-under-7-core-subjects-label": "Performance under 7 Core Subjects",
+  "esg-service-company-search-among-industry-peers-label": "Among Industry Peers",
+  "esg-service-company-search-among-universe-label": "Among Universe",
+  "esg-service-company-search-environment-label": "Environment",
+  "esg-service-company-search-social-label": "Social",
+  "esg-service-company-search-governance-label": "Governance",
+  "esg-service-company-search-corporate-governance-label": "Corporate Governance",
+  "esg-service-company-search-human-rights-label": "Human Rights",
+  "esg-service-company-search-labour-practices-label": "Labour Practices",
+  "esg-service-company-search-fair-operating-practices-label": "Fair Operating Practices",
+  "esg-service-company-search-consumer-issues-label": "Consumer Issues",
+  "esg-service-company-search-community-involvement-and-development-label": "Community Involvement and Development",
+  "esg-service-company-search-out-of-label": "out of",
+  "esg-service-company-search-companies-label": "companies",
+  "esg-service-company-search-better-than-prefix": "Better than",
+  "esg-service-company-search-better-than-suffix": "of industry peers",
+  "esg-service-company-search-last-updated": "Last updated:",
+  "esg-service-company-search-description": "Know more about the ESG performance of our ESG Indexes' constituents",
+  "esg-service-company-search-more": "More",
+  "contact-us-esg-desc": "For ESG Service, please contact us for more information.",
+  "cookie-section": {
+    "ariaLabel": "Close",
+    "cookieConsentIcon": "/static/uploads/assets/images/icon/black/cross.png",
+    "cookieConsentContent": "<p>We use cookies to give you the best possible experience on our website. By continuing to browse this site&#44 you give consent for cookies to be used. For more details&#44 please read our <a class=\"cookie_rwd-policy\" href=\"/eng/disclaimer\">Cookies Policy & Internet Privacy Policy Statement</a>.</p>"
+  },
+  "contact-us-smart-beta-desc": "For Smart Beta, please contact us for more information.",
+  "contact-us-customised-index-desc": "For Customised Index Solutions, please contact us for more information.",
+  "breadcrumb-smart-beta-label": "Factor",
+  "breadcrumb-smart-beta-introduction-label": "Factor Investing",
+  "breadcrumb-smart-beta-single-factor-approach-label": "Single Factor Approach",
+  "breadcrumb-smart-beta-multi-factor-approach-label": "Multi Factor Approach",
+  "breadcrumb-smart-beta-indexes-label": "Smart Beta Indexes",
+  "breadcrumb-smart-beta-factor-index-performances-label": "Factor Index Performances",
+  "confirm-download-title": "Download Confirmation",
+  "confirm-download-content": "Constituent Daily Performance files will be changed to PDF format from 8 May 2021",
+  "confirm-download": "Confirm",
+  "daily-con-perf-download-popup-ind": "false",
+  "cold-backup-pop-limit": 30,
+  "cold-backup-pop-title": "IMPORTANT NOTICE",
+  "cold-backup-pop-content": "Due to a system outage, the index values updates are not reflected promptly on our website. We will resolve this issue as soon as possible. Meanwhile, we can only provide a limited number of index values, which will be updated every 15 minutes. Please click the button below to view the latest report.",
+  "cold-backup-pop-view20": "View the latest index values updates report",
+  "cold-backup-notice": "IMPORTANT: Please note the below indexes will be updated every 15 minutes.",
+  "cold-backup-download": "Download Index Updates Report (Excel)",
+  "cold-backup-table-label": {
+    "dateFormat": "Date Format: dd-mm-yyyy",
+    "lastUpdate": "Last Update Time",
+    "indexCode": "Index Code",
+    "indexName": "Index Name",
+    "indexValue": "Index Value",
+    "changeValue": "Change (value)",
+    "changePercentage": "Change (%)",
+    "noData": "Please try reload this page later."
+  },
+  "non-cash-remark": "*Non-Cash Distribution",
+  "non-cash-remark-symbol": "*",
+  "registration": {
+    "tipMessage": "We encourage registration with business or corporate email for seamless access to Hang Seng INdex360.",
+    "errorEngFirstNameMessage1": "Please input valid First Name.",
+    "errorEngFirstNameMessage2": "Maximum characters have been reached.",
+    "errorEngLastNameMessage1": "Please input valid Last Name.",
+    "errorEngLastNameMessage2": "Maximum characters have been reached.",
+    "errorChiFirstNameMessage1": "Please input valid First Name.",
+    "errorChiFirstNameMessage2": "Maximum characters have been reached.",
+    "errorChiLastNameMessage1": "Please input valid Last Name.",
+    "errorChiLastNameMessage2": "Maximum characters have been reached.",
+    "errorEmailMessage": "Please input valid email.",
+    "errorEmailMessage1": "This email has been registered.",
+    "errorEmailMessage2": "Sorry, email coming from this public domain is not supported.",
+    "errorEmailMessage3": "Your request has failed. Please try again later.",
+    "errorPhoneNumberMessage": "Please input valid phone number.",
+    "errorCodeMessage": "Server error",
+    "hasErrorMessage":"There are errors in one or more fields. Please check and correct them to proceed to the next step.",
+    "errorCodeMessage1000": "Loading Error. Your request has failed. Please try again later.",
+    "errorCodeMessage1014": "Your current OTP verification code is no longer valid. Please click “Resend” to trigger the verification code to your email again.",
+    "errorCodeMessage1015": "Please input valid OTP verification code.",
+    "errorCodeMessage1016": "Your current OTP verification code is no longer valid. Please click “Resend” to trigger the verification code to your email again.",
+    "errorCodeMessage1017": "For security reason, your email is temporarily suspended. Please ensure the provided email is valid and try again later.",
+    "errorCodeMessage1018": "For security reason, your email is temporarily suspended. Please ensure the provided email is valid and try again later.",
+    "errorCodeMessage1019": "For security reason, your email is temporarily suspended. Please ensure the provided email is valid and try again later.",
+    "errorCodeMessage1020": "For security reason, your email is temporarily suspended. Please ensure the provided email is valid and try again later.",
+    "errorCodeMessage1021": "The verification code is incorrect, please re-enter it.",
+    "errorCodeMessage1022": "For security reason, your request has expired. Please re-enter the page and try again.",
+    "errorCodeMessage1100": "Please input valid OTP verification code.",
+    "click": "Click",
+    "here": " here",
+    "to-discover-the-power-of-IndexConnect": "to discover the power of Hang Seng INdex360!",
+    "create-an-account": "Create an account",
+    "please-fill-in-the-information-to-unlock-your-IndexConnect-journey": "Please fill in the information to unlock your Hang Seng INdex360 journey",
+    "logon-email-ID": "Logon Email ID",
+    "work-email": "Email",
+    "about-yourself": "About Yourself",
+    "english-first-name": "English First Name",
+    "english-last-name": "English Last Name",
+    "chinese-first-name": "Chinese First Name (Optional)",
+    "chinese-last-name": "Chinese Last Name (Optional)",
+    "phone-number": "Phone Number (Optional)",
+    "tell-us-about-what-you-do": "Tell us about what you do",
+    "company": "Company",
+    "country-region": "Country/Region",
+    "job-title": "Job Title",
+    "perference": "Preferred Language",
+    "perferred-language": "Preferred Language",
+    "newsletters": "Newsletters Subscription (Optional)",
+    "I-would-like-to-receive-newsletters-for-latest-updates-of": "I would like to receive the latest updates of",
+    "I-have-read-and-agreed-to-the": "I have read and agreed to the",
+    "disclaimer": " Online Important Notices",
+    "and": " and",
+    "next": "Next",
+    "verify-your-work-email": "Verify your email",
+    "please-fill-in-the-verification-code-sent-to-your-email": "Please fill in the verification code sent to your email.",
+    "verification-code": "Verification Code",
+    "verify": "Verify",
+    "placeholder-work-email": "Email (Email ID)",
+    "placeholder-first-name": "First Name",
+    "placeholder-last-name": "Last Name",
+    "placeholder-phone-number": "Phone Number",
+    "placeholder-company": "Company",
+    "placeholder-verification-code": "Verification Code",
+    "placeholder-please-select": "Please select",
+    "placeholder-job-title": "Job Title",
+    "marketingTitle": "Use of Personal Data in Direct Marketing",
+    "marketingContent-i-have": "I have read and I understand the ",
+    "marketingContent-notice-to": "Notice to Customers and Other Individuals relating to the Personal Data (Privacy) Ordinance",
+    "marketingContent-the-notice": " (the “Notice”) issued by you, including the information about the use and transfer of my personal data for direct marketing. I understand that I have the right to opt out by ticking (√) one or both box(es) below. If I do not tick the relevant box, I will be taken as having given consent for direct marketing as more particularly set out in paragraph 7 of the Notice",
+    "notice": " Notice",
+    "marketingContentEnd": ".",
+    "personalData": "Please do NOT use my personal data in direct marketing.",
+    "directMarketing": "Please do NOT provide my personal data to others for their use in direct marketing.",
+    "fullPeriod": ".",
+    "captchaTitle": "Please enter the verification code below to proceed.",
+    "captchaText": "Please enter the verification code",
+    "refreshButton": "Refresh",
+    "area-code": "Country Code",
+    "mandatoryTips": "Please complete all mandatory fields to proceed."
+  },
+  "create-pwd-title": "Create your password",
+  "create-pwd-password": "Password",
+  "create-pwd-confirm-password": "Confirm password",
+  "create-pwd-validate": {
+    "lowercase": "At least one lowercase character",
+    "uppercase": "At least one uppercase character",
+    "numberical": "At least one numeric character",
+    "special": "At least one special character",
+    "specialCharacters": "(e.g. [~!@#”“$%^&()_+`\\-={}:\";'<>?,.\/] )",
+    "length": "8-36 characters",
+    "match": "Passwords do not match.",
+    "reset-special": "At least one special character",
+    "reset-specialCharacters": "(e.g. [~!@#”“$%^&()_+`\\-={}:\";'<>?,.\/] )",
+    "reset-lowercase": "At least one lowercase character",
+    "reset-uppercase": "At least one uppercase character",
+    "reset-numberical": "At least one numeric character",
+    "reset-length": "8-36 characters"
+  },
+  "create-pwd-submit-button": "Next",
+  "create-success-title": "Your account is created",
+  "create-success-text": "You can log on to your account now.",
+  "create-success-button": "Log on",
+  "login-log-on": "Log on",
+  "login-label-email": "Email",
+  "login-input-email-placeholder": "Please enter your email",
+  "login-label-password": "Password",
+  "login-input-password-placeholder": "Please enter your password",
+  "login-fail-message": "Please input valid email / password.",
+  "login-forgot-password": "Forgot / Reset Password",
+  "login-expire": "For security reason, you have been logged out. Please login again. ",
+  "registration-server-error-message": "Loading Error. Your request has failed. Please try again later.",
+  "login-fail-suspended": "The account is suspended, please contact System administration. ",
+  "forgot-password-title": "Forgot / Reset Password",
+  "forgot-password-text": "Please enter your registered email to receive the verification code for password reset.",
+  "forgot-password-email": "Email",
+  "forgot-password-email-placeholder": "Email",
+  "forgot-password-button": "Reset password",
+  "forgot-password-error-message": "Please input valid email.",
+  "forgot-password-error-message1004": "Sorry, email coming from this public domain is not supported.",
+  "verify-your-email": "Verification Code",
+  "reset-password-title": "Reset your password",
+  "reset-password": "Password",
+  "reset-confirm-password": "Confirm password",
+  "reset-password-placeholder": "Password",
+  "reset-password-placeholder2": "Password",
+  "reset-password-button": "Save",
+  "reset-success-title": "Password has been reset",
+  "header-top-index-text": "Index",
+  "header-top-Connect-text": "Connect",
+  "promotion-feature-title": "Features",
+  "promotion-feature-contact-sales": "Contact Sales",
+  "promotion-feature-sales-subject": "Hang%20Seng%20INdexLab%20Enquiry&body=I%20am%20interested%20in%20understanding%20more%20about%20Hang%20Seng%20INdexLab.%20Please%20feel%20free%20to%20contact%20me.%0d%0a%0d%0aRegards,%0d%0a[%20Name%20]",
+  "promotion-video-list-title": "Discover our comprehensive index data and analytics platform",
+  "promotion-register-now": "Register Now",
+  "promotion-log-on": "Log on",
+  "registration-resend-verify-code": "Resend",
+  "registration-resend-second": "s",
+  "home-page-mediaroom-title": "Media Room",
+  "home-page-insights-title": "Insights & Reports",
+  "home-page-solutions-title": "Solutions",
+  "home-subscribe-now-title": "Receive the latest updates of <br>Hang Seng Indexes Company",
+  "home-subscribe-now-description": "Our newsletter offers you a comprehensive and latest news of Hang Seng Indexes Company, including our press release, index notice and research publications and insights.",
+  "home-insights-blog-label": "Blog",
+  "home-insights-esgInsights-label": "ESG Insights",
+  "home-insights-indexFlash-label": "Index Flash",
+  "home-insights-biotechWeekly-label": "Hang Seng HK Biotech Weekly",
+  "home-insights-monthlyRoundup-label": "Monthly Roundup",
+  "home-insights-esgeWeekly-label": "HSI ESG Enhanced Index Weekly",
+  "home-insights-researchPaper-label": "Research Paper",
+  "home-insights-reports-label": "Year-end Market Report",
+  "indexes-all-filter-label": "All",
+  "indexes-search-indexes-top-label": "Indexes",
+  "indexes-page-description-text": "A full list of indexes under each category selected.",
+  "insights-and-reports-description": "Stay informed with our latest index insights and reports, which provide our in-depth analysis, market trends, and valuable information on indexes.",
+  "index-methodologies-methodology-guides": "Index Methodology Guides",
+  "breadcrumb-indexes-overview-label": "Indexes Overview",
+  "registration-preference-languages": [
+    {
+      "value": "eng",
+      "label": "English",
+      "selected": false
+    },
+    {
+      "value": "chi",
+      "label": "Traditional Chinese",
+      "selected": false
+    },
+    {
+      "value": "schi",
+      "label": "Simplified Chinese",
+      "selected": false
+    }
+  ],
+  "registration-news-letters": [
+    {
+      "value": "Select All",
+      "label": "Select All",
+      "selected": false
+    },
+    {
+      "value": "Press Releases",
+      "label": "Press Releases",
+      "selected": false
+    },
+    {
+      "value": "Index Notices",
+      "label": "Index Notices",
+      "selected": false
+    },
+    {
+      "value": "Factsheets",
+      "label": "Factsheets",
+      "selected": false
+    },
+    {
+      "value": "Events",
+      "label": "Events",
+      "selected": false
+    },
+    {
+      "value": "Index Flash",
+      "label": "Index Flash",
+      "selected": false
+    },
+    {
+      "value": "Blog",
+      "label": "Blog",
+      "selected": false
+    },
+    {
+      "value": "Research Papers",
+      "label": "Research Papers",
+      "selected": false
+    },
+    {
+      "value": "ESG Insights",
+      "label": "ESG Insights",
+      "selected": false
+    },
+    {
+      "value": "HSI ESG Enhanced Index Weekly",
+      "label": "HSI ESG Enhanced Index Weekly",
+      "selected": false
+    },
+    {
+      "value": "Monthly Roundup",
+      "label": "Monthly Roundup",
+      "selected": false
+    },
+    {
+      "value": "Year-End Reports",
+      "label": "Year-end Market Reports",
+      "selected": false
+    }
+  ],
+  "location-list-value": [
+    {
+      "value": "Hong Kong SAR",
+      "label": "Hong Kong SAR"
+    },
+    {
+      "value": "China",
+      "label": "China"
+    },
+    {
+      "value": "Afghanistan",
+      "label": "Afghanistan"
+    },
+    {
+      "value": "Albania",
+      "label": "Albania"
+    },
+    {
+      "value": "Algeria",
+      "label": "Algeria"
+    },
+    {
+      "value": "American Samoa",
+      "label": "American Samoa"
+    },
+    {
+      "value": "Andorra",
+      "label": "Andorra"
+    },
+    {
+      "value": "Angola",
+      "label": "Angola"
+    },
+    {
+      "value": "Anguilla",
+      "label": "Anguilla"
+    },
+    {
+      "value": "Antarctica",
+      "label": "Antarctica"
+    },
+    {
+      "value": "Antigua and Barbuda",
+      "label": "Antigua and Barbuda"
+    },
+    {
+      "value": "Argentina",
+      "label": "Argentina"
+    },
+    {
+      "value": "Armenia",
+      "label": "Armenia"
+    },
+    {
+      "value": "Aruba",
+      "label": "Aruba"
+    },
+    {
+      "value": "Australia",
+      "label": "Australia"
+    },
+    {
+      "value": "Austria",
+      "label": "Austria"
+    },
+    {
+      "value": "Azerbaijan",
+      "label": "Azerbaijan"
+    },
+    {
+      "value": "Bahamas",
+      "label": "Bahamas"
+    },
+    {
+      "value": "Bahrain",
+      "label": "Bahrain"
+    },
+    {
+      "value": "Bangladesh",
+      "label": "Bangladesh"
+    },
+    {
+      "value": "Barbados",
+      "label": "Barbados"
+    },
+    {
+      "value": "Belarus",
+      "label": "Belarus"
+    },
+    {
+      "value": "Belgium",
+      "label": "Belgium"
+    },
+    {
+      "value": "Belize",
+      "label": "Belize"
+    },
+    {
+      "value": "Benin",
+      "label": "Benin"
+    },
+    {
+      "value": "Bermuda",
+      "label": "Bermuda"
+    },
+    {
+      "value": "Bhutan",
+      "label": "Bhutan"
+    },
+    {
+      "value": "Bolivia",
+      "label": "Bolivia"
+    },
+    {
+      "value": "Bosnia and Herzegovina",
+      "label": "Bosnia and Herzegovina"
+    },
+    {
+      "value": "Botswana",
+      "label": "Botswana"
+    },
+    {
+      "value": "Bouvet Island",
+      "label": "Bouvet Island"
+    },
+    {
+      "value": "Brazil",
+      "label": "Brazil"
+    },
+    {
+      "value": "British Indian Ocean Territory",
+      "label": "British Indian Ocean Territory"
+    },
+    {
+      "value": "Brunei Darussalam",
+      "label": "Brunei Darussalam"
+    },
+    {
+      "value": "Bulgaria",
+      "label": "Bulgaria"
+    },
+    {
+      "value": "Burkina Faso",
+      "label": "Burkina Faso"
+    },
+    {
+      "value": "Burundi",
+      "label": "Burundi"
+    },
+    {
+      "value": "Cambodia",
+      "label": "Cambodia"
+    },
+    {
+      "value": "Cameroon",
+      "label": "Cameroon"
+    },
+    {
+      "value": "Canada",
+      "label": "Canada"
+    },
+    {
+      "value": "Cape Verde",
+      "label": "Cape Verde"
+    },
+    {
+      "value": "Cayman Islands",
+      "label": "Cayman Islands"
+    },
+    {
+      "value": "Central African Republic",
+      "label": "Central African Republic"
+    },
+    {
+      "value": "Chad",
+      "label": "Chad"
+    },
+    {
+      "value": "Chile",
+      "label": "Chile"
+    },
+    {
+      "value": "Christmas Island",
+      "label": "Christmas Island"
+    },
+    {
+      "value": "Cocos (Keeling) Islands",
+      "label": "Cocos (Keeling) Islands"
+    },
+    {
+      "value": "Colombia",
+      "label": "Colombia"
+    },
+    {
+      "value": "Comoros",
+      "label": "Comoros"
+    },
+    {
+      "value": "Congo",
+      "label": "Congo"
+    },
+    {
+      "value": "Congo, The Democratic Republic",
+      "label": "Congo, The Democratic Republic"
+    },
+    {
+      "value": "Cook Islands",
+      "label": "Cook Islands"
+    },
+    {
+      "value": "Costa Rica",
+      "label": "Costa Rica"
+    },
+    {
+      "value": "Cote D'Ivoire",
+      "label": "Cote D'Ivoire"
+    },
+    {
+      "value": "Croatia",
+      "label": "Croatia"
+    },
+    {
+      "value": "Cuba",
+      "label": "Cuba"
+    },
+    {
+      "value": "Cyprus",
+      "label": "Cyprus"
+    },
+    {
+      "value": "Czech Republic",
+      "label": "Czech Republic"
+    },
+    {
+      "value": "Denmark",
+      "label": "Denmark"
+    },
+    {
+      "value": "Djibouti",
+      "label": "Djibouti"
+    },
+    {
+      "value": "Dominica",
+      "label": "Dominica"
+    },
+    {
+      "value": "Dominican Republic",
+      "label": "Dominican Republic"
+    },
+    {
+      "value": "East Timor",
+      "label": "East Timor"
+    },
+    {
+      "value": "Ecuador",
+      "label": "Ecuador"
+    },
+    {
+      "value": "Egypt",
+      "label": "Egypt"
+    },
+    {
+      "value": "El Salvador",
+      "label": "El Salvador"
+    },
+    {
+      "value": "Equatorial Guinea",
+      "label": "Equatorial Guinea"
+    },
+    {
+      "value": "Eritrea",
+      "label": "Eritrea"
+    },
+    {
+      "value": "Estonia",
+      "label": "Estonia"
+    },
+    {
+      "value": "Ethiopia",
+      "label": "Ethiopia"
+    },
+    {
+      "value": "Falkland Islands (Malvinas)",
+      "label": "Falkland Islands (Malvinas)"
+    },
+    {
+      "value": "Faroe Islands",
+      "label": "Faroe Islands"
+    },
+    {
+      "value": "Fiji",
+      "label": "Fiji"
+    },
+    {
+      "value": "Finland",
+      "label": "Finland"
+    },
+    {
+      "value": "Fmr Yugoslav Rep of Macedonia",
+      "label": "Fmr Yugoslav Rep of Macedonia"
+    },
+    {
+      "value": "France",
+      "label": "France"
+    },
+    {
+      "value": "French Guiana",
+      "label": "French Guiana"
+    },
+    {
+      "value": "French Polynesia",
+      "label": "French Polynesia"
+    },
+    {
+      "value": "French Southern Territories",
+      "label": "French Southern Territories"
+    },
+    {
+      "value": "Gabon",
+      "label": "Gabon"
+    },
+    {
+      "value": "Gambia",
+      "label": "Gambia"
+    },
+    {
+      "value": "Georgia",
+      "label": "Georgia"
+    },
+    {
+      "value": "Germany",
+      "label": "Germany"
+    },
+    {
+      "value": "Ghana",
+      "label": "Ghana"
+    },
+    {
+      "value": "Gibraltar",
+      "label": "Gibraltar"
+    },
+    {
+      "value": "Greece",
+      "label": "Greece"
+    },
+    {
+      "value": "Greenland",
+      "label": "Greenland"
+    },
+    {
+      "value": "Grenada",
+      "label": "Grenada"
+    },
+    {
+      "value": "Guadeloupe",
+      "label": "Guadeloupe"
+    },
+    {
+      "value": "Guam",
+      "label": "Guam"
+    },
+    {
+      "value": "Guatemala",
+      "label": "Guatemala"
+    },
+    {
+      "value": "Guinea",
+      "label": "Guinea"
+    },
+    {
+      "value": "Guinea-Bissau",
+      "label": "Guinea-Bissau"
+    },
+    {
+      "value": "Guyana",
+      "label": "Guyana"
+    },
+    {
+      "value": "Haiti",
+      "label": "Haiti"
+    },
+    {
+      "value": "Heard and McDonald Islands",
+      "label": "Heard and McDonald Islands"
+    },
+    {
+      "value": "Holy See (Vatican City State)",
+      "label": "Holy See (Vatican City State)"
+    },
+    {
+      "value": "Honduras",
+      "label": "Honduras"
+    },
+    {
+      "value": "Hungary",
+      "label": "Hungary"
+    },
+    {
+      "value": "Iceland",
+      "label": "Iceland"
+    },
+    {
+      "value": "India",
+      "label": "India"
+    },
+    {
+      "value": "Indonesia",
+      "label": "Indonesia"
+    },
+    {
+      "value": "Iran (Islamic Republic Of)",
+      "label": "Iran (Islamic Republic Of)"
+    },
+    {
+      "value": "Iraq",
+      "label": "Iraq"
+    },
+    {
+      "value": "Ireland",
+      "label": "Ireland"
+    },
+    {
+      "value": "Israel",
+      "label": "Israel"
+    },
+    {
+      "value": "Italy",
+      "label": "Italy"
+    },
+    {
+      "value": "Jamaica",
+      "label": "Jamaica"
+    },
+    {
+      "value": "Japan",
+      "label": "Japan"
+    },
+    {
+      "value": "Jordan",
+      "label": "Jordan"
+    },
+    {
+      "value": "Kazakhstan",
+      "label": "Kazakhstan"
+    },
+    {
+      "value": "Kenya",
+      "label": "Kenya"
+    },
+    {
+      "value": "Kiribati",
+      "label": "Kiribati"
+    },
+    {
+      "value": "Korea, Democratic People's Rep",
+      "label": "Korea, Democratic People's Rep"
+    },
+    {
+      "value": "Korea, Republic of",
+      "label": "Korea, Republic of"
+    },
+    {
+      "value": "Kuwait",
+      "label": "Kuwait"
+    },
+    {
+      "value": "Kyrgyzstan",
+      "label": "Kyrgyzstan"
+    },
+    {
+      "value": "Lao People's Democratic Rep",
+      "label": "Lao People's Democratic Rep"
+    },
+    {
+      "value": "Latvia",
+      "label": "Latvia"
+    },
+    {
+      "value": "Lebanon",
+      "label": "Lebanon"
+    },
+    {
+      "value": "Lesotho",
+      "label": "Lesotho"
+    },
+    {
+      "value": "Liberia",
+      "label": "Liberia"
+    },
+    {
+      "value": "Libyan Arab Jamahiriya",
+      "label": "Libyan Arab Jamahiriya"
+    },
+    {
+      "value": "Liechtenstein",
+      "label": "Liechtenstein"
+    },
+    {
+      "value": "Lithuania",
+      "label": "Lithuania"
+    },
+    {
+      "value": "Luxembourg",
+      "label": "Luxembourg"
+    },
+    {
+      "value": "Macau SAR",
+      "label": "Macau SAR"
+    },
+    {
+      "value": "Madagascar",
+      "label": "Madagascar"
+    },
+    {
+      "value": "Malawi",
+      "label": "Malawi"
+    },
+    {
+      "value": "Malaysia",
+      "label": "Malaysia"
+    },
+    {
+      "value": "Maldives",
+      "label": "Maldives"
+    },
+    {
+      "value": "Mali",
+      "label": "Mali"
+    },
+    {
+      "value": "Malta",
+      "label": "Malta"
+    },
+    {
+      "value": "Marshall Islands",
+      "label": "Marshall Islands"
+    },
+    {
+      "value": "Martinique",
+      "label": "Martinique"
+    },
+    {
+      "value": "Mauritania",
+      "label": "Mauritania"
+    },
+    {
+      "value": "Mauritius",
+      "label": "Mauritius"
+    },
+    {
+      "value": "Mayotte",
+      "label": "Mayotte"
+    },
+    {
+      "value": "Mexico",
+      "label": "Mexico"
+    },
+    {
+      "value": "Micronesia, Federated States",
+      "label": "Micronesia, Federated States"
+    },
+    {
+      "value": "Moldova, Republic of",
+      "label": "Moldova, Republic of"
+    },
+    {
+      "value": "Monaco",
+      "label": "Monaco"
+    },
+    {
+      "value": "Mongolia",
+      "label": "Mongolia"
+    },
+    {
+      "value": "Montserrat",
+      "label": "Montserrat"
+    },
+    {
+      "value": "Morocco",
+      "label": "Morocco"
+    },
+    {
+      "value": "Mozambique",
+      "label": "Mozambique"
+    },
+    {
+      "value": "Myanmar",
+      "label": "Myanmar"
+    },
+    {
+      "value": "Namibia",
+      "label": "Namibia"
+    },
+    {
+      "value": "Nauru",
+      "label": "Nauru"
+    },
+    {
+      "value": "Nepal",
+      "label": "Nepal"
+    },
+    {
+      "value": "Netherlands",
+      "label": "Netherlands"
+    },
+    {
+      "value": "Netherlands Antilles",
+      "label": "Netherlands Antilles"
+    },
+    {
+      "value": "New Caledonia",
+      "label": "New Caledonia"
+    },
+    {
+      "value": "New Zealand",
+      "label": "New Zealand"
+    },
+    {
+      "value": "Nicaragua",
+      "label": "Nicaragua"
+    },
+    {
+      "value": "Niger",
+      "label": "Niger"
+    },
+    {
+      "value": "Nigeria",
+      "label": "Nigeria"
+    },
+    {
+      "value": "Niue",
+      "label": "Niue"
+    },
+    {
+      "value": "Norfolk Island",
+      "label": "Norfolk Island"
+    },
+    {
+      "value": "Northern Mariana Islands",
+      "label": "Northern Mariana Islands"
+    },
+    {
+      "value": "Norway",
+      "label": "Norway"
+    },
+    {
+      "value": "Oman",
+      "label": "Oman"
+    },
+    {
+      "value": "Pakistan",
+      "label": "Pakistan"
+    },
+    {
+      "value": "Palau",
+      "label": "Palau"
+    },
+    {
+      "value": "Palestine Territory Occupied",
+      "label": "Palestine Territory Occupied"
+    },
+    {
+      "value": "Panama",
+      "label": "Panama"
+    },
+    {
+      "value": "Papua New Guinea",
+      "label": "Papua New Guinea"
+    },
+    {
+      "value": "Paraguay",
+      "label": "Paraguay"
+    },
+    {
+      "value": "Peru",
+      "label": "Peru"
+    },
+    {
+      "value": "Philippines",
+      "label": "Philippines"
+    },
+    {
+      "value": "Pitcairn",
+      "label": "Pitcairn"
+    },
+    {
+      "value": "Poland",
+      "label": "Poland"
+    },
+    {
+      "value": "Portugal",
+      "label": "Portugal"
+    },
+    {
+      "value": "Puerto Rico",
+      "label": "Puerto Rico"
+    },
+    {
+      "value": "Qatar",
+      "label": "Qatar"
+    },
+    {
+      "value": "Republic of Montenegro",
+      "label": "Republic of Montenegro"
+    },
+    {
+      "value": "Reunion",
+      "label": "Reunion"
+    },
+    {
+      "value": "Romania",
+      "label": "Romania"
+    },
+    {
+      "value": "Russian Federation",
+      "label": "Russian Federation"
+    },
+    {
+      "value": "Rwanda",
+      "label": "Rwanda"
+    },
+    {
+      "value": "Saint Helena",
+      "label": "Saint Helena"
+    },
+    {
+      "value": "Saint Kitts and Nevis",
+      "label": "Saint Kitts and Nevis"
+    },
+    {
+      "value": "Saint Lucia",
+      "label": "Saint Lucia"
+    },
+    {
+      "value": "Saint Pierre and Miquelon",
+      "label": "Saint Pierre and Miquelon"
+    },
+    {
+      "value": "Samoa",
+      "label": "Samoa"
+    },
+    {
+      "value": "San Marino",
+      "label": "San Marino"
+    },
+    {
+      "value": "Sao Tome and Principe",
+      "label": "Sao Tome and Principe"
+    },
+    {
+      "value": "Saudi Arabia",
+      "label": "Saudi Arabia"
+    },
+    {
+      "value": "Senegal",
+      "label": "Senegal"
+    },
+    {
+      "value": "Serbia",
+      "label": "Serbia"
+    },
+    {
+      "value": "Seychelles",
+      "label": "Seychelles"
+    },
+    {
+      "value": "Sierra Leone",
+      "label": "Sierra Leone"
+    },
+    {
+      "value": "Singapore",
+      "label": "Singapore"
+    },
+    {
+      "value": "Slovakia",
+      "label": "Slovakia"
+    },
+    {
+      "value": "Slovenia",
+      "label": "Slovenia"
+    },
+    {
+      "value": "Solomon Islands",
+      "label": "Solomon Islands"
+    },
+    {
+      "value": "Somalia",
+      "label": "Somalia"
+    },
+    {
+      "value": "South Africa",
+      "label": "South Africa"
+    },
+    {
+      "value": "Spain",
+      "label": "Spain"
+    },
+    {
+      "value": "Sri Lanka",
+      "label": "Sri Lanka"
+    },
+    {
+      "value": "St Vincent and the Grenadines",
+      "label": "St Vincent and the Grenadines"
+    },
+    {
+      "value": "Sth Georgia & Sth Sandwich Is",
+      "label": "Sth Georgia & Sth Sandwich Is"
+    },
+    {
+      "value": "Sudan",
+      "label": "Sudan"
+    },
+    {
+      "value": "Suriname",
+      "label": "Suriname"
+    },
+    {
+      "value": "Svalbard and Jan Mayen",
+      "label": "Svalbard and Jan Mayen"
+    },
+    {
+      "value": "Swaziland",
+      "label": "Swaziland"
+    },
+    {
+      "value": "Sweden",
+      "label": "Sweden"
+    },
+    {
+      "value": "Switzerland",
+      "label": "Switzerland"
+    },
+    {
+      "value": "Syrian Arab Republic",
+      "label": "Syrian Arab Republic"
+    },
+    {
+      "value": "Taiwan",
+      "label": "Taiwan"
+    },
+    {
+      "value": "Tajikistan",
+      "label": "Tajikistan"
+    },
+    {
+      "value": "Tanzania, United Republic of",
+      "label": "Tanzania, United Republic of"
+    },
+    {
+      "value": "Thailand",
+      "label": "Thailand"
+    },
+    {
+      "value": "Togo",
+      "label": "Togo"
+    },
+    {
+      "value": "Tokelau",
+      "label": "Tokelau"
+    },
+    {
+      "value": "Tonga",
+      "label": "Tonga"
+    },
+    {
+      "value": "Trinidad and Tobago",
+      "label": "Trinidad and Tobago"
+    },
+    {
+      "value": "Tunisia",
+      "label": "Tunisia"
+    },
+    {
+      "value": "Turkey",
+      "label": "Turkey"
+    },
+    {
+      "value": "Turkmenistan",
+      "label": "Turkmenistan"
+    },
+    {
+      "value": "Turks and Caicos Islands",
+      "label": "Turks and Caicos Islands"
+    },
+    {
+      "value": "Tuvalu",
+      "label": "Tuvalu"
+    },
+    {
+      "value": "Uganda",
+      "label": "Uganda"
+    },
+    {
+      "value": "Ukraine",
+      "label": "Ukraine"
+    },
+    {
+      "value": "United Arab Emirates",
+      "label": "United Arab Emirates"
+    },
+    {
+      "value": "United Kingdom",
+      "label": "United Kingdom"
+    },
+    {
+      "value": "United States",
+      "label": "United States"
+    },
+    {
+      "value": "Uruguay",
+      "label": "Uruguay"
+    },
+    {
+      "value": "US Minor Outlying Islands",
+      "label": "US Minor Outlying Islands"
+    },
+    {
+      "value": "Uzbekistan",
+      "label": "Uzbekistan"
+    },
+    {
+      "value": "Vanuatu",
+      "label": "Vanuatu"
+    },
+    {
+      "value": "Venezuela",
+      "label": "Venezuela"
+    },
+    {
+      "value": "Viet Nam",
+      "label": "Viet Nam"
+    },
+    {
+      "value": "Virgin Islands (British)",
+      "label": "Virgin Islands (British)"
+    },
+    {
+      "value": "Virgin Islands (U.S.)",
+      "label": "Virgin Islands (U.S.)"
+    },
+    {
+      "value": "Wallis and Futuna Islands",
+      "label": "Wallis and Futuna Islands"
+    },
+    {
+      "value": "Western Sahara",
+      "label": "Western Sahara"
+    },
+    {
+      "value": "Yemen",
+      "label": "Yemen"
+    },
+    {
+      "value": "Yugoslavia",
+      "label": "Yugoslavia"
+    },
+    {
+      "value": "Zambia",
+      "label": "Zambia"
+    },
+    {
+      "value": "Zimbabwe",
+      "label": "Zimbabwe"
+    }
+  ],
+  "header-index-overview": "INDEXES OVERVIEW",
+  "header-solutions": "SOLUTIONS",
+  "header-insights-report": "INSIGHTS & REPORTS",
+  "header-index-discover": "Discover",
+  "header-indexlab-discover": "Discover Hang Seng INdexLab",
+  "header-index-login-btn": "Log on",
+  "header-index-learn-btn": "Learn More",
+  "header-index-contact-us": "Contact Us",
+  "breadcrumb-mediaroom-label": "Media Room",
+  "media-room-header-title": "Media Room",
+  "media-room-header-description": "Stay up-to-date with the latest press releases, index notices, and announcements in our media room.",
+  "media-press-releases": "Press Releases",
+  "media-index-notices": "Index / Other Notices",
+  "media-consultations-proposals": "Consultations / Proposals",
+  "media-sort": "Sort by",
+  "media-desc": "Most Recent",
+  "media-asc": "From Oldest",
+  "footer-pics-m-1": "Privacy Notice",
+  "breadcrumb-insights-label": "Insights & Reports",
+  "insights-types-all": "All",
+  "insights-tab-videos-podcasts": "Videos & Podcasts",
+  "insights-tab-reports": "Reports",
+  "insights-tab-insights": "Insights",
+  "insights-publication-type": "Publication Types",
+  "insights-filter-types": "Types",
+  "insights-filter-topics": "Topics",
+  "insights-filter-categories": "Categories",
+  "insights-videos-categories-videos": "Videos",
+  "insights-videos-categories-podcasts": "Podcasts",
+  "insights-filter-select-all-clear": "Select / Clear All",
+  "insights-filter-select-lable": "By default",
+  "insights-filter-select-lable-all": "All",
+  "insights-types-list": [
+    {
+      "value": "market",
+      "label": "Market",
+      "selected": false
+    },
+    {
+      "value": "sector",
+      "label": "Sector",
+      "selected": false
+    },
+    {
+      "value": "sustainability",
+      "label": "Sustainability",
+      "selected": false
+    },
+    {
+      "value": "factor",
+      "label": "Factor",
+      "selected": false
+    },
+    {
+      "value": "strategy",
+      "label": "Strategy",
+      "selected": false
+    },
+    {
+      "value": "fixed-income",
+      "label": "Fixed Income",
+      "selected": false
+    }
+  ],
+  "publication-type-index-flash": "Index Flash",
+  "publication-type-index-flash-description": "Weekly publication with timely market updates and index performance",
+  "publication-type-biotech": "Hang Seng HK Biotech Weekly",
+  "publication-type-biotech-description": "A comprehensive overview on the constituents’ performance of the Hang Seng Hong Kong-Listed Biotech Index ('HSHKBIO') over the past week",
+  "publication-type-esg-insights": "ESG Insights",
+  "publication-type-esg-insights-description": "Quarterly ESG Insights offers in-depth analysis on the latest environmental, social, and governance (ESG) issues",
+  "publication-type-monthly-roundup": "Monthly Roundup",
+  "publication-type-monthly-roundup-description": "A comprehensive summary provides an overview on the monthly performance of the Hang Seng Family of Indexes",
+  "publication-type-esge-weekly": "HSI ESG Enhanced Index Weekly",
+  "publication-type-esge-weekly-description": "A comprehensive overview on the constituents' performance of the HSI ESG Enhanced Index ('HSIESGS') over the past week",
+  "publication-type-blog": "Blog",
+  "publication-type-blog-description": "A short research article that dives deeper into industry, market and thematic trends and offers discussions and insights",
+  "publication-type-market-report": "Year-end Market Report",
+  "publication-type-market-report-description": "An annual report provides an overview on the performance of the Hang Seng Family of Indexes throughout the year",
+  "publication-type-research-paper": "Research Paper",
+  "publication-type-research-paper-description": "In-depth analysis and discussion on various topics related to the Hang Seng Family of Indexes, offering valuable insights for investors and stakeholders",
+  "insights-no-data-title": "No matching results",
+  "insights-no-data-description": "Please explore other options and try again.",
+  "footer-subscribe-text-left": "Receive the latest updates of ",
+  "footer-subscribe-text-right": "Hang Seng Indexes Company",
+  "indexes-overview-categories": "Categories",
+  "indexes-overview-index-resources": "Index Resources",
+  "awards-and-recognition-title": "Awards & Recognition",
+  "awards-and-recognition-content": "/static/uploads/eng/html/downloads/about-us/awards-and-recognition.html",
+  "breadcrumb-awards-and-recognition-label": "Awards & Recognition",
+  "home-chart-tips": "Please visit the respective index page for more information.<br/>Last update (dd-mm-yyyy hh:mm)",
+  "indexes-overview-description-text": "Hang Seng Family of Indexes comprises of seven categories: Market, Factor, Strategy, Sector, Sustainability, Global and Fixed Income, providing index users with diversified tools to achieve investment goals amid evolving market landscape.",
+  "footer-back-to-top": "Back to top",
+  "indexes-details-bottom-tops":"* Data are updated around 01:00 HKT every index calculation day",
+  "notification-popup-title": "",
+  "notification-popup-content1": "Effective on 10 Jun, 2024, we will be introducing some adjustments to the presentation of our existing reports, including Full Constituent List, Historical Change of Constituent Report, Constituent Performance Report, and Historical PE Ratio & Dividend Yield Report.",
+  "notification-popup-content2": "<a target='_blank' href='/static/uploads/assets/images/banners/eng/Upcoming_Enhancements.pdf'>>> Please click here to view more details.</a><br>If you have any question, please <a target='_blank' href='/eng/contact-us'>contact us</a>.",
+  "notice-popup-title": "",
+  "notice-popup-content1": "We encourage registration with business or corporate email for seamless access to Hang Seng INdex360. We are delighted to offer full access to public domain email users during our trial period until end of March 2025. Please note that accounts registered with public domain emails will be removed at the end of the trial period, and Hang Seng Indexes Company Limited reserves the right to remove the accounts at its sole discretion.",
+  "notice-popup-content2": "",
+  "2024-hsi55a": "Events,/static/uploads/eng/html/downloads/event/2024-hsi55a.html",
+  "esg-resources-list": [
+    {
+      "value": "blog",
+      "label": "Blog",
+	  "filter": "Sustainability",
+      "date": true
+    },
+    {
+      "value": "research-paper",
+      "label": "Research Paper",
+	  "filter": "Sustainability",
+      "date": true
+    },
+    {
+      "value": "esg-insights",
+      "label": "ESG Insights",
+	  "filter": "Sustainability",
+      "date": false
+    }
+  ]
+}

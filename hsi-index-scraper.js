@@ -11,6 +11,7 @@ class HSIFundamentalsScraper {
         this.loginUrl = 'https://www.hsi.com.hk/eng/index360/login';
         this.fundamentalsUrl = 'https://www.hsi.com.hk/index360/schi/indexes?id=02055.00';
         this.outputDir = './hsi-fundamentals-data';
+        this.userDataDir = path.join(this.outputDir, 'browser-data');
         this.ensureOutputDirectory();
     }
 
@@ -18,13 +19,19 @@ class HSIFundamentalsScraper {
         if (!fs.existsSync(this.outputDir)) {
             fs.mkdirSync(this.outputDir, { recursive: true });
         }
+        // 确保浏览器数据目录存在
+        if (!fs.existsSync(this.userDataDir)) {
+            fs.mkdirSync(this.userDataDir, { recursive: true });
+        }
     }
 
     async initialize() {
         try {
+            console.log(`📁 使用浏览器数据目录: ${this.userDataDir}`);
             this.browser = await puppeteer.launch({
                 // headless: true, // 设置为false以便观察登录过程
                 defaultViewport: { width: 1280, height: 800 },
+                userDataDir: this.userDataDir, // 使用指定的用户数据目录
                 args: [
                     '--no-sandbox',
                     '--disable-setuid-sandbox',
@@ -34,7 +41,13 @@ class HSIFundamentalsScraper {
                     '--no-zygote',
                     '--disable-gpu',
                     '--disable-web-security',
-                    '--disable-features=VizDisplayCompositor'
+                    '--disable-features=VizDisplayCompositor',
+                    '--disable-images',                  
+                    '--disable-plugins',
+                    '--disable-extensions',
+                    '--disable-background-timer-throttling',
+                    '--disable-backgrounding-occluded-windows',
+                    '--disable-renderer-backgrounding'
                 ]
             });
 
@@ -291,7 +304,7 @@ class HSIFundamentalsScraper {
             console.log('📊 正在访问基本面数据页面...');
             await this.page.goto(this.fundamentalsUrl, {
                 waitUntil: 'networkidle2', // 改为等待网络空闲
-                timeout: 120000 // 增加到2分钟
+                timeout: 30000 // 增加到2分钟
             });
 
             // 等待页面加载 - 智能等待机制
@@ -373,8 +386,12 @@ class HSIFundamentalsScraper {
                 }
             }
             
+            // 即使出错也保存调试信息并继续
             await this.takeScreenshot('fundamentals-error');
-            return false;
+            await this.savePageContent('fundamentals-error');
+            
+            console.log('⚠️ 页面访问出现问题，但将继续尝试提取数据...');
+            return false; // 返回false但不抛出异常，让主函数继续处理
         }
     }
 
@@ -394,58 +411,78 @@ class HSIFundamentalsScraper {
                 attempts++;
                 console.log(`🔄 第 ${attempts} 次尝试提取基本面数据...`);
 
-                // 等待一段时间让数据加载
-                await this.page.waitForTimeout(3000);
+                try {
+                    // 等待一段时间让数据加载
+                    await this.page.waitForTimeout(3000);
 
-                // 尝试从页面提取数据
-                pageFundamentals = await this.extractFundamentalsFromPage();
-                
-                if (pageFundamentals && pageFundamentals.foundData.length > 0) {
-                    console.log(`✅ 第 ${attempts} 次尝试成功提取到数据`);
-                    break;
-                } else {
-                    console.log(`⚠️ 第 ${attempts} 次尝试未提取到数据，等待后重试...`);
+                    // 尝试从页面提取数据
+                    pageFundamentals = await this.extractFundamentalsFromPage();
                     
-                    // 尝试触发页面刷新或重新加载数据
-                    if (attempts < maxAttempts) {
-                        try {
-                            // 尝试点击刷新按钮或重新加载数据
-                            await this.page.evaluate(() => {
-                                // 查找可能的刷新按钮
-                                const refreshButtons = document.querySelectorAll('button, a');
-                                for (const button of refreshButtons) {
-                                    const text = button.textContent.toLowerCase();
-                                    if (text.includes('刷新') || text.includes('refresh') || 
-                                        text.includes('重新加载') || text.includes('reload')) {
-                                        button.click();
-                                        return true;
+                    if (pageFundamentals && pageFundamentals.foundData && pageFundamentals.foundData.length > 0) {
+                        console.log(`✅ 第 ${attempts} 次尝试成功提取到数据`);
+                        break;
+                    } else {
+                        console.log(`⚠️ 第 ${attempts} 次尝试未提取到数据，等待后重试...`);
+                        
+                        // 尝试触发页面刷新或重新加载数据
+                        if (attempts < maxAttempts) {
+                            try {
+                                // 尝试点击刷新按钮或重新加载数据
+                                const refreshed = await this.page.evaluate(() => {
+                                    // 查找可能的刷新按钮
+                                    const refreshButtons = document.querySelectorAll('button, a');
+                                    for (const button of refreshButtons) {
+                                        const text = button.textContent.toLowerCase();
+                                        if (text.includes('刷新') || text.includes('refresh') || 
+                                            text.includes('重新加载') || text.includes('reload')) {
+                                            button.click();
+                                            return true;
+                                        }
                                     }
+                                    return false;
+                                });
+                                
+                                if (refreshed) {
+                                    console.log('🔄 触发了页面刷新，等待数据重新加载...');
+                                    await this.page.waitForTimeout(5000);
                                 }
-                                return false;
-                            });
-                        } catch (e) {
-                            console.log('尝试刷新数据时出错:', e.message);
+                            } catch (e) {
+                                console.log('尝试刷新数据时出错:', e.message);
+                            }
                         }
+                    }
+                } catch (attemptError) {
+                    console.log(`⚠️ 第 ${attempts} 次尝试时出错:`, attemptError.message);
+                    
+                    // 如果是最后一次尝试，保存调试信息
+                    if (attempts === maxAttempts) {
+                        await this.takeScreenshot(`fundamentals-attempt-${attempts}-error`);
+                        await this.savePageContent(`fundamentals-attempt-${attempts}-error`);
                     }
                 }
             }
 
-            if (pageFundamentals && pageFundamentals.foundData.length > 0) {
+            // 处理提取结果
+            if (pageFundamentals && pageFundamentals.foundData && pageFundamentals.foundData.length > 0) {
                 const timestamp = new Date().toISOString().split('T')[0];
-                const dataFileName = path.join(this.outputDir, `fundamentals-data-${timestamp}.json`);
-                fs.writeFileSync(dataFileName, JSON.stringify({
+                // const dataFileName = path.join(this.outputDir, `fundamentals-data-${timestamp}.json`);
+                
+                const resultData = {
                     timestamp,
                     url: this.page.url(),
                     title: await this.page.title(),
                     fundamentals: pageFundamentals,
-                    attempts: attempts
-                }, null, 2));
+                    attempts: attempts,
+                    success: true
+                };
+                
+                // fs.writeFileSync(dataFileName, JSON.stringify(resultData, null, 2));
                 console.log('✅ 基本面数据提取完成:');
                 pageFundamentals.foundData.forEach(d => {
                     console.log(`- ${d.type}: ${d.value}`);
                 });
-                console.log(`- 数据已保存到: ${dataFileName}`);
-                return pageFundamentals;
+                // console.log(`- 数据已保存到: ${dataFileName}`);
+                return resultData;
             } else {
                 console.log('❌ 多次尝试后仍未能提取到基本面数据');
                 await this.savePageContent('fundamentals-debug');
@@ -453,20 +490,33 @@ class HSIFundamentalsScraper {
                 // 保存当前页面状态用于调试
                 const timestamp = new Date().toISOString().split('T')[0];
                 const debugFileName = path.join(this.outputDir, `fundamentals-debug-${timestamp}.json`);
-                fs.writeFileSync(debugFileName, JSON.stringify({
+                const debugData = {
                     timestamp,
                     url: this.page.url(),
                     title: await this.page.title(),
                     attempts: attempts,
+                    success: false,
                     error: 'No data found after multiple attempts'
-                }, null, 2));
+                };
                 
-                return null;
+                // fs.writeFileSync(debugFileName, JSON.stringify(debugData, null, 2));
+                
+                // 返回调试信息而不是null，让主函数能够处理
+                return debugData;
             }
         } catch (error) {
             console.error('❌ 提取基本面数据时发生错误:', error);
             await this.takeScreenshot('fundamentals-extract-error');
-            return null;
+            await this.savePageContent('fundamentals-extract-error');
+            
+            // 返回错误信息而不是null
+            return {
+                timestamp: new Date().toISOString().split('T')[0],
+                url: this.page.url(),
+                title: await this.page.title(),
+                success: false,
+                error: error.message
+            };
         }
     }
 
@@ -952,6 +1002,232 @@ class HSIFundamentalsScraper {
             console.log('🔒 浏览器已关闭');
         }
     }
+
+    async getAllHsidata(etfIndexMapping) {
+        try {
+            console.log(`📊 开始获取 ${Object.keys(etfIndexMapping).length} 个指数的基本面数据...`);
+            
+            const timestamp = new Date().toISOString().split('T')[0];
+            const summaryFileName = path.join(this.outputDir, `fundamentals-summary-${timestamp}.json`);
+            
+            // 检查当天的文件是否存在
+            if (fs.existsSync(summaryFileName)) {
+                console.log(`📄 发现当天的汇总文件已存在: ${summaryFileName}`);
+                console.log('📖 直接读取现有数据，无需重新获取...');
+                
+                try {
+                    const existingData = JSON.parse(fs.readFileSync(summaryFileName, 'utf8'));
+                    console.log(`✅ 成功读取现有数据:`);
+                    console.log(`📈 总指数数量: ${existingData.totalIndexes}`);
+                    console.log(`✅ 成功获取: ${existingData.successfulIndexes}`);
+                    console.log(`❌ 获取失败: ${existingData.failedIndexes}`);
+                    
+                    // 显示成功获取的数据
+                    const successfulResults = existingData.results.filter(r => r.success && r.fundamentals && r.fundamentals.foundData);
+                    if (successfulResults.length > 0) {
+                        console.log('\n=== 📋 现有基本面数据 ===');
+                        successfulResults.forEach(result => {
+                            console.log(`\n📊 ${result.indexName} (${result.etfCode}):`);
+                            if (result.fundamentals && result.fundamentals.foundData) {
+                                result.fundamentals.foundData.forEach(d => {
+                                    console.log(`  - ${d.type}: ${d.value}`);
+                                });
+                            }
+                        });
+                    }
+                    
+                    // 返回现有数据，标记为从缓存读取
+                    return {
+                        ...existingData,
+                        fromCache: true,
+                        cacheSource: summaryFileName
+                    };
+                } catch (readError) {
+                    console.error('❌ 读取现有文件失败:', readError.message);
+                    console.log('🔄 继续重新获取数据...');
+                }
+            }
+            
+            console.log(`📝 当天文件不存在，需要登录并获取数据...`);
+            
+            // 检查浏览器是否已初始化
+            if (!this.browser || !this.page) {
+                console.log('⚠️ 浏览器未初始化，无法获取新数据');
+                return {
+                    timestamp,
+                    success: false,
+                    error: 'Browser not initialized',
+                    fromCache: false
+                };
+            }
+            
+            const results = [];
+            
+            // 遍历所有指数
+            for (const [etfCode, indexInfo] of Object.entries(etfIndexMapping)) {
+                try {
+                    console.log(`\n=== 📈 处理指数: ${indexInfo.indexName} (${indexInfo.indexCode}) ===`);
+                    console.log(`📋 ETF代码: ${etfCode}`);
+                    console.log(`📝 描述: ${indexInfo.description}`);
+                    
+                    // 构建指数URL
+                    const indexUrl = `https://www.hsi.com.hk/index360/schi/indexes?id=${indexInfo.indexCode}`;
+                    
+                    // 获取单个指数的基本面数据
+                    const indexData = await this.getSingleIndexFundamentals(indexUrl, indexInfo);
+                    
+                    // 添加ETF代码和指数信息到结果中
+                    const resultWithMetadata = {
+                        etfCode,
+                        indexCode: indexInfo.indexCode,
+                        indexName: indexInfo.indexName,
+                        description: indexInfo.description,
+                        timestamp,
+                        ...indexData
+                    };
+                    
+                    results.push(resultWithMetadata);
+                    
+                    console.log(`✅ 指数 ${indexInfo.indexName} 数据处理完成`);
+                    
+                    // 在指数之间添加延迟，避免请求过于频繁
+                    if (Object.keys(etfIndexMapping).length > 1) {
+                        console.log('⏳ 等待3秒后处理下一个指数...');
+                        await this.page.waitForTimeout(3000);
+                    }
+                    
+                } catch (indexError) {
+                    console.error(`❌ 处理指数 ${indexInfo.indexName} (${indexInfo.indexCode}) 时出错:`, indexError.message);
+                    
+                    // 记录错误但继续处理其他指数
+                    results.push({
+                        etfCode,
+                        indexCode: indexInfo.indexCode,
+                        indexName: indexInfo.indexName,
+                        description: indexInfo.description,
+                        timestamp,
+                        success: false,
+                        error: indexError.message
+                    });
+                }
+            }
+            
+            // 保存所有指数的汇总数据
+            const summaryData = {
+                timestamp,
+                totalIndexes: Object.keys(etfIndexMapping).length,
+                successfulIndexes: results.filter(r => r.success).length,
+                failedIndexes: results.filter(r => !r.success).length,
+                results,
+                fromCache: false
+            };
+            
+            fs.writeFileSync(summaryFileName, JSON.stringify(summaryData, null, 2));
+            
+            // 输出汇总结果
+            console.log('\n=== 📊 所有指数数据获取完成 ===');
+            console.log(`⏰ 处理时间: ${timestamp}`);
+            console.log(`📈 总指数数量: ${summaryData.totalIndexes}`);
+            console.log(`✅ 成功获取: ${summaryData.successfulIndexes}`);
+            console.log(`❌ 获取失败: ${summaryData.failedIndexes}`);
+            console.log(`📄 汇总数据已保存: ${summaryFileName}`);
+            
+            // 显示成功获取的数据
+            const successfulResults = results.filter(r => r.success && r.fundamentals && r.fundamentals.foundData);
+            if (successfulResults.length > 0) {
+                console.log('\n=== 📋 成功获取的基本面数据 ===');
+                successfulResults.forEach(result => {
+                    console.log(`\n📊 ${result.indexName} (${result.etfCode}):`);
+                    if (result.fundamentals && result.fundamentals.foundData) {
+                        result.fundamentals.foundData.forEach(d => {
+                            console.log(`  - ${d.type}: ${d.value}`);
+                        });
+                    }
+                });
+            }
+            
+            return summaryData;
+            
+        } catch (error) {
+            console.error('❌ 获取所有指数数据时发生错误:', error);
+            return {
+                timestamp: new Date().toISOString().split('T')[0],
+                success: false,
+                error: error.message
+            };
+        }
+    }
+
+    async getSingleIndexFundamentals(indexUrl, indexInfo) {
+        try {
+            console.log(`🔍 正在访问指数页面: ${indexUrl}`);
+            
+            // 访问指数页面
+            let navigationSuccess = false;
+            try {
+                await this.page.goto(indexUrl, {
+                    waitUntil: 'networkidle2',
+                    timeout: 30000
+                });
+                
+                // 等待页面加载
+                await this.page.waitForTimeout(5000);
+                
+                // 保存页面截图
+                await this.takeScreenshot(`fundamentals-${indexInfo.indexCode}`);
+                
+                // 保存页面内容
+                await this.savePageContent(`fundamentals-${indexInfo.indexCode}`);
+                
+                navigationSuccess = true;
+                console.log('✅ 成功访问指数页面');
+                
+            } catch (navError) {
+                console.log('⚠️ 访问指数页面时发生错误，但继续尝试提取数据:', navError.message);
+                navigationSuccess = false;
+            }
+
+            // 尝试提取数据
+            let data = null;
+            try {
+                data = await this.extractFundamentalsData();
+            } catch (extractError) {
+                console.log('⚠️ 提取基本面数据时发生错误:', extractError.message);
+                data = {
+                    success: false,
+                    error: extractError.message
+                };
+            }
+
+            // 处理提取结果
+            if (data && data.success && data.fundamentals && data.fundamentals.foundData && data.fundamentals.foundData.length > 0) {
+                console.log(`✅ 成功提取到 ${data.fundamentals.foundData.length} 个基本面指标`);
+                data.fundamentals.foundData.forEach(d => {
+                    console.log(`  - ${d.type}: ${d.value}`);
+                });
+            } else {
+                console.log('❌ 未能提取到基本面数据');
+                if (data && data.error) {
+                    console.log(`❌ 错误信息: ${data.error}`);
+                }
+            }
+
+            return {
+                url: indexUrl,
+                navigationSuccess,
+                ...data
+            };
+            
+        } catch (error) {
+            console.error(`❌ 获取指数 ${indexInfo.indexName} 数据时发生错误:`, error);
+            return {
+                url: indexUrl,
+                navigationSuccess: false,
+                success: false,
+                error: error.message
+            };
+        }
+    }
 }
 
 // 主函数
@@ -959,24 +1235,19 @@ async function main() {
     const scraper = new HSIFundamentalsScraper();
     
     try {
-        // 初始化
-        const initialized = await scraper.initialize();
-        if (!initialized) {
-            console.error('❌ 初始化失败');
-            return;
-        }
-
-        // 从配置文件读取登录凭据
-        let username, password;
+        // 从配置文件读取登录凭据和指数映射
+        let username, password, etfIndexMapping;
         try {
             const config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
             username = config.hsi.credentials.username;
             password = config.hsi.credentials.password;
-            console.log('✅ 从配置文件读取登录凭据');
+            etfIndexMapping = config.etfIndexMapping;
+            console.log('✅ 从配置文件读取登录凭据和指数映射');
         } catch (configError) {
             console.error('❌ 读取配置文件失败:', configError.message);
             username = process.argv[2] || process.env.HSI_USERNAME;
             password = process.argv[3] || process.env.HSI_PASSWORD;
+            etfIndexMapping = {};
         }
 
         if (!username || !password) {
@@ -989,42 +1260,47 @@ async function main() {
 
         console.log(`🔐 使用用户名: ${username}`);
 
-        // 登录
+        // 首先检查是否需要获取数据（检查当天文件是否存在）
+        const timestamp = new Date().toISOString().split('T')[0];
+        const summaryFileName = path.join(scraper.outputDir, `fundamentals-summary-${timestamp}.json`);
+        
+        if (fs.existsSync(summaryFileName)) {
+            console.log(`📄 发现当天的汇总文件已存在: ${summaryFileName}`);
+            console.log('🔄 直接读取缓存数据，无需登录...');
+            
+            // 直接获取数据（会从缓存读取）
+            const result = await scraper.getAllHsidata(etfIndexMapping);
+            
+            if (result && result.fromCache) {
+                console.log('✅ 成功从缓存读取数据，无需登录');
+                return;
+            } else {
+                console.log('⚠️ 缓存读取失败，需要重新获取数据...');
+            }
+        }
+
+        // 如果需要获取新数据，则进行登录
+        console.log('🔐 需要获取新数据，开始登录流程...');
+        
+        // 初始化
+        const initialized = await scraper.initialize();
+        if (!initialized) {
+            console.error('❌ 初始化失败');
+            return;
+        }
+
+        // 登录 - 如果失败则立即停止
         const loginSuccess = await scraper.login(username, password);
         
-        if (loginSuccess) {
-            console.log('✅ 登录成功！正在访问基本面数据页面...');
-            
-            // 访问基本面数据页面
-            const navigationSuccess = await scraper.navigateToFundamentals();
-            
-            if (navigationSuccess) {
-                // 提取基本面数据
-                const data = await scraper.extractFundamentalsData();
-                
-                if (data) {
-                    console.log('\n=== 📊 基本面数据提取结果 ===');
-                    console.log(`⏰ 提取时间: ${data.timestamp}`);
-                    console.log(`📄 页面标题: ${data.title}`);
-                    console.log(`🔍 fundamentals div: ${data.foundData.length > 0 ? '✅ 找到' : '❌ 未找到'}`);
-                    
-                    if (data.foundData.length > 0) {
-                        console.log(`✅ 提取到 ${data.foundData.length} 个基本面指标`);
-                        data.foundData.forEach(d => {
-                            console.log(`- ${d.type}: ${d.value}`);
-                        });
-                    } else {
-                        console.log('⚠️ 注意: 部分数据未找到，请检查页面结构或查看保存的HTML文件进行调试');
-                    }
-                } else {
-                    console.log('❌ 数据提取失败');
-                }
-            } else {
-                console.log('❌ 访问基本面数据页面失败');
-            }
-        } else {
-            console.log('❌ 登录失败，请检查凭据或查看调试截图');
+        if (!loginSuccess) {
+            console.log('❌ 登录失败，停止处理');
+            return;
         }
+
+        console.log('✅ 登录成功！开始获取所有指数数据...');
+        
+        // 获取所有指数数据
+        await scraper.getAllHsidata(etfIndexMapping);
 
     } catch (error) {
         console.error('❌ 主函数执行错误:', error);

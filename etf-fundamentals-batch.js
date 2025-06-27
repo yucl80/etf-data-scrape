@@ -1,7 +1,6 @@
-const puppeteer = require('puppeteer');
 const fs = require('fs');
 const path = require('path');
-const HSIFundamentalsScraper = require('./hsi-fundamentals-scraper');
+const HSIFundamentalsScraper = require('./hsi-index-scraper');
 
 class ETFFundamentalsBatchProcessor {
     constructor() {
@@ -28,8 +27,7 @@ class ETFFundamentalsBatchProcessor {
 
     ensureDirectories() {
         const dirs = [
-            this.config.settings.dataDirectory,
-            this.config.settings.logDirectory
+            this.config.settings.dataDirectory
         ];
         
         dirs.forEach(dir => {
@@ -113,116 +111,6 @@ class ETFFundamentalsBatchProcessor {
         }
     }
 
-    async processETF(etfCode, indexInfo) {
-        try {
-            console.log(`\n📊 处理ETF: ${etfCode} -> 指数: ${indexInfo.indexName} (${indexInfo.indexCode})`);
-            
-            // 检查是否已经处理过这个指数代码
-            if (this.processedIndices.has(indexInfo.indexCode)) {
-                console.log(`⏭️ 指数 ${indexInfo.indexCode} 已处理，跳过...`);
-                return this.getCachedResult(indexInfo.indexCode, etfCode, indexInfo);
-            }
-
-            // 构建基本面数据URL
-            const fundamentalsUrl = `https://www.hsi.com.hk/index360/schi/indexes?id=${indexInfo.indexCode}`;
-            
-            // 直接访问基本面数据页面（修改scraper的URL）
-            this.scraper.fundamentalsUrl = fundamentalsUrl;
-            const navigationSuccess = await this.scraper.navigateToFundamentals();
-            if (!navigationSuccess) {
-                throw new Error('访问基本面数据页面失败');
-            }
-
-            // 提取基本面数据
-            const data = await this.scraper.extractFundamentalsData();
-            if (!data || !data.foundData || data.foundData.length === 0) {
-                throw new Error('未提取到基本面数据');
-            }
-
-            // 构建结果对象
-            const result = {
-                etfCode: etfCode,
-                indexCode: indexInfo.indexCode,
-                indexName: indexInfo.indexName,
-                dividendYield: null,
-                peRatio: null,
-                timestamp: new Date().toISOString(),
-                source: 'HSI Fundamentals'
-            };
-
-            // 提取周息率和市盈率
-            data.foundData.forEach(item => {
-                if (item.type === 'dividendYield') {
-                    result.dividendYield = item.value;
-                } else if (item.type === 'peRatio') {
-                    result.peRatio = item.value;
-                }
-            });
-
-            // 标记该指数已处理
-            this.processedIndices.add(indexInfo.indexCode);
-            
-            // 缓存结果
-            this.cacheResult(indexInfo.indexCode, result);
-
-            console.log(`✅ ETF ${etfCode} 处理完成:`);
-            console.log(`  - 周息率: ${result.dividendYield || 'N/A'}`);
-            console.log(`  - 市盈率: ${result.peRatio || 'N/A'}`);
-
-            return result;
-
-        } catch (error) {
-            console.error(`❌ 处理ETF ${etfCode} 失败:`, error.message);
-            return {
-                etfCode: etfCode,
-                indexCode: indexInfo.indexCode,
-                indexName: indexInfo.indexName,
-                dividendYield: null,
-                peRatio: null,
-                timestamp: new Date().toISOString(),
-                error: error.message
-            };
-        }
-    }
-
-    cacheResult(indexCode, result) {
-        try {
-            const cacheFile = path.join(this.config.settings.dataDirectory, `cache_${indexCode}.json`);
-            fs.writeFileSync(cacheFile, JSON.stringify(result, null, 2));
-        } catch (error) {
-            console.error('❌ 缓存结果失败:', error.message);
-        }
-    }
-
-    getCachedResult(indexCode, etfCode, indexInfo) {
-        try {
-            const cacheFile = path.join(this.config.settings.dataDirectory, `cache_${indexCode}.json`);
-            if (fs.existsSync(cacheFile)) {
-                const cached = JSON.parse(fs.readFileSync(cacheFile, 'utf8'));
-                // 检查缓存是否过期
-                const cacheTime = new Date(cached.timestamp);
-                const now = new Date();
-                const hoursDiff = (now - cacheTime) / (1000 * 60 * 60);
-                
-                if (hoursDiff < this.config.settings.cacheExpiryHours) {
-                    console.log(`📋 使用缓存数据 (${hoursDiff.toFixed(1)}小时前)`);
-                    return {
-                        ...cached,
-                        etfCode: etfCode, // 更新为当前ETF代码
-                        fromCache: true
-                    };
-                } else {
-                    console.log(`⏰ 缓存已过期 (${hoursDiff.toFixed(1)}小时)`);
-                    this.processedIndices.delete(indexCode); // 重新处理
-                    return null;
-                }
-            }
-        } catch (error) {
-            console.error('❌ 读取缓存失败:', error.message);
-        }
-        return null;
-    }
-
     async processAllETFs() {
         try {
             console.log('🚀 开始批量处理所有ETF...');
@@ -252,54 +140,73 @@ class ETFFundamentalsBatchProcessor {
                 throw new Error('初始化失败');
             }
 
-            // 登录（只登录一次）
-            const loginSuccess = await this.login();
-            if (!loginSuccess) {
-                throw new Error('登录失败');
+            // // 登录（只登录一次）
+            // const loginSuccess = await this.login();
+            // if (!loginSuccess) {
+            //     throw new Error('登录失败');
+            // }
+
+            // 直接使用 getAllHsidata 方法获取所有指数数据
+            console.log('📊 使用 getAllHsidata 方法批量获取所有指数数据...');
+            const hsiData = await this.scraper.getAllHsidata(this.config.etfIndexMapping);
+            
+            if (!hsiData) {
+                throw new Error('获取HSI数据失败');
             }
 
-            // 处理所有ETF
-            const etfCodes = Object.keys(this.config.etfIndexMapping);
-            let processedCount = 0;
-            let successCount = 0;
+            // 检查是否返回了错误信息
+            if (hsiData.success === false) {
+                throw new Error(`获取HSI数据失败: ${hsiData.error || '未知错误'}`);
+            }
 
-            for (const etfCode of etfCodes) {
-                try {
-                    const indexInfo = this.config.etfIndexMapping[etfCode];
-                    const result = await this.processETF(etfCode, indexInfo);
-                    
-                    if (result) {
-                        this.results.push(result);
-                        if (!result.error) {
-                            successCount++;
+            // 检查是否有结果数据
+            if (!hsiData.results || !Array.isArray(hsiData.results)) {
+                throw new Error('HSI数据格式错误：缺少结果数组');
+            }
+
+            // 将 HSI 数据转换为 ETF 结果格式
+            this.results = [];
+            this.processedIndices = new Set();
+            
+            hsiData.results.forEach(hsiResult => {
+                // 构建ETF结果对象
+                const etfResult = {
+                    etfCode: hsiResult.etfCode,
+                    indexCode: hsiResult.indexCode,
+                    indexName: hsiResult.indexName,
+                    dividendYield: null,
+                    peRatio: null,
+                    timestamp: hsiResult.timestamp || new Date().toISOString(),
+                    source: 'HSI Fundamentals'
+                };
+
+                // 提取周息率和市盈率
+                if (hsiResult.fundamentals && hsiResult.fundamentals.foundData) {
+                    hsiResult.fundamentals.foundData.forEach(item => {
+                        if (item.type === 'dividendYield') {
+                            etfResult.dividendYield = item.value;
+                        } else if (item.type === 'peRatio') {
+                            etfResult.peRatio = item.value;
                         }
-                    }
-                    
-                    processedCount++;
-                    console.log(`📈 进度: ${processedCount}/${etfCodes.length} (${((processedCount/etfCodes.length)*100).toFixed(1)}%)`);
-                    
-                    // 添加延迟避免请求过于频繁
-                    await new Promise(resolve => setTimeout(resolve, 2000));
-                    
-                } catch (error) {
-                    console.error(`❌ 处理ETF ${etfCode} 时发生错误:`, error.message);
-                    this.results.push({
-                        etfCode: etfCode,
-                        indexCode: this.config.etfIndexMapping[etfCode].indexCode,
-                        indexName: this.config.etfIndexMapping[etfCode].indexName,
-                        dividendYield: null,
-                        peRatio: null,
-                        timestamp: new Date().toISOString(),
-                        error: error.message
                     });
                 }
-            }
+
+                // 如果获取失败，添加错误信息
+                if (!hsiResult.success) {
+                    etfResult.error = hsiResult.error || '获取数据失败';
+                } else {
+                    // 标记该指数已处理
+                    this.processedIndices.add(hsiResult.indexCode);
+                }
+
+                this.results.push(etfResult);
+            });
 
             console.log(`\n✅ 批量处理完成!`);
             console.log(`📊 统计信息:`);
-            console.log(`  - 总ETF数量: ${etfCodes.length}`);
-            console.log(`  - 成功处理: ${successCount}`);
-            console.log(`  - 失败数量: ${etfCodes.length - successCount}`);
+            console.log(`  - 总ETF数量: ${this.results.length}`);
+            console.log(`  - 成功处理: ${this.results.filter(r => !r.error).length}`);
+            console.log(`  - 失败数量: ${this.results.filter(r => r.error).length}`);
             console.log(`  - 实际访问指数: ${this.processedIndices.size}`);
 
             return this.results;

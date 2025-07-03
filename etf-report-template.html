@@ -77,6 +77,7 @@
                     <th>5-Day</th>
                     <th>10-Day</th>
                     <th>30-Day</th>
+                    <th>60-Day</th>
                     <th>Index</th>
                     <th>P/E</th>
                     <th>D/P</th>
@@ -113,6 +114,7 @@
         { key: 'fiveDayChange', label: '5-Day', isNumber: true },
         { key: 'tenDayChange', label: '10-Day', isNumber: true },
         { key: 'thirtyDayChange', label: '30-Day', isNumber: true },
+        { key: 'sixtyDayChange', label: '60-Day', isNumber: true },
         { key: 'indexName', label: 'Index' },
         { key: 'peValue', label: 'P/E', isNumber: true },
         { key: 'dpValue', label: 'D/P', isNumber: true }
@@ -138,12 +140,12 @@
             columns.forEach(col => {
                 const td = document.createElement('td');
                 let val = row[col.key];
-                if (col.isNumber && ["latestSize","oneDayChange","threeDayChange","fiveDayChange","tenDayChange","thirtyDayChange"].includes(col.key) && val !== 'N/A' && val !== '-' && val !== undefined) {
+                if (col.isNumber && ["latestSize","oneDayChange","threeDayChange","fiveDayChange","tenDayChange","thirtyDayChange","sixtyDayChange"].includes(col.key) && val !== 'N/A' && val !== '-' && val !== undefined) {
                     td.textContent = formatNumber(val);
                 } else {
                     td.textContent = val;
                 }
-                if (["oneDayChange","threeDayChange","fiveDayChange","tenDayChange","thirtyDayChange"].includes(col.key)) {
+                if (["oneDayChange","threeDayChange","fiveDayChange","tenDayChange","thirtyDayChange","sixtyDayChange"].includes(col.key)) {
                     td.className = getChangeClass(val);
                 }
                 tr.appendChild(td);

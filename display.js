@@ -46,44 +46,52 @@ function calculateSizeChanges(stock) {
             };
         }
 
-        let FiveDayChange = null;
+        let fiveDayChange = null;
         if (data.length >= 6) {
-            FiveDayChange = {
+            fiveDayChange = {
                 date: sortedData[0].date,
                 change: parseFloat(sortedData[0].size) - parseFloat(sortedData[5].size)
             };
         }
 
-        let TenDayChange = null;
+        let tenDayChange = null;
         if (data.length >= 11) {
-            TenDayChange = {
+            tenDayChange = {
                 date: sortedData[0].date,
                 change: parseFloat(sortedData[0].size) - parseFloat(sortedData[10].size)
             };
         }
 
-        let FityDayChange = null;
+        let fityDayChange = null;
         if (data.length >= 22) {
-            FityDayChange = {
+            fityDayChange = {
                 date: sortedData[0].date,
                 change: parseFloat(sortedData[0].size) - parseFloat(sortedData[21].size)
             };
         }
 
-        let ThirtyDayChange = null;
+        let thirtyDayChange = null;
         if (data.length >= 31) {
-            ThirtyDayChange = {
+            thirtyDayChange = {
                 date: sortedData[0].date,
                 change: parseFloat(sortedData[0].size) - parseFloat(sortedData[30].size)
+            };
+        }
+		let sixtyDayChange = null;
+        if (data.length >= 61) {
+            sixtyDayChange = {
+                date: sortedData[0].date,
+                change: parseFloat(sortedData[0].size) - parseFloat(sortedData[60].size)
             };
         }
 
         return {
             oneDayChange,
             threeDayChange,
-            FiveDayChange,
-            TenDayChange,
-            ThirtyDayChange
+            fiveDayChange,
+            tenDayChange,
+            thirtyDayChange,
+			sixtyDayChange
         };
     } catch (error) {
         console.error('Error calculating size changes:', error);
@@ -206,9 +214,10 @@ async function generateHTML() {
             dpValue: (dpValue !== null && dpValue !== undefined && !isNaN(Number(dpValue))) ? Number(dpValue) : '-',
             oneDayChange: changes?.oneDayChange?.change ?? 'N/A',
             threeDayChange: changes?.threeDayChange?.change ?? 'N/A',
-            fiveDayChange: changes?.FiveDayChange?.change ?? 'N/A',
-            tenDayChange: changes?.TenDayChange?.change ?? 'N/A',
-            thirtyDayChange: changes?.ThirtyDayChange?.change ?? 'N/A'
+            fiveDayChange: changes?.fiveDayChange?.change ?? 'N/A',
+            tenDayChange: changes?.tenDayChange?.change ?? 'N/A',
+            thirtyDayChange: changes?.thirtyDayChange?.change ?? 'N/A',
+            sixtyDayChange: changes?.sixtyDayChange?.change ?? 'N/A'
         });
     }
 
@@ -224,6 +233,7 @@ async function generateHTML() {
                 <td class="${getChangeClass(result.fiveDayChange)}">${formatNumber(result.fiveDayChange)}</td>
                 <td class="${getChangeClass(result.tenDayChange)}">${formatNumber(result.tenDayChange)}</td>
                 <td class="${getChangeClass(result.thirtyDayChange)}">${formatNumber(result.thirtyDayChange)}</td>
+				<td class="${getChangeClass(result.sixtyDayChange)}">${formatNumber(result.sixtyDayChange)}</td>
                 <td>${result.indexName}</td>
                 <td>${result.peValue}</td>
                 <td>${result.dpValue}</td>

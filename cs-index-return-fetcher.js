@@ -64,7 +64,7 @@ async function fetchIndexReturnData(browser, indexCode) {
             });
 
             // 随机延时 3-7 秒，模拟页面加载时间
-            const loadDelay = getRandomDelay(3000, 7000);
+            const loadDelay = getRandomDelay(2000, 4000);
             console.log(`Waiting ${loadDelay}ms for page load...`);
             await page.waitForTimeout(loadDelay);
 
@@ -84,7 +84,7 @@ async function fetchIndexReturnData(browser, indexCode) {
                     console.log(`Clicked "五年" button for index ${indexCode}`);
                     
                     // 随机延时 2-5 秒，等待数据更新
-                    const updateDelay = getRandomDelay(2000, 5000);
+                    const updateDelay = getRandomDelay(1500, 3000);
                     console.log(`Waiting ${updateDelay}ms for data update...`);
                     await page.waitForTimeout(updateDelay);
                 } else {
@@ -110,7 +110,16 @@ async function fetchIndexReturnData(browser, indexCode) {
             }
             
             const data = await page.evaluate(() => {
-                // Try multiple selectors to find the table
+                function getCellValue(td) {
+                    let value = td.innerText.trim();
+                    // 检查td下是否有<span class="indices-compare-down-arrow">
+                    if (td.querySelector && td.querySelector('span.indices-compare-down-arrow')) {
+                        if (!value.startsWith('-')) {
+                            value = '-' + value;
+                        }
+                    }
+                    return value;
+                }
                 let tableWrapper = document.querySelector('.mt24.ivu-table-wrapper');
                 if (!tableWrapper) {
                     tableWrapper = document.querySelector('.ivu-table-wrapper');
@@ -119,32 +128,24 @@ async function fetchIndexReturnData(browser, indexCode) {
                     console.log('No table wrapper found');
                     return [];
                 }
-                
                 const rows = Array.from(tableWrapper.querySelectorAll('.ivu-table-tbody tr'));
                 console.log(`Found ${rows.length} rows in table`);
-                
                 const rowData = rows.map((row, index) => {
                     const columns = row.querySelectorAll('td');
                     console.log(`Row ${index}: ${columns.length} columns`);
                     console.log(`Row ${index} content:`, Array.from(columns).map(col => col.innerText.trim()));
-                    
                     if (columns.length < 9) return null;
-                    
-                    // 第一列通常是代码，第二列是名称，后面9列是数据
                     return {
-                        name: columns[0].innerText.trim(),
-                        // 阶段性收益 (前3列)
-                        阶段性收益_近一月: columns[1].innerText.trim(),
-                        阶段性收益_近三月: columns[2].innerText.trim(),
-                        阶段性收益_年至今: columns[3].innerText.trim(),
-                        // 年化收益 (中间3列)
-                        年化收益_近一年: columns[4].innerText.trim(),
-                        年化收益_近三年: columns[5].innerText.trim(),
-                        年化收益_近五年: columns[6].innerText.trim(),
-                        // 年化波动率 (后3列)
-                        年化波动率_近一年: columns[7].innerText.trim(),
-                        年化波动率_近三年: columns[8] ? columns[8].innerText.trim() : '',
-                        年化波动率_近五年: columns[9] ? columns[9].innerText.trim() : ''
+                        name: getCellValue(columns[0]),
+                        阶段性收益_近一月: getCellValue(columns[1]),
+                        阶段性收益_近三月: getCellValue(columns[2]),
+                        阶段性收益_年至今: getCellValue(columns[3]),
+                        年化收益_近一年: getCellValue(columns[4]),
+                        年化收益_近三年: getCellValue(columns[5]),
+                        年化收益_近五年: getCellValue(columns[6]),
+                        年化波动率_近一年: getCellValue(columns[7]),
+                        年化波动率_近三年: columns[8] ? getCellValue(columns[8]) : '',
+                        年化波动率_近五年: columns[9] ? getCellValue(columns[9]) : ''
                     };
                 }).filter(Boolean);
                 return rowData;
@@ -190,7 +191,7 @@ async function fetchIndexReturnData(browser, indexCode) {
     }
 }
 
-async function main() {
+async function fetchAllIndexReturnData() {
     const browser = await puppeteer.launch({ 
         headless: true,
         args: [
@@ -233,11 +234,7 @@ async function main() {
         const outputFilePath = path.join(DATA_DIR, `all_index_returns_${today}.json`);
         await fs.writeFile(outputFilePath, JSON.stringify(allIndexData, null, 2), 'utf-8');
         console.log(`All data saved to ${outputFilePath} with ${allIndexData.length} indices`);
-        
-        // 同时保存一个不带日期的文件作为默认文件
-        const defaultOutputFilePath = path.join(DATA_DIR, 'all_index_returns.json');
-        await fs.writeFile(defaultOutputFilePath, JSON.stringify(allIndexData, null, 2), 'utf-8');
-        console.log(`Default data file also saved to ${defaultOutputFilePath}`);
+               
 
     } catch (error) {
         console.error('An error occurred during the main process:', error);
@@ -247,4 +244,11 @@ async function main() {
     }
 }
 
-main(); 
+async function main() {
+    await fetchAllIndexReturnData();
+}
+
+module.exports = {
+    fetchAllIndexReturnData,
+    main
+};

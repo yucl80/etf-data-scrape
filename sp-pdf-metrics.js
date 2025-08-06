@@ -32,15 +32,20 @@ async function extractMetricsFromPDF(pdfPath) {
   console.log('baseMatch:', baseMatch);
   if (baseMatch) {
     // 先将小数后紧跟数字的位置加空格
-    let numstr = baseMatch[0].replace(/(\d+\.\d\d)/g, '$1 ');
+
+    let numstr = baseMatch[0].split('%')[0];
+    console.log('numstr:', numstr);
     numstr = numstr.replace(/(%)/g, ' $1 ');
-    const nums = numstr.match(/\d+\.\d+|\d+\.\d+%|\d+%/g);
+    // 从后往前找，匹配小数点前只有1位数字的数（如 9.17），以及可能带%号
+    const nums = Array.from(numstr.matchAll(/\d\.\d{1,2}%?|\d{1,2}%?/g)).map(m => m[0]);
     console.log('nums:', nums);
-    // 正确顺序：nums[1] = 市盈率，nums[2] = 市净率，nums[3] = 股息率
+    // 取最后4个，顺序为：最后一个是第一个指标
     if (nums && nums.length >= 4) {
-      pe = nums[1]; // 预期市盈率
-      pb = nums[2]; // 市净率
-      dy = nums[3]; // 股息率
+      const last4 = nums.slice(-4);
+      pe = last4[1];
+      pb = last4[2];
+      dy = last4[3];
+      // 如果有第4个，可能是多余的，按实际需求可忽略或使用
     }
   }
 
@@ -104,5 +109,6 @@ function getETFResultByStock(allResults, stockCode) {
 
 module.exports = {
   processAllETFs,
-  getETFResultByStock
+  getETFResultByStock,
+  extractMetricsFromPDF
 };

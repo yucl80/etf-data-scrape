@@ -1,6 +1,5 @@
 const axios = require('axios');
 const fs = require('fs');
-const pdfParse = require('pdf-parse');
 
 const config = JSON.parse(fs.readFileSync('config.json', 'utf-8'));
 const etfIndexMap = config.spEtfIndexMap;
@@ -20,50 +19,66 @@ async function downloadPDF(url, outputPath) {
   fs.writeFileSync(outputPath, response.data);
 }
 
-async function extractMetricsFromPDF(pdfPath) {
-  const dataBuffer = fs.readFileSync(pdfPath);
-  const data = await pdfParse(dataBuffer);
-  const text = data.text.replace(/\n+/g, ' ');
-  console.log('PDF文本内容:', text.substring(0, 1000)); // 输出前1000个字符用于调试
+async function extractTable(pdfPath) {
+  const pdfjsLib = await import('pdfjs-dist/legacy/build/pdf.mjs');
+  const loadingTask = pdfjsLib.getDocument(pdfPath);
+  const pdf = await loadingTask.promise;
+  let tableData = [];
+  let found = false;
 
-  // 新逻辑：定位字段并提取数字
-  let pe = null, pb = null, dy = null;
-  const baseMatch = text.match(/股息率\s*市净率\s*预期市盈率[\s\S]{0,40}/);
-  console.log('baseMatch:', baseMatch);
-  if (baseMatch) {
-    // 先将小数后紧跟数字的位置加空格
+  for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+    const page = await pdf.getPage(pageNum);
+    const content = await page.getTextContent();
+    const lines = content.items.map(item => ({
+      text: item.str,
+      x: item.transform[4],
+      y: item.transform[5]
+    }));
 
-    let numstr = baseMatch[0].split('%')[0];
-    console.log('numstr:', numstr);
-    numstr = numstr.replace(/(%)/g, ' $1 ');
-    // 从后往前找，匹配小数点前只有1位数字的数（如 9.17），以及可能带%号
-    const nums = Array.from(numstr.matchAll(/\d\.\d{1,2}%?|\d{1,2}%?/g)).map(m => m[0]);
-    console.log('nums:', nums);
-    // 取最后4个，顺序为：最后一个是第一个指标
-    if (nums && nums.length >= 4) {
-      const last4 = nums.slice(-4);
-      pe = last4[1];
-      pb = last4[2];
-      dy = last4[3];
-      // 如果有第4个，可能是多余的，按实际需求可忽略或使用
+    var foundData = false;
+    var tableLines = [];
+    lines.forEach(line => {
+      if (line.text.includes('基本面')) {
+        foundData = true;
+      } else if (foundData) {
+        if (line.text.includes('截至')) {
+          foundData = false;
+        } else {
+          if (line.text.trim() !== '')
+            tableLines.push(line);
+        }
+      }
+
+    });
+    const rowsMap = {};
+    tableLines.forEach(line => {
+      const yKey = Math.round(line.y); // 取整分组
+      if (!rowsMap[yKey]) rowsMap[yKey] = [];
+      rowsMap[yKey].push(line);
+    });
+
+    // 按y排序，x排序
+    const rows = Object.values(rowsMap)
+      .sort((a, b) => a[0].y - b[0].y)
+      .map(row =>
+        row.sort((a, b) => a.x - b.x).map(cell => cell.text)
+      );
+
+    tableData = rows;   
+    if (tableData.length > 0) {
+      let pd = tableData[0][3];
+      pd = pd.replace(/%/g, '');
+      return {
+        预期市盈率: tableData[0][0],
+        市净率: tableData[0][2],
+        股息率: pd,
+        截至时间: '',
+      };
     }
   }
 
-  // 提取"截至"时间
-  let reportDate = null;
-  const dateMatch = text.match(/截至\s*([A-Z]{3}\s+\d{1,2},\s+\d{4})/);
-  console.log('dateMatch:', dateMatch);
-  if (dateMatch) {
-    reportDate = dateMatch[1];
-  }
-
-  return {
-    预期市盈率: pe,
-    市净率: pb,
-    股息率: dy,
-    截至时间: reportDate,
-  };
 }
+
 
 async function processAllETFs() {
   const results = [];
@@ -82,8 +97,8 @@ async function processAllETFs() {
       } else {
         console.log(`PDF文件已存在，跳过下载: ${etf.stock}`);
       }
-      
-      const metrics = await extractMetricsFromPDF(pdfPath);
+
+      const metrics = await extractTable(pdfPath);
       results.push({
         stock: etf.stock,
         indexCode: etf.indexCode,
@@ -110,5 +125,5 @@ function getETFResultByStock(allResults, stockCode) {
 module.exports = {
   processAllETFs,
   getETFResultByStock,
-  extractMetricsFromPDF
+  extractTable
 };

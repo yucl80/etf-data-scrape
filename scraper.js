@@ -96,13 +96,30 @@ async function shScrapeData(fundId) {
             });
         });
 
+        const tableData2 = await page.evaluate(() => {
+            // 使用多个class组合选择器
+            const container = document.querySelector('.product_detailBox.js_marketIndex');
+            if (!container) return null;
+
+            // 在容器内查找表格
+            const table = container.querySelector('table');
+            if (!table) return null;
+
+            const rows = Array.from(table.querySelectorAll('tr'));
+            return rows.map(row => {
+                const cells = Array.from(row.querySelectorAll('td, th'));
+                return cells.map(cell => cell.textContent.trim());
+            });
+        });
+
         if (tableData && tableData.length > 1) {    
             const stock = tableData[1][1];    
             const result = {
                 date: tableData[1][0],
                 stock: tableData[1][1],
                 name: tableData[1][2],
-                size: tableData[1][3],                
+                size: tableData[1][3],
+                price: tableData2[4][0],                 
             };            
             // Save the result to file
             await saveToFile(stock,result);
@@ -190,6 +207,7 @@ async function szScrapeData(fundId) {
 
         if (jsonData && jsonData.length > 0) {
             const data = jsonData[0];
+            const share_price = jsonData[1].data[0].nav_per_share;
             if (data.data) {
                 const kzjcurl = data.data[0]["kzjcurl"];
                 const hrefRegex = /href=['"]([^'"]+)['"]/g;
@@ -207,7 +225,8 @@ async function szScrapeData(fundId) {
                     date: date,
                     stock: stock,
                     name: params.get("name"),
-                    size: dqgm.replace(/[^\d.-]/g, '')                  
+                    size: dqgm.replace(/[^\d.-]/g, '') ,
+                    price: share_price,                 
                 };
                 
                 // Save the result to file
@@ -325,5 +344,5 @@ function shouldScrapeStock(stock) {
 (async () => {
     await processAllStocks();
     writeHTML();
-    await generateIndexReport();
+    // await generateIndexReport();
 })(); 
